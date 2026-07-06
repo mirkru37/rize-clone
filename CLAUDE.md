@@ -35,6 +35,7 @@ ALWAYS create branch from fresh main branch. Ex:
 - **Branch**: `feat/RIZ-<n>-<short-slug>` (use `fix/`, `docs/`, `chore/` prefixes as appropriate), e.g. `feat/RIZ-42-implement-user-model`.
 - **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`) referencing `RIZ-<n>` in the scope or body.
 - **PR**: title `[RIZ-<n>] <summary>`, body links the Linear issue, states what changed and how it was tested. One atomic task per PR. PRs merge into the submodule's `main`, then a pointer-bump commit lands in the master repo.
+- **Stacked (nested) PRs — allowed to unblock dependent tasks.** When Task B depends on Task A whose PR is not yet merged: branch B off Task A's branch (`git fetch && git checkout -b feat/RIZ-<b>-<slug> origin/feat/RIZ-<a>-<slug>`) and open B's PR with base = Task A's branch (`gh pr create --base feat/RIZ-<a>-<slug>`), noting the dependency in the PR body. Rules: B's PR diff must contain only B's changes; never merge B before A; after A merges, retarget B to `main` (GitHub retargets automatically when A's branch is deleted on merge), rebase B on fresh `main`, and re-run CI before merging B. If A's branch changes after review feedback, rebase B onto it promptly.
 - **Linear status flow**: `In Progress` when work is dispatched → `In Review` when the PR opens → `Done` at merge.
 
 ## Linear
