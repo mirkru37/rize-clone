@@ -145,6 +145,8 @@ erDiagram
     }
 
     EVENT_TAGS {
+        uuid user_id FK
+        timestamptz started_at FK
         uuid entity_id PK, FK
         uuid tag_id PK, FK
     }
@@ -363,7 +365,7 @@ Primary key: `(user_id, started_at, event_id)`. TimescaleDB requires the partiti
 
 Idempotency constraint: `UNIQUE (user_id, event_id, started_at)`. This is what lets an upload retry safely re-submit the same event without creating a duplicate row, complementing the client-generated UUIDv7 `event_id`.
 
-Additional constraint: `UNIQUE (event_id)`. This standalone uniqueness constraint on `event_id` alone exists specifically to support a simple, single-column foreign key from `event_tags.entity_id` into this table, without which a reference into `activity_events` would otherwise have to go through the composite primary key.
+No standalone `UNIQUE (event_id)` constraint exists on this table: TimescaleDB requires every unique constraint on a hypertable to include the partitioning column (`started_at`), so `event_id` alone cannot be made unique. This is why `event_tags` (see below) references the composite primary key rather than a simple `event_id` foreign key.
 
 Indexes:
 
@@ -404,14 +406,27 @@ Explicit, user-initiated sessions (a Pomodoro-style focus block, a break, or a m
 
 Join tables attaching tags to, respectively, activity events and focus sessions.
 
+**event_tags**
+
 | Column | Type | Constraints |
 |---|---|---|
-| entity_id | uuid | PK (composite) |
+| user_id | uuid | FK (composite, see below) |
+| started_at | timestamptz | FK (composite, see below) |
+| entity_id | uuid | PK (composite), FK (composite, see below) |
 | tag_id | uuid | PK (composite), FK -> `tags(id)` |
 
-Both tables share the same shape: primary key `(entity_id, tag_id)`. `event_tags.entity_id` references `activity_events(event_id)`, and `session_tags.entity_id` references `focus_sessions(id)`.
+Primary key: `(entity_id, tag_id)`. Foreign key: `FOREIGN KEY (user_id, started_at, entity_id) REFERENCES activity_events (user_id, started_at, event_id)`.
 
-The `event_tags` reference is a straightforward single-column foreign key rather than one that has to account for `activity_events`'s composite primary key: the standalone `UNIQUE (event_id)` constraint added to `activity_events` (see the `activity_events` section above) is exactly what makes `entity_id uuid REFERENCES activity_events(event_id)` valid. `session_tags.entity_id REFERENCES focus_sessions(id)` was never ambiguous, since `focus_sessions` has a simple, non-composite primary key.
+**session_tags**
+
+| Column | Type | Constraints |
+|---|---|---|
+| entity_id | uuid | PK (composite), FK -> `focus_sessions(id)` |
+| tag_id | uuid | PK (composite), FK -> `tags(id)` |
+
+Primary key: `(entity_id, tag_id)`.
+
+`session_tags` keeps the simple two-column shape because `focus_sessions` has a plain, non-composite primary key (`id`), so `session_tags.entity_id REFERENCES focus_sessions(id)` is a straightforward single-column foreign key. `event_tags` cannot do the same: `activity_events` is a hypertable partitioned on `started_at`, so TimescaleDB requires every unique constraint on it to include the partitioning column, and no unique key on `event_id` alone exists — only the composite primary key `(user_id, started_at, event_id)` and the composite idempotency constraint `UNIQUE (user_id, event_id, started_at)`. A foreign key must reference a unique key on the target table, so `event_tags` has to carry the matching composite columns (`user_id`, `started_at`) alongside `entity_id` in order to reference `activity_events`'s composite key. The primary key of `event_tags` remains `(entity_id, tag_id)` — the extra `user_id`/`started_at` columns are needed only to satisfy the foreign key, not to identify the row.
 
 ### sync_cursors
 
