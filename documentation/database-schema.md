@@ -9,9 +9,9 @@ The schema follows a small set of conventions applied consistently across all ta
 - **Primary keys are UUIDs.** Server-generated rows use Postgres's `gen_random_uuid()`. Rows that originate on a client (activity events, focus sessions, projects, tags) are created with a client-supplied **UUIDv7** instead, so the identifier is both globally unique and time-ordered — this is what lets the backend deduplicate retried or replayed uploads without a round trip to allocate an ID first.
 - **All timestamps are `timestamptz`.** Storing the timezone offset alongside every timestamp avoids ambiguity when a user's clients cross timezones or when the backend aggregates across users in different timezones.
 - **Soft delete via `deleted_at`.** Tables that support user-initiated deletion carry a nullable `deleted_at` column rather than a hard `DELETE`, so that sync can propagate the tombstone to other devices and so deletions remain reversible until the GDPR grace period in `deletion_requests` expires (see [[security]]).
-- **Syncable tables carry `server_seq BIGINT`.** Any table that a client pulls incrementally bumps `server_seq` on every write (insert or update). Sync pull requests page through this column with keyset pagination (`WHERE server_seq > :cursor ORDER BY server_seq`) rather than offset pagination, which stays correct and efficient regardless of how much data has accumulated. The full pull/push mechanics are specified in [[sync-protocol]].
+- **Syncable tables carry `server_seq BIGINT`.** Any table that a client pulls incrementally bumps `server_seq` on every write (insert or update), rather than using offset pagination, so pulls stay correct and efficient regardless of how much data has accumulated. `server_seq` remains the per-row change counter recorded on the entity table itself, but the pull cursor a client actually holds is an opaque, commit-ordered watermark maintained internally by the server over [[#sync_changelog]] (see [[sync-protocol]]) — not a direct `WHERE server_seq > :cursor` scan of each syncable table. The full pull/push mechanics are specified in [[sync-protocol]].
 
-`server_seq` is present on every syncable table, including `users` and `categories`: a display-name change or a custom-category edit propagates to other devices via the same keyset-pagination mechanism as `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions`.
+`server_seq` is present on `users` as well as `categories`, but the two are not equivalent: a custom-category edit propagates to other devices through the same pull feed as `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions` (`categories` has a `sync_changelog` trigger and is part of the pull entity set). `users.server_seq` exists on the table, but `users` is intentionally NOT part of the pull feed at this stage: it has no `sync_changelog` trigger and is not one of the entity types `GET /v1/sync/changes` returns. Profile data (`display_name` and the rest of the `users` row) is instead obtained via the auth endpoints (`GET /v1/users/me`, login/refresh) rather than pull-synced; pull-syncing profile changes across a user's devices is a possible future extension, not a current guarantee.
 
 ## Entity-Relationship Diagram
 
@@ -156,6 +156,15 @@ erDiagram
         uuid tag_id PK, FK
     }
 
+    SYNC_CHANGELOG {
+        bigint changelog_id PK
+        uuid user_id
+        text entity_type
+        uuid entity_id
+        timestamptz event_started_at
+        bigint server_seq
+    }
+
     SYNC_CURSORS {
         uuid device_id PK, FK
         bigint last_pull_seq
@@ -194,6 +203,7 @@ erDiagram
     FOCUS_SESSIONS ||--o{ SESSION_TAGS : "tagged by"
     TAGS ||--o{ SESSION_TAGS : "applied to"
     DEVICES ||--|| SYNC_CURSORS : tracks
+    USERS |o--o{ SYNC_CHANGELOG : logs
     USERS ||--o{ DELETION_REQUESTS : requests
 ```
 
@@ -373,7 +383,7 @@ Indexes:
 
 - `(user_id, started_at DESC)` — the primary access pattern for "this user's activity, most recent first," used by timeline and report views.
 - `(user_id, app_id, started_at)` — supports per-app time breakdowns for a user over a range.
-- `(user_id, server_seq)` — supports sync pull's keyset pagination for this table.
+- `(user_id, server_seq)` — sync pull now paginates the `sync_changelog` outbox table (see [[#sync_changelog]]) rather than this table's own `server_seq` column directly; this index instead serves the per-table list endpoints that page by this table's own, plain `server_seq` cursor.
 
 Compression policy: chunks older than 30 days are compressed. Retention policy: optional/configurable (not a fixed default), so that data lifetime can be tuned per deployment or per user preference rather than being hard-coded.
 
@@ -429,6 +439,29 @@ Primary key: `(entity_id, tag_id)`. Foreign key: `FOREIGN KEY (user_id, started_
 Primary key: `(entity_id, tag_id)`.
 
 `session_tags` keeps the simple two-column shape because `focus_sessions` has a plain, non-composite primary key (`id`), so `session_tags.entity_id REFERENCES focus_sessions(id)` is a straightforward single-column foreign key. `event_tags` cannot do the same: `activity_events` is a hypertable partitioned on `started_at`, so TimescaleDB requires every unique constraint on it to include the partitioning column, and no unique key on `event_id` alone exists — only the composite primary key `(user_id, started_at, event_id)` and the composite idempotency constraint `UNIQUE (user_id, event_id, started_at)`. A foreign key must reference a unique key on the target table, so `event_tags` has to carry the matching composite columns (`user_id`, `started_at`) alongside `entity_id` in order to reference `activity_events`'s composite key. The primary key of `event_tags` remains `(entity_id, tag_id)` — the extra `user_id`/`started_at` columns are needed only to satisfy the foreign key, not to identify the row.
+
+### sync_changelog
+
+An append-only, plain heap outbox table: one row per write (insert or update) to any of the six syncable tables (`activity_events`, `focus_sessions`, `projects`, `tags`, `user_app_settings`, `categories`). `GET /v1/sync/changes` paginates this single table rather than each syncable table's own system columns — see [[sync-protocol]] for why the pull cursor is anchored here.
+
+| Column | Type | Constraints |
+|---|---|---|
+| changelog_id | bigint | PK, `GENERATED ALWAYS AS IDENTITY` |
+| user_id | uuid | NULL |
+| entity_type | text | NOT NULL |
+| entity_id | uuid | NOT NULL |
+| event_started_at | timestamptz | NULL |
+| server_seq | bigint | NOT NULL |
+
+Index: `(user_id, server_seq)`.
+
+`changelog_id` is a plain identity column — a tiebreaker for humans reading the table, not part of the pull cursor. `user_id` is `NULL` only for a changelog row logging a system-default category (`categories.user_id IS NULL`, copied verbatim); every other entity type's `user_id` is never `NULL` here since it isn't `NULL` on the entity table itself. `entity_id` holds that entity's own identifier — `event_id` for `activity_events`, `app_id` for `user_app_settings` (whose primary key is the composite `(user_id, app_id)`), `id` for every other entity type. `event_started_at` is populated only for `activity_events` rows: because `activity_events` is a hypertable partitioned on `started_at`, a point lookup back into it needs `started_at` alongside `entity_id` to land on the correct chunk; every other entity type leaves this column `NULL`. `server_seq` is the entity row's own `server_seq_global`-assigned value at the time of the write that produced this changelog row, copied verbatim.
+
+**Triggers.** Six `AFTER INSERT OR UPDATE` triggers — one per syncable table (`activity_events_log_change`, `focus_sessions_log_change`, `projects_log_change`, `tags_log_change`, `user_app_settings_log_change`, `categories_log_change`) — each append exactly one row into `sync_changelog` whenever their table is written. Each trigger fires strictly after the entity table's own `BEFORE INSERT/UPDATE` trigger has already assigned the row's `server_seq`, so the value copied into `sync_changelog` is always that write's real, final `server_seq`. Because the entity table's write and the `sync_changelog` append happen inside the same transaction, the changelog row commits at the exact same instant as the entity write it describes, which is what lets the pull cursor treat `sync_changelog`'s own commit ordering as authoritative for every syncable table, including `activity_events` once its older chunks are compressed (a plain heap table's commit-ordering columns remain readable regardless of what happens to a hypertable's compressed chunks).
+
+**Backfill.** One `sync_changelog` row is seeded per pre-existing row across all six syncable tables, using each row's current `server_seq`, so a client starting from a fresh (zero) sync cursor still discovers every row that existed before this table was introduced, not only rows written afterward.
+
+**Growth and retention are deferred.** This table is append-only with no compaction, pruning, or retention policy defined here; unbounded growth and any future retention/compaction strategy are tracked separately (RIZ-72), not specified by this document.
 
 ### sync_cursors
 

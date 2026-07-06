@@ -149,9 +149,9 @@ Per-item `status` is exactly one of:
 
 ## Pull — `GET /v1/sync/changes?cursor=<opaque>&limit=<n>`
 
-Clients pull changes — including server-derived data — using **keyset pagination** over a per-row `server_seq BIGINT` that is bumped on every write to a row, whether that write originated from a push or from server-side derivation (aggregate recomputation, category resolution).
+Clients pull changes — including server-derived data — using a `cursor` that is an **opaque, commit-ordered watermark** over the server's change stream. Every syncable row still carries its own `server_seq BIGINT`, bumped on every write to that row (whether the write originated from a push or from server-side derivation such as aggregate recomputation or category resolution) — `server_seq` remains the per-row change counter and is still returned to clients on every upsert/tombstone. The cursor itself, however, is not simply "the last `server_seq` seen": how the server derives and advances it internally (including what it is anchored to and why) is a server-side implementation detail, not part of this contract. Clients must treat `cursor` as an opaque string: they persist and resubmit it verbatim and never parse, construct, or compare it themselves. The no-skip delivery guarantee below holds regardless of that internal mechanism.
 
-- `cursor` is an opaque token representing the last `server_seq` the client has fully consumed. On a client's first-ever pull, `cursor` is omitted or empty, and the server starts from the beginning of that user's change stream.
+- `cursor` is an opaque token representing the position in the change stream the client has fully consumed. On a client's first-ever pull, `cursor` is omitted or empty, and the server starts from the beginning of that user's change stream.
 - `limit` bounds the number of changed rows returned per entity type in a single response page.
 
 ### Response schema
@@ -229,7 +229,9 @@ Clients pull changes — including server-derived data — using **keyset pagina
 }
 ```
 
-Every entity type the user has data for is represented as an `{ upserts, tombstones }` pair. `user_app_settings` never carries tombstones: the table has no `deleted_at`/`deleted` column (see [[database-schema]]), so its `tombstones` array is always empty and every row it does deliver is an upsert.
+Every implemented entity type always appears in `changes` as an `{ upserts, tombstones }` pair, even when a given page has no changes for it — in that case both arrays are simply empty, rather than the key being omitted. The only keys absent from `changes` altogether are entity types that are not yet delivered at all (currently `aggregates`; see the note below). `user_app_settings` never carries tombstones: the table has no `deleted_at`/`deleted` column (see [[database-schema]]), so its `tombstones` array is always empty and every row it does deliver is an upsert.
+
+Within an upsert or tombstone object, a field whose value is nullable (for example `focus_sessions`' `ended_at`, `project_id`, `planned_duration_s`, and `note`; `projects`' `archived_at`; `user_app_settings`' `category_id`; `activity_events`' `app_bundle_id` and `category`) is omitted from the JSON entirely when its value is null, rather than being present with a `null` value.
 
 `next_cursor` is always returned; the client repeats the pull with `next_cursor` while `has_more` is `true`, and stops once a page comes back with `has_more: false`.
 
@@ -242,7 +244,7 @@ Field notes:
 > [!note] Aggregates are not yet delivered
 > An `aggregates` key (server-computed daily/weekly rollups, per [[#Entity Classes and Sync Strategies]]) is planned for the `changes` object once the reports/aggregation epic ships a service to compute it — not shown in the worked example above because it does not exist yet. Until then, no `aggregates` key is present in the response at all: there is no aggregation service yet to source it from. Clients MUST decode the `changes` object permissively: treat any key they don't recognize, and the absence of any key they do expect (including `aggregates`), as "no changes of that type in this page" rather than an error, so that `aggregates` (and any future entity type) can be introduced later without breaking already-deployed clients.
 
-**Pulls are idempotent and safe to repeat.** Because the cursor is a strict keyset bound (`server_seq > cursor`) rather than a time window, requesting the same cursor twice returns the same page, and applying that page twice is a no-op (upserts overwrite by `id`/`event_id`, tombstones set `deleted` which is already set on replay). This is what makes cursor loss and full re-pull safe (see [[#Device Restore from Backup]]).
+**Pulls are idempotent and safe to repeat.** Because the cursor is a stable position in the commit-ordered change stream rather than a time window, requesting the same cursor twice returns the same page, and applying that page twice is a no-op (upserts overwrite by `id`/`event_id`, tombstones set `deleted` which is already set on replay). This is what makes cursor loss and full re-pull safe (see [[#Device Restore from Backup]]).
 
 **No row is ever skipped, even under concurrent writes.** The server guarantees this by pairing a snapshot-consistent read across every entity type in a page with a transaction-visibility horizon: a row is only eligible for delivery once the write that produced it is safely behind that horizon. A row belonging to a transaction that has not yet reached that horizon — for example, a slower concurrent write that has not finished committing yet — is simply deferred and delivered on a later pull instead of being included (or half-included) in the current one. `next_cursor` only ever advances over rows that were actually delivered under this rule, never past a row that is still pending. From a client's perspective this means: a just-written row may take a short additional delay to appear in a pull, but once `next_cursor` has advanced past a point, nothing behind that point can arrive out of order or get permanently lost.
 
@@ -265,7 +267,7 @@ sequenceDiagram
     App->>Outbox: mark each row per its own result
 
     App->>API: GET /v1/sync/changes?cursor=<stored_cursor>&limit=<n>
-    API->>DB: SELECT WHERE server_seq > cursor ORDER BY server_seq LIMIT n
+    API->>DB: read next page of the change stream past cursor, limit n
     DB-->>API: upserts + tombstones per entity type, next_cursor
     API-->>App: changes payload
 
