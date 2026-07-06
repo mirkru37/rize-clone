@@ -42,6 +42,23 @@ All versioned endpoints are served under a common base URL with `/v1` path versi
 
 The register, login, and Apple sign-in routes are public (no bearer token required) since they are how a client obtains its first token pair. `refresh` rotates the refresh token and mints a new access token, and is likewise called without an existing valid access token (it uses the refresh token itself as its credential). `logout` requires an authenticated session and revokes the refresh token backing it, ending that session. See [[security]] for token rotation and revocation details, and [[architecture-desktop]] / [[architecture-mobile]] for how each client persists and refreshes tokens.
 
+`register`, `login`, and `refresh` all return the same `authResponse` shape: `access_token` (signed JWT), `refresh_token` (opaque, `rt_`-prefixed), `token_type` (`"Bearer"`), `expires_in` (access token lifetime in seconds), `user`, and `device`. `register` and `login` both require a `device` object in the request body (`platform`, `name`, `model`, `os_version`, `app_version`, plus an optional `id` — omitted by the client when registering a brand-new device, populated by the server in the echoed response so the client can reuse it on later calls). `refresh`'s request body carries `refresh_token` and an optional `device` object with the same id semantics. `logout`'s request body carries only `refresh_token` and responds `204 No Content`.
+
+Known error types surfaced by the auth handlers, each following the RFC 7807-style body from [[#Conventions]] with `type` set to `https://api.rize-clone.example/errors/<slug>`:
+
+| Slug | Status | Meaning |
+|---|---|---|
+| `invalid-request-body` | 400 | Request body is missing, malformed, or not valid JSON |
+| `validation-error` | 400 | Request body parsed but failed field-level validation |
+| `email-already-registered` | 409 | `register` was called with an email that already has an account |
+| `invalid-credentials` | 401 | `login` was called with an incorrect email/password combination |
+| `invalid-refresh-token` | 401 | `refresh` or `logout` was called with a refresh token that is unknown, expired, or already revoked |
+| `refresh-token-reuse-detected` | 401 | `refresh` was called with a token that was already rotated; the entire token family for the device has been revoked (see [[security]]) |
+| `device-not-found` | 404 | A `device.id` was supplied that does not resolve to a device owned by the authenticating user |
+| `user-not-found` | 404 | The user backing a token or credential no longer exists |
+| `unauthenticated` | 401 | `logout` was called without a valid `Authorization: Bearer` access token |
+| `internal-error` | 500 | Unexpected server-side failure |
+
 ### Users
 
 | Method | Path | Description | Auth level |
@@ -126,6 +143,8 @@ These operational endpoints are unversioned (no `/v1` prefix) and sit outside th
 
 ### 1. POST /v1/auth/login
 
+`device` is required on both `register` and `login`. When a client submits a new device that does not yet have a server-assigned id, it omits `device.id` in the request; the server assigns one and echoes the full device object — including the new `device.id` — back in the response. On subsequent calls the client passes that same `device.id` back so the server matches/updates the existing device row rather than creating a new one.
+
 Request:
 
 ```json
@@ -134,7 +153,14 @@ Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "password": "correct-horse-battery-staple"
+  "password": "correct-horse-battery-staple",
+  "device": {
+    "platform": "macos",
+    "name": "Roman's MacBook Pro",
+    "model": "MacBookPro18,3",
+    "os_version": "14.5",
+    "app_version": "1.2.0"
+  }
 }
 ```
 
@@ -145,9 +171,19 @@ Response (200 OK):
   "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
   "refresh_token": "rt_9f8c1e2a4b3d4c5e8f7a6b5c4d3e2f1a",
   "token_type": "Bearer",
+  "expires_in": 900,
   "user": {
     "id": "usr_01HZX3K4Q9T7V8W9Y0Z1A2B3C4",
-    "email": "user@example.com"
+    "email": "user@example.com",
+    "role": "user"
+  },
+  "device": {
+    "id": "dev_01J2K3M4N5P6Q7R8S9T0U1V2W3",
+    "platform": "macos",
+    "name": "Roman's MacBook Pro",
+    "model": "MacBookPro18,3",
+    "os_version": "14.5",
+    "app_version": "1.2.0"
   }
 }
 ```
@@ -163,7 +199,77 @@ Error example (401 Unauthorized) using the RFC 7807-style body:
 }
 ```
 
-### 2. POST /v1/sync/events
+`POST /v1/auth/register` follows the identical request/response shape (`device` required, `authResponse` returned), except it returns `201 Created` and can additionally fail with `email-already-registered` (409) instead of `invalid-credentials`.
+
+### 2. POST /v1/auth/refresh
+
+`device` is optional on refresh. Omit it to simply rotate the refresh token and mint a new access token without touching device state; supply it (with or without `device.id`) to update an existing device or register a new one as part of the same call, using the same `device.id` semantics described above.
+
+Request (without device):
+
+```json
+POST /v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh_token": "rt_9f8c1e2a4b3d4c5e8f7a6b5c4d3e2f1a"
+}
+```
+
+Response (200 OK):
+
+```json
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "rt_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+  "token_type": "Bearer",
+  "expires_in": 900,
+  "user": {
+    "id": "usr_01HZX3K4Q9T7V8W9Y0Z1A2B3C4",
+    "email": "user@example.com",
+    "role": "user"
+  },
+  "device": {
+    "id": "dev_01J2K3M4N5P6Q7R8S9T0U1V2W3",
+    "platform": "macos",
+    "name": "Roman's MacBook Pro",
+    "model": "MacBookPro18,3",
+    "os_version": "14.5",
+    "app_version": "1.2.0"
+  }
+}
+```
+
+Error example (401 Unauthorized) on reuse of an already-rotated refresh token:
+
+```json
+{
+  "type": "https://api.rize-clone.example/errors/refresh-token-reuse-detected",
+  "title": "Refresh token reuse detected",
+  "status": 401,
+  "detail": "This refresh token has already been rotated; the token family has been revoked."
+}
+```
+
+### 3. POST /v1/auth/logout
+
+Requires an authenticated request (`Authorization: Bearer <access-token>`).
+
+Request:
+
+```json
+POST /v1/auth/logout
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "refresh_token": "rt_1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+}
+```
+
+Response: `204 No Content` (empty body).
+
+### 4. POST /v1/sync/events
 
 Request (batch of three events, idempotent by `event_id`):
 
@@ -195,7 +301,7 @@ Response (200 OK) — partial success, with a per-item result of `applied`, `dup
 
 Here `evt_001` was newly ingested, `evt_002` had already been ingested previously (idempotent replay, no-op), and `evt_003` failed validation but did not prevent the other two items in the batch from being applied. See [[sync-protocol]] for the full idempotency and conflict-resolution semantics that govern how per-item outcomes are determined.
 
-### 3. GET /v1/reports/daily
+### 5. GET /v1/reports/daily
 
 Request:
 
