@@ -83,9 +83,10 @@ flowchart LR
 The Tracking Engine's activity state determines whether frontmost-app/window samples are attributed to a live session or excluded from tracking. Transitions:
 
 - `active -> idle` when `CGEventSource`'s `secondsSinceLastEventType` exceeds a threshold, default **300 seconds**.
+  - **Idle boundary back-dating**: when the idle threshold is crossed, the engine closes the active segment at the *last-input instant* (`detection time − seconds since last input`), not at detection time, and the idle segment starts there. The closed active segment keeps `precision: exact`. The idle segment is `precision: approximate` because its boundary is derived. The back-dated boundary is clamped to the active segment's start; if clamping leaves the active segment under the 5-second minimum event duration (see §Event Model), it is dropped.
 - `-> locked` on the `com.apple.screenIsLocked` distributed notification (reachable from any state in which the screen can lock).
 - `-> sleeping` on `NSWorkspace` `willSleepNotification` / `didWakeNotification` (`willSleep` drives the transition into `sleeping`; `didWake` drives the return transition).
-- Returning from `idle` (or from `locked`/`sleeping`) to `active` triggers the **back-fill decision** for the elapsed gap: either **discard the idle gap** (the gap is not attributed to any activity), or **prompt the user to attribute it** (the user assigns the gap to a task/session retroactively). Both back-fill rules are given by the brief as the defined options for handling the gap.
+- Returning from `idle` (or from `locked`/`sleeping`) to `active` closes the elapsed gap according to the resolved back-fill decision below.
 
 ```mermaid
 stateDiagram-v2
@@ -95,20 +96,22 @@ stateDiagram-v2
     active --> sleeping: NSWorkspace willSleep
     idle --> locked: com.apple.screenIsLocked
     idle --> sleeping: NSWorkspace willSleep
-    idle --> active: user input resumes\n(back-fill: discard gap OR prompt to attribute)
-    locked --> active: screen unlocked\n(back-fill: discard gap OR prompt to attribute)
-    sleeping --> active: NSWorkspace didWake\n(back-fill: discard gap OR prompt to attribute)
+    idle --> active: user input resumes\n(back-fill: discard gap, MVP)
+    locked --> active: screen unlocked\n(back-fill: discard gap, MVP)
+    sleeping --> active: NSWorkspace didWake\n(back-fill: discard gap, MVP)
 ```
 
-> [!note] Open question
-> The brief presents "discard the idle gap" and "prompt the user to attribute it" as the two back-fill rules without specifying which is the default or whether the choice is user-configurable per Settings. Recommend resolving this alongside the exclusion-list/capture-toggle settings in the Privacy Controls section below.
+> [!note] Decision (RIZ-39)
+> Idle/locked/sleeping back-fill discards the gap for MVP: the elapsed gap is recorded as its own unattributed event (of the corresponding type — see §Event Model for the persistence mapping) rather than being attributed to any activity. A user-facing prompt letting the user retroactively attribute the gap to a task/session is deferred to a later epic. This decision is revisitable.
 
 ## Event Model
 
 When a tracked session ends (on an app/window change, or on a state-machine transition out of `active`), the Tracking Engine closes it into an immutable row in `activity_events`:
 
 - Each row is assigned a **client-generated UUIDv7** as its identifier. UUIDv7's time-ordered structure supports both idempotent ingestion on the backend and natural sort order locally (consistent with the client-generated-identifier decision in [[system-overview]]).
-- A **minimum-duration filter** discards sessions shorter than **5 seconds** — these are treated as noise (e.g., transient window focus flicker) and never written to `activity_events`.
+- A **minimum-duration filter** discards sessions shorter than **5 seconds** — these are treated as noise (e.g., transient window focus flicker) and never written to `activity_events`. This is the same 5-second floor referenced by the idle boundary back-dating rule in §Tracking State Machine above.
+- Persistence mapping for gap-producing states: `idle` gaps persist as `type: idle, precision: approximate`; `sleeping` gaps persist as `type: idle, precision: approximate` (the `sleeping` state has no dedicated `activity_events.type` value in [[database-schema]], so it collapses to `idle`); `locked` gaps persist as `type: locked, precision: exact`, using [[database-schema]]'s dedicated `'locked'` value.
+
 - `activity_events` rows are **immutable** once written: corrections are made by appending new events, not by editing existing rows, matching the append-only event model described in [[system-overview]].
 - The local `activity_events` schema **mirrors the server ingest contract**; the authoritative shape of these rows is defined in [[database-schema]], and the local GRDB schema must be kept in sync with it.
 
