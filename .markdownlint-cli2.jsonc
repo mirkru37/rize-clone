@@ -1,0 +1,38 @@
+{
+  // Lint the documentation suite plus top-level markdown files (README,
+  // CLAUDE.md). Rules are tuned so the CURRENT docs pass unmodified -- see
+  // RIZ-26. Do not "fix" this by editing documentation/*.md; tune config
+  // instead, per the docs-CI brief.
+  "globs": [
+    "documentation/**/*.md",
+    "*.md"
+  ],
+  "config": {
+    "default": true,
+
+    // Docs are prose-heavy with long reference sentences and links; a hard
+    // line-length limit doesn't fit this style.
+    "MD013": false,
+
+    // Wiki-links and some diagrams rely on inline HTML in a few places.
+    "MD033": false,
+
+    // Headings like "Transport" / "Response schema" legitimately repeat
+    // under different parent sections (e.g. per-endpoint subsections).
+    "MD024": {
+      "siblings_only": true
+    },
+
+    // Several fenced blocks (example CLI invocations, directory trees) are
+    // intentionally left without a language tag.
+    "MD040": false,
+
+    // Some fenced blocks in README.md / CLAUDE.md are inside list items
+    // without a following blank line; content is otherwise correct.
+    "MD031": false,
+
+    // Compact-style markdown tables (no padding spaces around pipes) are
+    // used throughout the docs and master CLAUDE.md.
+    "MD060": false
+  }
+}

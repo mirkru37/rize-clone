@@ -1,0 +1,61 @@
+name: docs-ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  markdownlint:
+    name: markdownlint-cli2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Run markdownlint-cli2
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: |
+            documentation/**/*.md
+            *.md
+
+  wiki-links:
+    name: check-wiki-links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Check documentation wiki-links
+        run: ./scripts/check-wiki-links.sh
+
+  mermaid:
+    name: check-mermaid
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check Mermaid diagrams render
+        # GitHub-hosted ubuntu-latest runners restrict unprivileged user
+        # namespaces via AppArmor, which prevents Chromium's own sandbox
+        # from starting ("No usable sandbox!"). MERMAID_NO_SANDBOX makes
+        # check-mermaid.sh pass a puppeteer config with --no-sandbox to
+        # mmdc so it can still launch headless Chromium here. Local runs
+        # (this env var unset) stay sandboxed by default.
+        run: ./scripts/check-mermaid.sh
+        env:
+          MERMAID_NO_SANDBOX: "1"
