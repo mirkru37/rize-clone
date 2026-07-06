@@ -24,6 +24,14 @@ Start with `documentation/README.md` for the map of content.
 
 One Linear ticket → one branch → one PR, all named after the ticket:
 
+NEVER work in main branch, ALWAYS branch off a Linear ticket or create new branch from main.
+
+ALWAYS create branch from fresh main branch. Ex:
+```
+  git fetch
+  git checkout -b feat/RIZ-<n>-<short-slug> origin/main
+```
+
 - **Branch**: `feat/RIZ-<n>-<short-slug>` (use `fix/`, `docs/`, `chore/` prefixes as appropriate), e.g. `feat/RIZ-42-implement-user-model`.
 - **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`) referencing `RIZ-<n>` in the scope or body.
 - **PR**: title `[RIZ-<n>] <summary>`, body links the Linear issue, states what changed and how it was tested. One atomic task per PR. PRs merge into the submodule's `main`, then a pointer-bump commit lands in the master repo.
