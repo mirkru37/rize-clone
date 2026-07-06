@@ -18,6 +18,7 @@ Start with `documentation/README.md` for the map of content.
 1. **`documentation/` is the source of truth.** Code must conform to the contracts in `documentation/database-schema.md`, `documentation/api-reference.md`, and `documentation/sync-protocol.md`. Any change to a contract (schema, API, sync protocol) requires updating the corresponding doc in the same cycle — dispatch the document-writer for it.
 2. **Submodule git semantics.** Never run git write operations against a submodule from the master repo root — `cd` into the submodule first. After a submodule PR merges, commit the pointer bump in the master repo.
 3. **Every task maps to a Linear issue.** No untracked work.
+4. **Containerization.** Every containerizable project must provide a `Dockerfile` and be runnable end-to-end with `docker compose` (currently `rize-backend`: api + TimescaleDB + migrations). `rize-desktop` and `rize-mobile` are exempt — macOS/iOS GUI apps cannot run in Linux containers.
 
 ## Git flow
 

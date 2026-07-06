@@ -204,9 +204,13 @@ Schema migrations are managed with golang-migrate and are forward-only: every sc
 > [!note] Open question
 > The brief does not specify how a forward-only migration policy handles a mistake in an already-applied migration (a corrective forward migration is the natural approach, but this is not stated explicitly). Worth confirming alongside [[database-schema]].
 
-## Local Development
+## Containerization and Local Development
 
-Local development runs the backend and its datastore via `docker-compose`, using a TimescaleDB image (a PostgreSQL image with the TimescaleDB extension preinstalled) for the database service, so that continuous aggregates and hypertables behave the same locally as in deployed environments. The Go binary itself can be run directly against the compose-managed database using the same environment-based configuration described above.
+Containerization is a hard requirement for this service: the repository must provide a `Dockerfile` (multi-stage build — compile the Go binary in a builder stage, ship it in a minimal runtime image), and the entire backend must be runnable end-to-end with a single `docker compose up`. The compose file defines three services: the API (built from the `Dockerfile`), the database (a TimescaleDB image — a PostgreSQL image with the TimescaleDB extension preinstalled, so that continuous aggregates and hypertables behave the same locally as in deployed environments), and a one-shot migration service that applies golang-migrate migrations before the API starts. Configuration flows into the containers through the same environment-based configuration described above.
+
+For faster iteration, the Go binary can also be run directly on the host against the compose-managed database; the `docker compose` path is the reference way to run the service and must always work.
+
+This requirement applies to every containerizable project in Rize-Clone. The desktop and mobile clients ([[architecture-desktop]], [[architecture-mobile]]) are exempt: macOS and iOS GUI applications cannot run in Linux containers.
 
 > [!note] Open question
 > The brief does not specify whether the background jobs (refresh-token cleanup, retention enforcement, GDPR deletion executor) run on a fixed schedule, and if so at what interval, or what retention window the retention-enforcement job targets. Worth confirming alongside [[security]] and [[database-schema]].
