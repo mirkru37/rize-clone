@@ -27,7 +27,7 @@ Email/password remains available as a secondary authentication method (see `POST
 | Iterations | 3 |
 | Parallelism | 4 |
 
-These parameters apply uniformly to registration and to any password reset/change flow — a password is never stored or compared in any form other than its argon2id hash.
+These parameters apply uniformly to registration and to any password reset/change flow — a password is never stored or compared in any form other than its argon2id hash. Passwords must be at least 8 characters and are capped at a maximum of **1024 bytes**, rejected as a validation error before any hashing is attempted, since argon2id's cost is proportional to input size and an unbounded password would let a caller amplify server-side memory/CPU cost per request (a denial-of-service vector), so the cap is enforced up front rather than left to argon2id itself to absorb.
 
 ### Sign in with Apple flow
 
@@ -87,18 +87,20 @@ Rize-Clone uses two token types, issued as a pair on every successful authentica
 
 | Token | Lifetime | Format | Notes |
 |---|---|---|---|
-| Access token | 15 minutes | JWT, signed RS256 or EdDSA | Claims: `sub` (user id), `role`, `device_id`. Sent as `Authorization: Bearer <access-token>` per [[api-reference]]. |
-| Refresh token | 30 days | Opaque string | Stored hashed at rest; exactly one active refresh token per device; rotated on every use; family-based reuse detection (see flow above). |
+| Access token | 15 minutes | JWT, signed RS256 | Claims: `sub` (user id), `role`, `device_id`. Sent as `Authorization: Bearer <access-token>` per [[api-reference]]. |
+| Refresh token | 30 days | Opaque string (SHA-256 hashed at rest) | Stored hashed at rest; exactly one active refresh token per device; rotated on every use; family-based reuse detection (see flow above). |
 
 Key properties of the model:
 
 - **Short-lived access tokens** limit the exposure window if a token is intercepted or leaked, and carry enough claims (`sub`, `role`, `device_id`) for the backend to authorize a request and scope it correctly (see [[#Role-based access control (RBAC)]]) without a database round trip.
-- **Opaque refresh tokens** are not JWTs — they carry no claims of their own and are meaningless outside the backend's token store, which is what makes hashed-at-rest storage possible (the backend never needs to recover the plaintext, only compare a hash).
+- **Opaque refresh tokens** are not JWTs — they carry no claims of their own and are meaningless outside the backend's token store, which is what makes hashed-at-rest storage possible (the backend never needs to recover the plaintext, only compare a hash). Refresh tokens are 256-bit (32 random bytes) high-entropy secrets, minted server-side, `rt_`-prefixed, and base64 (URL-safe, no padding) encoded. At rest, the backend stores a **SHA-256** hash of the token in `refresh_tokens.token_hash` — deliberately not argon2id. Passwords (see [[#Email / password (secondary)]]) are low-entropy, human-chosen secrets that need a slow, salted key-derivation function to resist offline guessing, whereas refresh tokens are high-entropy, server-generated 256-bit values with no guessing risk to defend against; a fast, unsalted cryptographic hash is the appropriate, standard choice here, and it keeps refresh-token validation on every use a cheap indexed lookup rather than an intentionally slow KDF computation. Either way, the backend never persists the plaintext refresh token.
 - **One refresh token per device** ties the refresh token's identity to the `device_id` claim that also appears on the access token it mints, so a revoked device (`DELETE /v1/devices/{id}` in [[api-reference]]) can be fully invalidated by revoking its token family.
 - **Rotation on every refresh** plus **family-based reuse detection** together mean a stolen refresh token is only usable once before its reuse is detected and the whole family is revoked — see the sequence diagram above.
 
-> [!note] Open question
-> The brief specifies signing with "RS256 or EdDSA" without selecting one as the default. This should be pinned to a single algorithm (with a documented key-rotation and JWKS-publishing plan for the backend's own signing keys, mirroring how the backend consumes Apple's JWKS) before implementation.
+Access tokens are signed with **RS256**; EdDSA was considered but is no longer an option — RS256 is the algorithm actually implemented. The signing key is loaded from the `JWT_SIGNING_KEY` environment variable, a PEM-encoded RSA private key (PKCS#1 or PKCS#8 format), RSA-2048 minimum. In non-production (`development`) environments, if `JWT_SIGNING_KEY` is not configured, the backend falls back to an ephemeral, in-memory-generated RSA-2048 signing key so a fresh checkout can run without extra setup; this ephemeral key is not persisted across restarts, so every restart invalidates all access tokens issued with it, and it must never be used outside development. The `AccessTokenClaims` verifier rejects any token not signed with RS256, explicitly guarding against algorithm-confusion attacks.
+
+> [!info] Follow-up
+> JWKS publication for the backend's own signing key (so relying parties/clients could in principle verify tokens against a published public key, mirroring how the backend consumes Apple's JWKS) is not yet implemented. Key rotation for `JWT_SIGNING_KEY` is likewise not yet implemented or defined. Both are follow-up work, tracked as a future ticket, rather than a blocking gap in the current implementation — the wire contract of tokens already issued is unaffected by rotation being added later, since access tokens are opaque to clients beyond their claims.
 
 ### Client-side token storage
 
@@ -183,6 +185,7 @@ This checklist is the canonical, citable list of concrete requirements from this
 | [ ] | Sign in with Apple identity token signature is verified against Apple's live JWKS (`https://appleid.apple.com/auth/keys`) on every sign-in, with `iss`/`aud`/`exp` validated |
 | [ ] | Accounts are linked and looked up by `apple_user_id`, never by email address alone |
 | [ ] | Passwords are hashed with argon2id at memory=64 MiB, iterations=3, parallelism=4 |
+| [ ] | Passwords are rejected as a validation error (before hashing) if shorter than 8 characters or longer than 1024 bytes |
 | [ ] | Plaintext passwords are never logged, cached, or persisted in any form other than the argon2id hash |
 | [ ] | Password reset flow invalidates any in-flight reset token after use or expiry |
 
@@ -190,10 +193,10 @@ This checklist is the canonical, citable list of concrete requirements from this
 
 | ✓ | Requirement |
 |---|---|
-| [ ] | Access tokens are JWTs signed with RS256 or EdDSA (algorithm pinned per the open question above), expiring at 15 minutes |
+| [ ] | Access tokens are JWTs signed with RS256, expiring at 15 minutes |
 | [ ] | Access token claims are exactly `sub`, `role`, `device_id` (plus standard JWT claims); no sensitive data is embedded in the token |
 | [ ] | Refresh tokens are opaque (not JWTs) with a 30-day lifetime |
-| [ ] | Refresh tokens are stored hashed at rest in the backend's token store |
+| [ ] | Refresh tokens are stored hashed at rest (SHA-256) in the backend's token store |
 | [ ] | Exactly one active refresh token exists per device at any time |
 | [ ] | Every refresh call rotates the refresh token (old token invalidated, new token issued in the same family) |
 | [ ] | Reuse of an already-rotated refresh token revokes the entire token family for that device |
