@@ -1,0 +1,9 @@
+[submodule "rize-desktop"]
+	path = rize-desktop
+	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-desktop
+[submodule "rize-mobile"]
+	path = rize-mobile
+	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-mobile
+[submodule "rize-backend"]
+	path = rize-backend
+	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-backend
