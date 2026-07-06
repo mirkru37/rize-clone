@@ -1,0 +1,42 @@
+site_name: Rize-Clone Documentation
+site_description: Architecture documentation suite for Rize-Clone (source of truth for schema, API, and sync contracts).
+docs_dir: documentation
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+    - toc.follow
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - roamlinks
+  - callouts
+
+nav:
+  - Home: README.md
+  - System overview: system-overview.md
+  - Database schema: database-schema.md
+  - API reference: api-reference.md
+  - Sync protocol: sync-protocol.md
+  - Desktop architecture: architecture-desktop.md
+  - Mobile architecture: architecture-mobile.md
+  - Backend architecture: architecture-backend.md
+  - Security: security.md
+  - Observability: observability.md
