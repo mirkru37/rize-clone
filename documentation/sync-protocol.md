@@ -83,7 +83,9 @@ Clients push their local outbox — rows created or tombstoned since the last su
         "started_at": "2026-07-05T14:30:00Z",
         "ended_at": "2026-07-05T14:50:00Z",
         "project_id": "018f99f0-6a11-77aa-9c40-1a2b3c4d5e6f",
-        "label": "Deep work",
+        "kind": "focus",
+        "status": "completed",
+        "note": "Deep work",
         "deleted": false
       }
     },
@@ -216,6 +218,9 @@ sequenceDiagram
 ```
 
 The critical invariant is the transactional pairing at the end: **applying pulled changes and persisting the new cursor happen in the same local database transaction.** If the client crashes or loses power between applying data and saving the cursor, an all-or-nothing local transaction guarantees it either re-requests the same page (safe, per idempotent pulls) or has already durably recorded that it consumed it — it can never apply data and lose the cursor advance, which would otherwise cause the same page to be reapplied against a client state that has already moved past it in some other way.
+
+> [!note] Permitted relaxation
+> Clients MAY persist the pull cursor outside the apply transaction, but only if cursor persistence strictly follows a successful apply and pulls remain idempotent. The dangerous direction — advancing the cursor before (or without) the corresponding data being applied — must remain impossible; this relaxation only ever moves cursor persistence later relative to a completed apply, never earlier.
 
 ## Edge Cases
 
