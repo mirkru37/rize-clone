@@ -34,6 +34,10 @@ Pull latest submodule changes:
 git submodule update --remote --merge
 ```
 
+## Documentation site
+
+The `documentation/` folder is built into a static site with MkDocs Material on every push to `main` and every PR (`.github/workflows/docs-site.yml`). Build locally with `make docs-build` (output in `site/`, gitignored) or preview live with `make docs-serve`. In CI the built site is uploaded as a workflow artifact named `docs-site-<sha>`; public deployment (GitHub Pages) is prepared but disabled pending GRC review.
+
 ## Development workflow
 
 Work is tracked in Linear (team **RizeClone**, key `RIZ`): projects are milestones/epics, issues are short atomic tasks.
