@@ -23,8 +23,15 @@ Every entity synced between client and server falls into exactly one of three cl
 | Entity class | Entities | Strategy | Idempotency / conflict rule |
 |---|---|---|---|
 | Append-only, immutable | `activity_events` | Push-only from client; never mutated after ingestion. | Idempotency key is the composite `UNIQUE (user_id, event_id, started_at)` constraint defined in [[database-schema]]. Deletion is a tombstone (`deleted` flag set), never a hard delete through the sync path. No conflicts are possible — two pushes of the same key are the same fact reported twice. |
-| Mutable, last-write-wins | `focus_sessions`, `projects`, `tags`, category overrides (`user_app_settings`), other settings | Push and pull; edited after creation. | Client supplies its own `updated_at`. Server compares it against the currently stored `updated_at` for that `id` (last-write-wins). Server rejects a client timestamp skewed more than 24 hours from server time and substitutes server time for that write (see [[#Clock Skew]]). Whichever timestamp wins, the server persists that version and bumps `server_seq` on the row. |
-| Server-derived | Resolved categories, aggregates (daily/weekly rollups, cross-device totals) | Pull-only. | Never pushed by clients under any circumstance. Computed by the backend from ingested `activity_events` and the current category-override state. Exposed only through `GET /v1/sync/changes`. |
+| Mutable, last-write-wins | `focus_sessions`, `projects`, `tags`, `categories` (user-owned), category overrides (`user_app_settings`), other settings | Push and pull; edited after creation. | Client supplies its own `updated_at`. Server compares it against the currently stored `updated_at` for that `id` (last-write-wins). Server rejects a client timestamp skewed more than 24 hours from server time and substitutes server time for that write (see [[#Clock Skew]]). Whichever timestamp wins, the server persists that version and bumps `server_seq` on the row. |
+| Server-derived | Resolved category assignments (per-event classification), aggregates (daily/weekly rollups, cross-device totals) | Pull-only. | Never pushed by clients under any circumstance. Computed by the backend from ingested `activity_events` and the current category-override state. Exposed only through `GET /v1/sync/changes`. |
+
+`categories` rows themselves are a syncable mutable-LWW entity, not a server-derived one: a user's own custom categories (`user_id` set, per [[database-schema]]) carry `id`/`updated_at`/`deleted_at`/`server_seq` exactly like `projects` or `tags`, and are pushed and pulled the same way. What *is* server-derived and pull-only is the separate concept of a **resolved category assignment** — which category a given `activity_event` or `user_app_settings` override currently resolves to. Those are two different things that happen to share the word "category":
+
+- A `categories` row (this entity class) is a definition — a name, color, and productivity value — that a user creates, edits, or deletes.
+- A resolved category assignment (server-derived class, above) is the *answer* to "what category does this event currently fall under," computed from `activity_events.category_id` / `user_app_settings.category_id` and delivered as the `category` field on a pulled `activity_events` upsert (see the worked example below).
+
+The `categories` pull stream additionally includes every **system default category** (`user_id IS NULL`) alongside the caller's own, so a client can always resolve a `category_id` it sees on an `activity_events` or `user_app_settings` row to a name/color/productivity even if that category is a system default the user never created. System default categories are delivered **read-only**: they have no owning `user_id` for a client to push an edit against, so only a user's own (`user_id` set) categories are ever pushed back to the server under the mutable-LWW rule above.
 
 ```mermaid
 flowchart TD
@@ -35,10 +42,11 @@ flowchart TD
         FS["focus_sessions"]
         PR["projects"]
         TG["tags"]
+        CATU["categories\n(user-owned)"]
         UAS["user_app_settings\n(category overrides, settings)"]
     end
     subgraph Derived["Server-derived, pull-only"]
-        CAT["resolved categories"]
+        CAT["resolved category\nassignments"]
         AGG["aggregates"]
     end
 
@@ -46,7 +54,9 @@ flowchart TD
     Client -- "push / pull" --> FS
     Client -- "push / pull" --> PR
     Client -- "push / pull" --> TG
+    Client -- "push / pull" --> CATU
     Client -- "push / pull" --> UAS
+    Client -- "pull only\n(system defaults)" --> CATU
     AE -- "server computes from" --> CAT
     AE -- "server computes from" --> AGG
     CAT -- "pull only" --> Client
@@ -165,15 +175,53 @@ Clients pull changes — including server-derived data — using **keyset pagina
         { "event_id": "018f99aa-1111-7222-8333-444455556666", "server_seq": 48211 }
       ]
     },
-    "focus_sessions": { "upserts": [ /* ... */ ], "tombstones": [ /* ... */ ] },
+    "focus_sessions": {
+      "upserts": [
+        {
+          "id": "018f9a41-9d2a-7e3f-8b11-2f4a6c8d0e12",
+          "updated_at": "2026-07-05T14:50:00Z",
+          "started_at": "2026-07-05T14:30:00Z",
+          "ended_at": "2026-07-05T14:50:00Z",
+          "project_id": "018f99f0-6a11-77aa-9c40-1a2b3c4d5e6f",
+          "kind": "focus",
+          "status": "completed",
+          "planned_duration_s": 1500,
+          "note": "Deep work",
+          "server_seq": 48213
+        }
+      ],
+      "tombstones": [
+        { "id": "018f99bb-2222-7333-8444-555566667777", "server_seq": 48214 }
+      ]
+    },
     "projects": { "upserts": [ /* ... */ ], "tombstones": [ /* ... */ ] },
     "tags": { "upserts": [ /* ... */ ], "tombstones": [ /* ... */ ] },
-    "user_app_settings": { "upserts": [ /* ... */ ], "tombstones": [ /* ... */ ] },
-    "aggregates": {
+    "user_app_settings": {
       "upserts": [
-        { "date": "2026-07-05", "category": "Development", "duration_seconds": 14400, "server_seq": 48215 }
+        {
+          "app_id": "018f99cc-3333-7444-9555-666677778888",
+          "category_id": "018f99dd-4444-7555-a666-777788889999",
+          "excluded": false,
+          "updated_at": "2026-07-05T14:51:10Z",
+          "server_seq": 48216
+        }
       ],
       "tombstones": []
+    },
+    "categories": {
+      "upserts": [
+        {
+          "id": "018f9a50-2222-7333-9444-555566667777",
+          "name": "Development",
+          "color": "#4287f5",
+          "productivity": 2,
+          "updated_at": "2026-07-05T14:40:00Z",
+          "server_seq": 48217
+        }
+      ],
+      "tombstones": [
+        { "id": "018f99ee-5555-7666-b777-888899990000", "server_seq": 48218 }
+      ]
     }
   },
   "next_cursor": "opaque-cursor-string",
@@ -181,9 +229,22 @@ Clients pull changes — including server-derived data — using **keyset pagina
 }
 ```
 
-Every entity type the user has data for is represented as an `{ upserts, tombstones }` pair, even server-derived types like `aggregates`, since a recomputed aggregate is itself an upsert with a fresh `server_seq`. `next_cursor` is always returned; the client repeats the pull with `next_cursor` while `has_more` is `true`, and stops once a page comes back with `has_more: false`.
+Every entity type the user has data for is represented as an `{ upserts, tombstones }` pair. `user_app_settings` never carries tombstones: the table has no `deleted_at`/`deleted` column (see [[database-schema]]), so its `tombstones` array is always empty and every row it does deliver is an upsert.
+
+`next_cursor` is always returned; the client repeats the pull with `next_cursor` while `has_more` is `true`, and stops once a page comes back with `has_more: false`.
+
+Field notes:
+
+- `focus_sessions` upserts mirror the same field set as the `focus_session` push data object (see [[#Push — POST /v1/sync/events]]): `id`, `updated_at`, `started_at`, `ended_at`, `project_id`, `kind`, `status`, `planned_duration_s`, `note`, plus the pull-only `server_seq`. A `focus_sessions` tombstone carries only `id` and `server_seq`.
+- `user_app_settings` upserts carry `app_id`, `category_id`, `excluded`, `updated_at`, and `server_seq` — the table's own columns (see [[database-schema]]'s `user_app_settings` table). There is no tombstone shape for this entity type.
+- `categories` upserts carry `id`, `name`, `color`, `productivity`, `updated_at`, and `server_seq`; a `categories` tombstone carries `id` and `server_seq`. As with every entity in this response, `categories` includes the caller's own custom categories and every system default category (`user_id IS NULL`) — see [[#Entity Classes and Sync Strategies]].
+
+> [!note] Aggregates are not yet delivered
+> An `aggregates` key (server-computed daily/weekly rollups, per [[#Entity Classes and Sync Strategies]]) is planned for the `changes` object once the reports/aggregation epic ships a service to compute it — not shown in the worked example above because it does not exist yet. Until then, no `aggregates` key is present in the response at all: there is no aggregation service yet to source it from. Clients MUST decode the `changes` object permissively: treat any key they don't recognize, and the absence of any key they do expect (including `aggregates`), as "no changes of that type in this page" rather than an error, so that `aggregates` (and any future entity type) can be introduced later without breaking already-deployed clients.
 
 **Pulls are idempotent and safe to repeat.** Because the cursor is a strict keyset bound (`server_seq > cursor`) rather than a time window, requesting the same cursor twice returns the same page, and applying that page twice is a no-op (upserts overwrite by `id`/`event_id`, tombstones set `deleted` which is already set on replay). This is what makes cursor loss and full re-pull safe (see [[#Device Restore from Backup]]).
+
+**No row is ever skipped, even under concurrent writes.** The server guarantees this by pairing a snapshot-consistent read across every entity type in a page with a transaction-visibility horizon: a row is only eligible for delivery once the write that produced it is safely behind that horizon. A row belonging to a transaction that has not yet reached that horizon — for example, a slower concurrent write that has not finished committing yet — is simply deferred and delivered on a later pull instead of being included (or half-included) in the current one. `next_cursor` only ever advances over rows that were actually delivered under this rule, never past a row that is still pending. From a client's perspective this means: a just-written row may take a short additional delay to appear in a pull, but once `next_cursor` has advanced past a point, nothing behind that point can arrive out of order or get permanently lost.
 
 ## Flow
 

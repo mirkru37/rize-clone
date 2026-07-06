@@ -21,10 +21,20 @@ All versioned endpoints are served under a common base URL with `/v1` path versi
   `type` is a URI identifying the error category, `title` is a short human-readable summary, `status` mirrors the HTTP status code, and `detail` gives request-specific context.
 - **Authentication**: authenticated requests carry `Authorization: Bearer <access-token>`. Access tokens are short-lived; see [[security]] for token lifetime and rotation policy, and the Auth route group below for how tokens are issued and refreshed.
 - **Request IDs**: every response echoes a request identifier (used for support/debugging correlation and log tracing). Clients should log this value alongside any error they surface.
-- **Pagination**: list endpoints that support pagination use a cursor-based convention: callers pass `limit` (page size) and an opaque `cursor` query parameter. The server returns the page of results plus a cursor for the next page. Cursors are opaque tokens and must not be parsed or constructed by clients.
+- **Pagination**: list endpoints that support pagination use a cursor-based convention: callers pass `limit` (page size) and an opaque `cursor` query parameter. The server returns the page of results plus a cursor for the next page. Cursors are opaque tokens and must not be parsed or constructed by clients. Every list endpoint's response body uses the same envelope:
+
+  ```json
+  {
+    "data": [ /* page of resources */ ],
+    "next_cursor": "opaque-cursor-string",
+    "has_more": true
+  }
+  ```
+
+  `data` is the page of resources for that endpoint (each shaped per that resource's own schema), `next_cursor` is the opaque token to pass as `cursor` on the following request, and `has_more` indicates whether another page is available. This envelope applies to every list endpoint in this document, including the four [[#CRUD groups]] (`GET /v1/projects`, `/v1/tags`, `/v1/categories`, `/v1/focus-sessions`).
 
 > [!note] Open question
-> The brief does not specify the exact request ID header/field name (e.g. `X-Request-Id` vs. a body field), the response envelope shape for paginated list endpoints (e.g. `{"data": [...], "next_cursor": "..."}`), or the precise access-token lifetime. These are written here at the level of detail given; confirm exact wire format before implementation.
+> The brief does not specify the exact request ID header/field name (e.g. `X-Request-Id` vs. a body field) or the precise access-token lifetime. These are written here at the level of detail given; confirm exact wire format before implementation.
 
 ## Route groups
 
