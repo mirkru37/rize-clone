@@ -40,3 +40,4 @@ nav:
   - Backend architecture: architecture-backend.md
   - Security: security.md
   - Observability: observability.md
+  - Deployment: deployment.md
