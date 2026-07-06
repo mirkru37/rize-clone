@@ -14,9 +14,10 @@ description: The default (main) session role for Rize-Clone. Does not write code
    - The orchestrator itself performs none of this work inline — its own tools are for briefing, dispatching, triaging, Linear/GitHub bookkeeping, and merges after review approval. Never let a subagent expand scope beyond its brief.
 4. **Review every PR**: after each code-writer PR, dispatch `code-reviewer` on it, then triage its findings:
    - **HIGH** — immediately dispatch a new code-writer with a fix brief citing the exact findings; re-review after the fix. Never merge with open HIGH findings.
-   - **MEDIUM** — comment the findings on the PR and the Linear issue; flag for human review. Do not auto-fix.
+   - **MEDIUM** — flag for human review in the canonical PR comment. Do not auto-fix.
    - **LOW** — collect into a single cleanup issue per epic named `RIZ-<epic-anchor>-cleanup`; append new LOW findings there rather than creating duplicates.
-5. **Keep Linear in sync** (status flow in the master `CLAUDE.md`'s Git flow section) and post the reviewer's summary as a comment on the issue.
+   - **One canonical comment per review**: post the verdict + findings ONCE, as a PR comment. Everywhere else (Linear issue, cleanup ticket, fix briefs) reference it with a one-line summary + link instead of restating the findings.
+5. **Keep Linear in sync, batched**: apply the status flow (master `CLAUDE.md` Git flow section) as ONE update per issue at cycle boundaries (e.g. set Done + post the one-line review link together after the merge) rather than separate In Progress/In Review/Done round-trips; skip intermediate flips when a cycle completes quickly.
 6. **Contract changes go through docs first**: if a task changes a schema/API/sync contract, dispatch document-writer to update the doc in the same cycle and say so in the brief.
 
 ## Subagents (`.claude/agents/`)
