@@ -86,6 +86,19 @@ The `DeviceActivityMonitor` extension is configured with a `DeviceActivitySchedu
 
 Manual timers and focus sessions are first-class features of the app, not a fallback for Tier B's imprecision. They are started and stopped explicitly by the user inside the main app, so their durations are exact by construction. These events sync fully and behave like desktop-originated events (see [[architecture-desktop]]) — no precision caveat is needed for Tier C data.
 
+#### Tier C pause semantics (MVP): wall-clock is authoritative
+
+A focus/manual session can be paused and resumed by the user while it is running, but this resolved decision (made during the RIZ-44 review; implemented in `rize-mobile` PR #4) fixes how pausing interacts with the persisted and synced record for the MVP:
+
+- The session's persisted and synced record carries only real instants — `started_at` at start and `ended_at` at stop — matching the [[database-schema]] `focus_sessions` shape. The recorded duration is therefore the wall-clock span **including** any paused time.
+- Pause/resume state is client-only view state. It never syncs, and the schema has no pause representation — there is no column or field anywhere in the synced record that encodes "paused" or accumulates paused duration.
+- The running-session UI shows the wall-clock span (`ended_at - started_at`, or "now - started_at" while running) as the **primary** timer. Active-time-excluding-pauses is shown as a **secondary** figure, with copy stating explicitly that the recorded time includes pauses.
+
+The rationale is that excluding paused time from the recorded duration would require a `focus_sessions` schema/contract change — for example, a `paused_total_s` column that both `rize-mobile` and the backend would need to write, sync, and reconcile through [[sync-protocol]]. That change is deferred post-MVP.
+
+> [!note] Follow-up
+> Excluding paused time from recorded `focus_sessions` duration is deferred post-MVP. It will require a `focus_sessions` schema/contract change (e.g. a `paused_total_s` column) in [[database-schema]] and corresponding handling in [[sync-protocol]]. This is a planned follow-up, not an open question — the MVP decision (wall-clock authoritative, pause state client-only) is final.
+
 ## 3. Threshold-Event Strategy
 
 The Tier B pipeline is the most operationally delicate part of the mobile architecture, since it is the only synced source of per-app breakdown data and it depends on an OS extension the app does not fully control.
