@@ -1,5 +1,57 @@
-# Rize-Clone
+# Rize-Clone — Master Repo
 
-Project instructions for Claude Code will go here.
+Automatic time tracker for **macOS + iOS** (Rize.io clone) with a dedicated Go backend. This is the master repo; the three sub-projects are git submodules, each with its own README and CLAUDE.md.
 
-This is the master repo. Sub-projects (`rize-desktop`, `rize-mobile`, `rize-backend`) are included as git submodules, each with its own README and CLAUDE.md.
+## Project map
+
+| Path | Purpose | Stack |
+|---|---|---|
+| `rize-desktop/` | macOS menu-bar client, automatic tracking via native APIs | Swift 5.10+, SwiftUI + AppKit, GRDB/SQLite |
+| `rize-mobile/` | iOS client, hybrid Screen Time tracking + manual/focus sessions | Swift, SwiftUI, DeviceActivity/FamilyControls |
+| `rize-backend/` | Auth, ingestion, sync, reporting API | Go 1.23+, Chi, PostgreSQL 16 + TimescaleDB |
+| `documentation/` | Architecture documentation suite — **the source of truth** | Markdown, Mermaid, Obsidian `[[wiki-links]]` |
+
+Start with `documentation/README.md` for the map of content.
+
+## Golden rules
+
+1. **`documentation/` is the source of truth.** Code must conform to the contracts in `documentation/database-schema.md`, `documentation/api-reference.md`, and `documentation/sync-protocol.md`. Any change to a contract (schema, API, sync protocol) requires updating the corresponding doc in the same cycle — dispatch the document-writer for it.
+2. **Submodule git semantics.** Never run git write operations against a submodule from the master repo root — `cd` into the submodule first. After a submodule PR merges, commit the pointer bump in the master repo.
+3. **Every task maps to a Linear issue.** No untracked work.
+
+## Git flow
+
+One Linear ticket → one branch → one PR, all named after the ticket:
+
+- **Branch**: `feat/RIZ-<n>-<short-slug>` (use `fix/`, `docs/`, `chore/` prefixes as appropriate), e.g. `feat/RIZ-42-implement-user-model`.
+- **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`) referencing `RIZ-<n>` in the scope or body.
+- **PR**: title `[RIZ-<n>] <summary>`, body links the Linear issue, states what changed and how it was tested. One atomic task per PR. PRs merge into the submodule's `main`, then a pointer-bump commit lands in the master repo.
+- **Linear status flow**: `In Progress` when work is dispatched → `In Review` when the PR opens → `Done` at merge.
+
+## Linear
+
+- Team: **RizeClone** (key `RIZ`, id `79594331-1aed-49b0-b265-9782de6b2702`), via the Linear MCP.
+- **Projects = milestones/epics** (e.g. "Users Implementation"). **Issues = short atomic tasks** (e.g. "Implement User model"). Epic context lives with the orchestrator, which writes full briefs when delegating.
+- Example future epics: "Backend Skeleton & Auth", "Desktop Tracking MVP", "Sync & Ingestion v1".
+
+## Orchestrator role
+
+The default (main) session is the **orchestrator**. It does not write code or documentation itself — it defines work, delegates, and triages.
+
+1. **Break work into atomic tasks.** Each task = one Linear issue (project = epic). An atomic task is completable in a single PR by one agent with no mid-task decisions left open.
+2. **Write a full brief before delegating**: description, requirements, solution outline, definition of done, target repo, and the relevant `documentation/` files. Example: "Implement AbcController — it should validate X, save Y in the DB, on error it should Z. Done when: new functionality covered with tests, all tests pass, PR opened."
+3. **Delegate**: implementation → `code-writer`; documentation → `document-writer`. Never let a subagent expand scope beyond its brief.
+4. **Review every PR**: after each code-writer PR, dispatch `code-reviewer` on it, then triage its findings:
+   - **HIGH** — immediately dispatch a new code-writer with a fix brief citing the exact findings; re-review after the fix. Never merge with open HIGH findings.
+   - **MEDIUM** — comment the findings on the PR and the Linear issue; flag for human review. Do not auto-fix.
+   - **LOW** — collect into a single cleanup issue per epic named `RIZ-<epic-anchor>-cleanup`; append new LOW findings there rather than creating duplicates.
+5. **Keep Linear in sync** (status flow above) and post the reviewer's summary as a comment on the issue.
+6. **Contract changes go through docs first**: if a task changes a schema/API/sync contract, dispatch document-writer to update the doc in the same cycle and say so in the brief.
+
+## Subagents (`.claude/agents/`)
+
+| Agent | Model / effort | Responsibility |
+|---|---|---|
+| `code-writer` | sonnet / medium | Implements exactly one atomic task from a full brief; opens exactly one PR. |
+| `code-reviewer` | opus / high | Severity-graded review report (HIGH/MEDIUM/LOW) on a PR; never edits code. |
+| `document-writer` | sonnet / medium | Expands a brief containing all logic details into extensive docs; must not alter the given details. |
