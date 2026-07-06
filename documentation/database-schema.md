@@ -408,7 +408,7 @@ Explicit, user-initiated sessions (a Pomodoro-style focus block, a break, or a m
 
 Join tables attaching tags to, respectively, activity events and focus sessions.
 
-**event_tags**
+#### event_tags
 
 | Column | Type | Constraints |
 |---|---|---|
@@ -419,7 +419,7 @@ Join tables attaching tags to, respectively, activity events and focus sessions.
 
 Primary key: `(entity_id, tag_id)`. Foreign key: `FOREIGN KEY (user_id, started_at, entity_id) REFERENCES activity_events (user_id, started_at, event_id)`.
 
-**session_tags**
+#### session_tags
 
 | Column | Type | Constraints |
 |---|---|---|
