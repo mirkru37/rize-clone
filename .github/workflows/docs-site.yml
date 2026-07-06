@@ -36,40 +36,39 @@ jobs:
           name: docs-site-${{ github.sha }}
           path: site/
 
-  # deploy-pages:
-  #   name: deploy-pages
-  #   # Public deployment gated on GRC review — do not enable until approved.
-  #   needs: build
-  #   if: github.ref == 'refs/heads/main'
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     pages: write
-  #     id-token: write
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         submodules: false
-  #
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.12"
-  #
-  #     - name: Install docs dependencies
-  #       run: pip install -r requirements-docs.txt
-  #
-  #     - name: Build documentation site
-  #       run: mkdocs build
-  #
-  #     - name: Upload GitHub Pages artifact
-  #       uses: actions/upload-pages-artifact@v3
-  #       with:
-  #         path: site/
-  #
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+  deploy-pages:
+    name: deploy-pages
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+  
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+  
+      - name: Install docs dependencies
+        run: pip install -r requirements-docs.txt
+  
+      - name: Build documentation site
+        run: mkdocs build
+  
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+  
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
