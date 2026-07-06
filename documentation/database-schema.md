@@ -238,6 +238,8 @@ One row per client installation that has registered with the backend. `revoked_a
 | created_at | timestamptz | |
 | revoked_at | timestamptz | NULL |
 
+`id` is the table's primary key and is globally unique across all users, which is a stronger guarantee than — and already subsumes — the per-user uniqueness that [[sync-protocol]]'s `device_id` handling depends on: the contract [[sync-protocol]] relies on is `UNIQUE (user_id, device_id)` semantics, and a globally unique `id` scoped to exactly one `user_id` per row satisfies that contract without a separate composite constraint. Two different users can never end up sharing a row's `id`; the case [[sync-protocol]]'s Duplicate Device IDs edge case actually has to tolerate is the same user's `device_id` being reused across two installations (e.g. a restored backup), which this table's constraints do not detect — see [[sync-protocol#Edge Cases|Duplicate Device IDs]] for how that is handled.
+
 ### refresh_tokens
 
 Implements refresh token rotation with reuse detection. Each rotation produces a new token in the same `family_id`; if a revoked or already-rotated token is presented again, the entire family can be revoked, which is the standard defense against a stolen refresh token being replayed after the legitimate client has already rotated past it. Full token-handling rules live in [[security]].
