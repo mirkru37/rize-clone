@@ -1,9 +1,9 @@
 [submodule "rize-desktop"]
 	path = rize-desktop
-	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-desktop
+	url = git@github.com:mirkru37/rize-desktop.git
 [submodule "rize-mobile"]
 	path = rize-mobile
-	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-mobile
+	url = git@github.com:mirkru37/rize-mobile.git
 [submodule "rize-backend"]
 	path = rize-backend
-	url = /Users/roman.myrka/Projects/.rize-clone-submodule-sources/rize-backend
+	url = git@github.com:mirkru37/rize-backend.git
