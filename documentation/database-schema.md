@@ -11,7 +11,7 @@ The schema follows a small set of conventions applied consistently across all ta
 - **Soft delete via `deleted_at`.** Tables that support user-initiated deletion carry a nullable `deleted_at` column rather than a hard `DELETE`, so that sync can propagate the tombstone to other devices and so deletions remain reversible until the GDPR grace period in `deletion_requests` expires (see [[security]]).
 - **Syncable tables carry `server_seq BIGINT`.** Any table that a client pulls incrementally bumps `server_seq` on every write (insert or update), rather than using offset pagination, so pulls stay correct and efficient regardless of how much data has accumulated. `server_seq` remains the per-row change counter recorded on the entity table itself, but the pull cursor a client actually holds is an opaque, commit-ordered watermark maintained internally by the server over [[#sync_changelog]] (see [[sync-protocol]]) — not a direct `WHERE server_seq > :cursor` scan of each syncable table. The full pull/push mechanics are specified in [[sync-protocol]].
 
-`server_seq` is present on every syncable table, including `users` and `categories`: a display-name change or a custom-category edit propagates to other devices via the same keyset-pagination mechanism as `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions`.
+`server_seq` is present on `users` as well as `categories`, but the two are not equivalent: a custom-category edit propagates to other devices through the same pull feed as `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions` (`categories` has a `sync_changelog` trigger and is part of the pull entity set). `users.server_seq` exists on the table, but `users` is intentionally NOT part of the pull feed at this stage: it has no `sync_changelog` trigger and is not one of the entity types `GET /v1/sync/changes` returns. Profile data (`display_name` and the rest of the `users` row) is instead obtained via the auth endpoints (`GET /v1/users/me`, login/refresh) rather than pull-synced; pull-syncing profile changes across a user's devices is a possible future extension, not a current guarantee.
 
 ## Entity-Relationship Diagram
 
@@ -383,7 +383,7 @@ Indexes:
 
 - `(user_id, started_at DESC)` — the primary access pattern for "this user's activity, most recent first," used by timeline and report views.
 - `(user_id, app_id, started_at)` — supports per-app time breakdowns for a user over a range.
-- `(user_id, server_seq)` — supports sync pull's keyset pagination for this table.
+- `(user_id, server_seq)` — sync pull now paginates the `sync_changelog` outbox table (see [[#sync_changelog]]) rather than this table's own `server_seq` column directly; this index instead serves the per-table list endpoints that page by this table's own, plain `server_seq` cursor.
 
 Compression policy: chunks older than 30 days are compressed. Retention policy: optional/configurable (not a fixed default), so that data lifetime can be tuned per deployment or per user preference rather than being hard-coded.
 
