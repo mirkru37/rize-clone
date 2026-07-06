@@ -3,6 +3,12 @@
 # with the Mermaid CLI (mmdc). Requires Node/npx; mmdc is fetched on demand
 # via `npx -y @mermaid-js/mermaid-cli`.
 #
+# Set MERMAID_NO_SANDBOX=1 to run mmdc's bundled Chromium with --no-sandbox
+# (via a generated puppeteer config passed through -p). This is needed on
+# CI runners (e.g. GitHub Actions ubuntu-latest) where unprivileged user
+# namespaces are restricted by AppArmor and Chromium's own sandbox cannot
+# start ("No usable sandbox!"). Local runs stay sandboxed by default.
+#
 # Exits non-zero and reports the offending file/block on any render failure.
 
 set -euo pipefail
@@ -21,6 +27,13 @@ fi
 
 work_dir="$(mktemp -d)"
 trap 'rm -rf "$work_dir"' EXIT
+
+mmdc_extra_args=()
+if [[ "${MERMAID_NO_SANDBOX:-0}" == "1" ]]; then
+  puppeteer_config="$work_dir/puppeteer-config.json"
+  printf '%s\n' '{"args": ["--no-sandbox"]}' > "$puppeteer_config"
+  mmdc_extra_args=(-p "$puppeteer_config")
+fi
 
 failures=0
 total=0
@@ -51,7 +64,7 @@ while IFS= read -r -d '' file; do
       out_file="$work_dir/${rel//\//_}.block${block_num}.svg"
       printf '%s' "$block_content" > "$in_file"
 
-      if ! npx -y @mermaid-js/mermaid-cli -i "$in_file" -o "$out_file" >"$work_dir/log.$block_num" 2>&1; then
+      if ! npx -y @mermaid-js/mermaid-cli -i "$in_file" -o "$out_file" "${mmdc_extra_args[@]+"${mmdc_extra_args[@]}"}" >"$work_dir/log.$block_num" 2>&1; then
         echo "mermaid render failed: documentation/${rel} block #${block_num}" >&2
         cat "$work_dir/log.$block_num" >&2
         failures=$((failures + 1))

@@ -50,4 +50,12 @@ jobs:
           node-version: "20"
 
       - name: Check Mermaid diagrams render
+        # GitHub-hosted ubuntu-latest runners restrict unprivileged user
+        # namespaces via AppArmor, which prevents Chromium's own sandbox
+        # from starting ("No usable sandbox!"). MERMAID_NO_SANDBOX makes
+        # check-mermaid.sh pass a puppeteer config with --no-sandbox to
+        # mmdc so it can still launch headless Chromium here. Local runs
+        # (this env var unset) stay sandboxed by default.
         run: ./scripts/check-mermaid.sh
+        env:
+          MERMAID_NO_SANDBOX: "1"
