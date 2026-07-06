@@ -46,7 +46,7 @@ ALWAYS create branch from fresh main branch. Ex:
 
 ## Subagents (`.claude/agents/`)
 
-**The main (default) chat session is the orchestrator** (contract: `.claude/agents/orchestrator.md`). It never writes code, reviews, or docs inline — every delegated task must name its agent per the mandatory mapping: code changes (incl. CI/config/fixes) → `code-writer`; every PR review and re-review → `code-reviewer`; documentation → `document-writer`.
+**The main (default) chat session is the orchestrator** (contract: `.claude/agents/orchestrator.md`). It never writes code, reviews, or docs inline — every delegated task must name its agent per the mandatory mapping: code changes (incl. CI/config/fixes) → `code-writer`; every PR review and re-review → `code-reviewer`; documentation → `document-writer`. **Every brief must open by telling the subagent explicitly which agent it is**, e.g. `You are the code-writer subagent.`
 
 | Agent | Model / effort | Responsibility |
 |---|---|---|
