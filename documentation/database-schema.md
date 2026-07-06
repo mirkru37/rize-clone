@@ -11,8 +11,7 @@ The schema follows a small set of conventions applied consistently across all ta
 - **Soft delete via `deleted_at`.** Tables that support user-initiated deletion carry a nullable `deleted_at` column rather than a hard `DELETE`, so that sync can propagate the tombstone to other devices and so deletions remain reversible until the GDPR grace period in `deletion_requests` expires (see [[security]]).
 - **Syncable tables carry `server_seq BIGINT`.** Any table that a client pulls incrementally bumps `server_seq` on every write (insert or update). Sync pull requests page through this column with keyset pagination (`WHERE server_seq > :cursor ORDER BY server_seq`) rather than offset pagination, which stays correct and efficient regardless of how much data has accumulated. The full pull/push mechanics are specified in [[sync-protocol]].
 
-> [!note] Open question
-> The brief marks `server_seq` as present on `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions`, but not on `users` or `categories`, even though both are user-editable and referenced by syncing clients (e.g., a display name change or a custom category edited on one device needs to reach another). It is not clear whether `users` and `categories` sync through a different mechanism or were simply omitted from the brief.
+`server_seq` is present on every syncable table, including `users` and `categories`: a display-name change or a custom-category edit propagates to other devices via the same keyset-pagination mechanism as `user_app_settings`, `projects`, `tags`, `activity_events`, and `focus_sessions`.
 
 ## Entity-Relationship Diagram
 
@@ -29,6 +28,7 @@ erDiagram
         timestamptz created_at
         timestamptz updated_at
         timestamptz deleted_at
+        bigint server_seq
     }
 
     DEVICES {
@@ -73,6 +73,7 @@ erDiagram
         timestamptz created_at
         timestamptz updated_at
         timestamptz deleted_at
+        bigint server_seq
     }
 
     USER_APP_SETTINGS {
@@ -144,6 +145,8 @@ erDiagram
     }
 
     EVENT_TAGS {
+        uuid user_id FK
+        timestamptz started_at FK
         uuid entity_id PK, FK
         uuid tag_id PK, FK
     }
@@ -214,6 +217,7 @@ The root identity table. A user authenticates either with a password (`password_
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
 | deleted_at | timestamptz | NULL |
+| server_seq | bigint | bumped on every write |
 
 `citext` on `email` gives case-insensitive uniqueness and lookups without the application having to normalize case itself.
 
@@ -280,6 +284,7 @@ Categories classify time by productivity value (for example, "Deep Work" vs. "Di
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
 | deleted_at | timestamptz | NULL |
+| server_seq | bigint | bumped on every write |
 
 The `productivity` scale (-2 to 2) is what downstream reporting sums to produce a "productive time" metric; it is a fixed five-point scale rather than an open-ended score.
 
@@ -342,7 +347,7 @@ The append-only, high-volume time-series table capturing every unit of tracked a
 | device_id | uuid | FK -> `devices(id)` |
 | started_at | timestamptz | NOT NULL |
 | ended_at | timestamptz | NOT NULL |
-| duration_s | int | GENERATED |
+| duration_s | int | GENERATED ALWAYS AS (`EXTRACT(EPOCH FROM (ended_at - started_at))::int`) STORED |
 | type | text | CHECK (`type IN ('app_active','idle','locked','mobile_usage','manual')`) |
 | source | text | CHECK (`source IN ('desktop','mobile','manual')`) |
 | precision | text | CHECK (`precision IN ('exact','approximate')`), DEFAULT `'exact'` |
@@ -360,6 +365,8 @@ Primary key: `(user_id, started_at, event_id)`. TimescaleDB requires the partiti
 
 Idempotency constraint: `UNIQUE (user_id, event_id, started_at)`. This is what lets an upload retry safely re-submit the same event without creating a duplicate row, complementing the client-generated UUIDv7 `event_id`.
 
+No standalone `UNIQUE (event_id)` constraint exists on this table: TimescaleDB requires every unique constraint on a hypertable to include the partitioning column (`started_at`), so `event_id` alone cannot be made unique. This is why `event_tags` (see below) references the composite primary key rather than a simple `event_id` foreign key.
+
 Indexes:
 
 - `(user_id, started_at DESC)` — the primary access pattern for "this user's activity, most recent first," used by timeline and report views.
@@ -370,8 +377,7 @@ Compression policy: chunks older than 30 days are compressed. Retention policy: 
 
 `deleted` (a boolean flag) coexists with the soft-delete convention used elsewhere; unlike other tables' `deleted_at`, this table uses a plain flag, which is consistent with activity events being append-only and never truly mutated — a "deletion" here is a correction event's flag, not a lifecycle timestamp.
 
-> [!note] Open question
-> The brief specifies `duration_s int GENERATED` but does not give the generation expression. The natural computation is `EXTRACT(EPOCH FROM (ended_at - started_at))::int`, but this is not stated explicitly in the brief and should be confirmed before the migration is written.
+The generation expression for `duration_s` is `EXTRACT(EPOCH FROM (ended_at - started_at))::int`, computed as a stored generated column so it is always consistent with `started_at`/`ended_at` without the application having to compute or maintain it separately.
 
 ### focus_sessions
 
@@ -400,15 +406,27 @@ Explicit, user-initiated sessions (a Pomodoro-style focus block, a break, or a m
 
 Join tables attaching tags to, respectively, activity events and focus sessions.
 
+**event_tags**
+
 | Column | Type | Constraints |
 |---|---|---|
-| entity_id | uuid | PK (composite) |
+| user_id | uuid | FK (composite, see below) |
+| started_at | timestamptz | FK (composite, see below) |
+| entity_id | uuid | PK (composite), FK (composite, see below) |
 | tag_id | uuid | PK (composite), FK -> `tags(id)` |
 
-Both tables share the same shape: primary key `(entity_id, tag_id)`.
+Primary key: `(entity_id, tag_id)`. Foreign key: `FOREIGN KEY (user_id, started_at, entity_id) REFERENCES activity_events (user_id, started_at, event_id)`.
 
-> [!note] Open question
-> The brief names the first column `entity_id` in both `event_tags` and `session_tags` without stating its foreign-key target explicitly; by context, `event_tags.entity_id` references `activity_events` and `session_tags.entity_id` references `focus_sessions`. For `event_tags` specifically this is not a straightforward single-column foreign key: `activity_events`'s primary key is the composite `(user_id, started_at, event_id)`, so a plain `entity_id -> activity_events(event_id)` reference requires a separate unique constraint on `event_id` alone (or the join table must itself carry `user_id`/`started_at` to reference the composite key). This should be resolved before the migration is written.
+**session_tags**
+
+| Column | Type | Constraints |
+|---|---|---|
+| entity_id | uuid | PK (composite), FK -> `focus_sessions(id)` |
+| tag_id | uuid | PK (composite), FK -> `tags(id)` |
+
+Primary key: `(entity_id, tag_id)`.
+
+`session_tags` keeps the simple two-column shape because `focus_sessions` has a plain, non-composite primary key (`id`), so `session_tags.entity_id REFERENCES focus_sessions(id)` is a straightforward single-column foreign key. `event_tags` cannot do the same: `activity_events` is a hypertable partitioned on `started_at`, so TimescaleDB requires every unique constraint on it to include the partitioning column, and no unique key on `event_id` alone exists — only the composite primary key `(user_id, started_at, event_id)` and the composite idempotency constraint `UNIQUE (user_id, event_id, started_at)`. A foreign key must reference a unique key on the target table, so `event_tags` has to carry the matching composite columns (`user_id`, `started_at`) alongside `entity_id` in order to reference `activity_events`'s composite key. The primary key of `event_tags` remains `(entity_id, tag_id)` — the extra `user_id`/`started_at` columns are needed only to satisfy the foreign key, not to identify the row.
 
 ### sync_cursors
 
@@ -437,8 +455,7 @@ Implements the GDPR-mandated grace period between a user requesting account dele
 
 `executed_at` remaining NULL is what distinguishes a pending, cancellable request from one that has already been carried out.
 
-> [!note] Open question
-> The brief lists `deletion_requests`' columns without explicit types; the types above (`uuid` for `id`/`user_id`, `timestamptz` for the three date fields) are inferred by applying this document's stated conventions, not given directly in the brief.
+The column types above (`uuid` for `id`/`user_id`, `timestamptz` for `requested_at`/`execute_after`/`executed_at`) follow this document's stated UUID and `timestamptz` conventions and are confirmed correct as the types to migrate.
 
 ## Continuous Aggregates
 
