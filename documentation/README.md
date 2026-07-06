@@ -33,6 +33,7 @@ New contributors should read in this order: [[system-overview]] → [[database-s
 ### Operations
 
 - [[observability]] — error and performance tracking: Sentry across all projects, integration and privacy rules
+- [[deployment]] — environments, promotion pipeline, GCP deployment design, GitHub secrets/vars, free-tier constraints
 
 ## Conventions
 
