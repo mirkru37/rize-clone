@@ -27,7 +27,7 @@ Email/password remains available as a secondary authentication method (see `POST
 | Iterations | 3 |
 | Parallelism | 4 |
 
-These parameters apply uniformly to registration and to any password reset/change flow — a password is never stored or compared in any form other than its argon2id hash.
+These parameters apply uniformly to registration and to any password reset/change flow — a password is never stored or compared in any form other than its argon2id hash. Passwords must be at least 8 characters and are capped at a maximum of **1024 bytes**, rejected as a validation error before any hashing is attempted, since argon2id's cost is proportional to input size and an unbounded password would let a caller amplify server-side memory/CPU cost per request (a denial-of-service vector), so the cap is enforced up front rather than left to argon2id itself to absorb.
 
 ### Sign in with Apple flow
 
@@ -185,6 +185,7 @@ This checklist is the canonical, citable list of concrete requirements from this
 | [ ] | Sign in with Apple identity token signature is verified against Apple's live JWKS (`https://appleid.apple.com/auth/keys`) on every sign-in, with `iss`/`aud`/`exp` validated |
 | [ ] | Accounts are linked and looked up by `apple_user_id`, never by email address alone |
 | [ ] | Passwords are hashed with argon2id at memory=64 MiB, iterations=3, parallelism=4 |
+| [ ] | Passwords are rejected as a validation error (before hashing) if shorter than 8 characters or longer than 1024 bytes |
 | [ ] | Plaintext passwords are never logged, cached, or persisted in any form other than the argon2id hash |
 | [ ] | Password reset flow invalidates any in-flight reset token after use or expiry |
 

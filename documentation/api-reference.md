@@ -49,7 +49,7 @@ Known error types surfaced by the auth handlers, each following the RFC 7807-sty
 | Slug | Status | Meaning |
 |---|---|---|
 | `invalid-request-body` | 400 | Request body is missing, malformed, or not valid JSON |
-| `validation-error` | 400 | Request body parsed but failed field-level validation |
+| `validation-error` | 400 | Request body parsed but failed field-level validation — e.g. `register`/`login` reject a `password` shorter than 8 characters or longer than 1024 bytes (the upper bound is enforced before hashing, to bound argon2id's per-request cost; see [[security]]) |
 | `email-already-registered` | 409 | `register` was called with an email that already has an account |
 | `invalid-credentials` | 401 | `login` was called with an incorrect email/password combination |
 | `invalid-refresh-token` | 401 | `refresh` or `logout` was called with a refresh token that is unknown, expired, or already revoked |
