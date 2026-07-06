@@ -102,7 +102,7 @@ stateDiagram-v2
 ```
 
 > [!note] Decision (RIZ-39)
-> Idle/locked/sleeping back-fill discards the gap for MVP: the elapsed gap is recorded as its own unattributed idle event rather than being attributed to any activity. A user-facing prompt letting the user retroactively attribute the gap to a task/session is deferred to a later epic. This decision is revisitable.
+> Idle/locked/sleeping back-fill discards the gap for MVP: the elapsed gap is recorded as its own unattributed event (of the corresponding type — see §Event Model for the persistence mapping) rather than being attributed to any activity. A user-facing prompt letting the user retroactively attribute the gap to a task/session is deferred to a later epic. This decision is revisitable.
 
 ## Event Model
 
@@ -110,10 +110,7 @@ When a tracked session ends (on an app/window change, or on a state-machine tran
 
 - Each row is assigned a **client-generated UUIDv7** as its identifier. UUIDv7's time-ordered structure supports both idempotent ingestion on the backend and natural sort order locally (consistent with the client-generated-identifier decision in [[system-overview]]).
 - A **minimum-duration filter** discards sessions shorter than **5 seconds** — these are treated as noise (e.g., transient window focus flicker) and never written to `activity_events`. This is the same 5-second floor referenced by the idle boundary back-dating rule in §Tracking State Machine above.
-- The `sleeping` state has no dedicated `activity_events.type` value in [[database-schema]]; sleeping gaps (like locked/idle gaps) persist as `type: idle, precision: approximate`.
-
-> [!note] Open question
-> [[database-schema]]'s `activity_events.type` CHECK constraint includes a dedicated `'locked'` value distinct from `'idle'`, which appears to conflict with the statement above that locked gaps persist as `type: idle`. This document records the RIZ-39 decision as given; reconciling it with the `locked` type value in the schema is left open.
+- Persistence mapping for gap-producing states: `idle` gaps persist as `type: idle, precision: approximate`; `sleeping` gaps persist as `type: idle, precision: approximate` (the `sleeping` state has no dedicated `activity_events.type` value in [[database-schema]], so it collapses to `idle`); `locked` gaps persist as `type: locked, precision: exact`, using [[database-schema]]'s dedicated `'locked'` value.
 
 - `activity_events` rows are **immutable** once written: corrections are made by appending new events, not by editing existing rows, matching the append-only event model described in [[system-overview]].
 - The local `activity_events` schema **mirrors the server ingest contract**; the authoritative shape of these rows is defined in [[database-schema]], and the local GRDB schema must be kept in sync with it.
