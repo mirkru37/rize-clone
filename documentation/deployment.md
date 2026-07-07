@@ -46,10 +46,12 @@ The compose stack has three services:
 A deploy runs the following, over `gcloud compute ssh --tunnel-through-iap`:
 
 ```bash
-docker compose --env-file .env pull                 # pull api + migrate + timescaledb images
-docker compose --env-file .env run --rm migrate      # one-shot migration, blocks until done, exits
-docker compose --env-file .env up -d api             # (re)start the api container only
+sudo docker compose --env-file .env pull                    # pull api + migrate + timescaledb images
+sudo docker compose --env-file .env run --rm -T migrate      # one-shot migration, blocks until done, exits
+sudo docker compose --env-file .env up -d api                # (re)start the api container only
 ```
+
+These run under `sudo` because the deploy SSH session is not a member of the `docker` group on the VM; `-T` on the migrate invocation disables pseudo-TTY allocation, since the command runs non-interactively over the SSH session.
 
 This mirrors local development's `docker compose up` (same TimescaleDB image, same migration-then-api ordering), but with pre-built images from Artifact Registry instead of a local build, and real per-environment secrets instead of hardcoded local credentials. `.env` is rendered fresh on every deploy — never committed, never logged — chmod'd `600` on the VM and deleted immediately after `up -d api` completes.
 

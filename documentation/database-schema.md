@@ -499,13 +499,13 @@ The `(horizon_xid8, horizon_server_seq)` pair is the furthest `(xid8, server_seq
 
 ### sync_changelog Retention
 
-Rows in `sync_changelog` older than `SYNC_CHANGELOG_MAX_AGE` (default `2160h` / 90 days, measured against `created_at`) are eligible for deletion. A background job runs every `SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS` (default `3600` seconds) and deletes at most `SYNC_CHANGELOG_PRUNE_BATCH_SIZE` (default `5000`) rows per tick, advancing `sync_changelog_horizon` in the same transaction as each batch's delete.
+Rows in `sync_changelog` older than `SYNC_CHANGELOG_MAX_AGE` (default `2160`, hours / 90 days, measured against `created_at`) are eligible for deletion. A background job runs every `SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS` (default `3600` seconds) and deletes at most `SYNC_CHANGELOG_PRUNE_BATCH_SIZE` (default `5000`) rows per tick, advancing `sync_changelog_horizon` in the same transaction as each batch's delete.
 
 The 90-day default was chosen to comfortably bound the xid8 wraparound-safety window that migrations 000024/000025 established (a 2^31-transaction space that, at roughly 276 transactions/second sustained, takes about 90 days to exhaust) — retention prunes rows well before that window could be a concern.
 
 | Config knob | Default | Purpose |
 |---|---|---|
-| `SYNC_CHANGELOG_MAX_AGE` | `2160h` (90 days) | Age (against `created_at`) past which a `sync_changelog` row is eligible for deletion. |
+| `SYNC_CHANGELOG_MAX_AGE` | `2160` (hours; 90 days) | Age in hours (against `created_at`) past which a `sync_changelog` row is eligible for deletion. Parsed as a bare integer (`strconv.Atoi`), not a Go duration string — unlike the `AUTH_LOCKOUT_*` knobs in [[security]], which do use `15m`/`24h`-style duration strings. |
 | `SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS` | `3600` | How often the background pruning job runs. |
 | `SYNC_CHANGELOG_PRUNE_BATCH_SIZE` | `5000` | Maximum rows deleted per pruning tick. |
 
