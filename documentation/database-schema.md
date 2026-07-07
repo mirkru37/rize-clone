@@ -25,6 +25,9 @@ erDiagram
         text display_name
         text role
         text timezone
+        int failed_login_attempts
+        int lockout_count
+        timestamptz locked_until
         timestamptz created_at
         timestamptz updated_at
         timestamptz deleted_at
@@ -163,6 +166,15 @@ erDiagram
         uuid entity_id
         timestamptz event_started_at
         bigint server_seq
+        timestamptz created_at
+    }
+
+    SYNC_CHANGELOG_HORIZON {
+        bool id PK
+        xid8 horizon_xid8
+        bigint horizon_server_seq
+        timestamptz pruned_at
+        timestamptz updated_at
     }
 
     SYNC_CURSORS {
@@ -224,12 +236,17 @@ The root identity table. A user authenticates either with a password (`password_
 | display_name | text | |
 | role | text | CHECK (`role IN ('user','admin')`), DEFAULT `'user'` |
 | timezone | text | |
+| failed_login_attempts | int | brute-force lockout counter, see [[security]] §Account lockout policy |
+| lockout_count | int | number of lockouts imposed on this account; drives escalating lockout duration |
+| locked_until | timestamptz | NULL; account is locked while `now() < locked_until` |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
 | deleted_at | timestamptz | NULL |
 | server_seq | bigint | bumped on every write |
 
 `citext` on `email` gives case-insensitive uniqueness and lookups without the application having to normalize case itself.
+
+`failed_login_attempts`, `lockout_count`, and `locked_until` (migration 000028) back the brute-force lockout policy specified in [[security]] §Account lockout policy: 10 consecutive failed attempts locks the account for an escalating, capped duration, and both counters reset to zero on the next successful login.
 
 ### devices
 
@@ -452,8 +469,11 @@ An append-only, plain heap outbox table: one row per write (insert or update) to
 | entity_id | uuid | NOT NULL |
 | event_started_at | timestamptz | NULL |
 | server_seq | bigint | NOT NULL |
+| created_at | timestamptz | NOT NULL, DEFAULT `now()` |
 
 Index: `(user_id, server_seq)`.
+
+`created_at` (migration 000029, renumbered from 000027 during rebase) is the column the retention job (see [[#Retention and the sync_changelog_horizon table]] below) ages rows out by. Pre-existing rows were backfilled to migration-apply time rather than to their true original write time — a conservative choice that only ever pushes a pre-existing row's eligibility for pruning later than its real age would justify, never earlier.
 
 `changelog_id` is a plain identity column — a tiebreaker for humans reading the table, not part of the pull cursor. `user_id` is `NULL` only for a changelog row logging a system-default category (`categories.user_id IS NULL`, copied verbatim); every other entity type's `user_id` is never `NULL` here since it isn't `NULL` on the entity table itself. `entity_id` holds that entity's own identifier — `event_id` for `activity_events`, `app_id` for `user_app_settings` (whose primary key is the composite `(user_id, app_id)`), `id` for every other entity type. `event_started_at` is populated only for `activity_events` rows: because `activity_events` is a hypertable partitioned on `started_at`, a point lookup back into it needs `started_at` alongside `entity_id` to land on the correct chunk; every other entity type leaves this column `NULL`. `server_seq` is the entity row's own `server_seq_global`-assigned value at the time of the write that produced this changelog row, copied verbatim.
 
@@ -461,7 +481,35 @@ Index: `(user_id, server_seq)`.
 
 **Backfill.** One `sync_changelog` row is seeded per pre-existing row across all six syncable tables, using each row's current `server_seq`, so a client starting from a fresh (zero) sync cursor still discovers every row that existed before this table was introduced, not only rows written afterward.
 
-**Growth and retention are deferred.** This table is append-only with no compaction, pruning, or retention policy defined here; unbounded growth and any future retention/compaction strategy are tracked separately (RIZ-72), not specified by this document.
+### sync_changelog_horizon
+
+A single permanent row tracking the furthest point in the change stream that has ever been pruned from `sync_changelog`. This is a global watermark — one row for the entire deployment, not per-device or per-user — and it is entirely separate from `sync_cursors` (below), which remains fully unused/unimplemented and is not touched by retention.
+
+| Column | Type | Constraints |
+|---|---|---|
+| id | bool | PK, DEFAULT `true`, CHECK (`id`) |
+| horizon_xid8 | xid8 | furthest `xid8` position ever pruned |
+| horizon_server_seq | bigint | furthest `server_seq` position ever pruned, paired with `horizon_xid8` |
+| pruned_at | timestamptz | |
+| updated_at | timestamptz | |
+
+`id bool PRIMARY KEY DEFAULT true CHECK (id)` is a singleton-table pattern: the primary key plus the check constraint together make it impossible for the table to ever hold more than the one permanent row, without a separate application-level "is this the only row" invariant to maintain.
+
+The `(horizon_xid8, horizon_server_seq)` pair is the furthest `(xid8, server_seq)` position ever pruned — see [[sync-protocol]] §Retention and cursor expiry for how this position is compared against an incoming pull cursor to decide whether that cursor has expired. Each retention batch's delete from `sync_changelog` and the corresponding horizon advance happen inside one transaction, and the horizon is only ever moved forward (`GREATEST` of the current and candidate position), never regressed.
+
+### sync_changelog Retention
+
+Rows in `sync_changelog` older than `SYNC_CHANGELOG_MAX_AGE` (default `2160`, hours / 90 days, measured against `created_at`) are eligible for deletion. A background job runs every `SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS` (default `3600` seconds) and deletes at most `SYNC_CHANGELOG_PRUNE_BATCH_SIZE` (default `5000`) rows per tick, advancing `sync_changelog_horizon` in the same transaction as each batch's delete.
+
+The 90-day default was chosen to comfortably bound the xid8 wraparound-safety window that migrations 000024/000025 established (a 2^31-transaction space that, at roughly 276 transactions/second sustained, takes about 90 days to exhaust) — retention prunes rows well before that window could be a concern.
+
+| Config knob | Default | Purpose |
+|---|---|---|
+| `SYNC_CHANGELOG_MAX_AGE` | `2160` (hours; 90 days) | Age in hours (against `created_at`) past which a `sync_changelog` row is eligible for deletion. Parsed as a bare integer (`strconv.Atoi`), not a Go duration string — unlike the `AUTH_LOCKOUT_*` knobs in [[security]], which do use `15m`/`24h`-style duration strings. |
+| `SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS` | `3600` | How often the background pruning job runs. |
+| `SYNC_CHANGELOG_PRUNE_BATCH_SIZE` | `5000` | Maximum rows deleted per pruning tick. |
+
+`sync_changelog` remains append-only from the ingestion/trigger side — nothing above changes how rows are written, only how old rows are eventually removed and how that removal is tracked. See [[sync-protocol]] §Retention and cursor expiry for the client-facing contract this retention policy implies (the `410 Gone` response on `GET /v1/sync/changes` for an expired cursor).
 
 ### sync_cursors
 
@@ -494,17 +542,21 @@ The column types above (`uuid` for `id`/`user_id`, `timestamptz` for `requested_
 
 ## Continuous Aggregates
 
-Three TimescaleDB continuous aggregates sit on top of `activity_events`:
+Three TimescaleDB continuous aggregates sit on top of `activity_events`, each now carrying a `device_id` dimension in addition to their original grouping columns (migrations 000030–000037; `device_id`/`materialized_only` land in 000034 for `daily_app_totals`, 000035 for `daily_category_totals`, 000036 for `hourly_category_totals`):
 
-- `daily_app_totals(user_id, day, app_id, total_s)`
-- `daily_category_totals(user_id, day, category_id, total_s)`
-- `hourly_category_totals(user_id, hour, category_id, total_s)`
+- `daily_app_totals(user_id, day, device_id, app_id, total_s)`
+- `daily_category_totals(user_id, day, device_id, category_id, total_s)`
+- `hourly_category_totals(user_id, hour, device_id, category_id, total_s)`
+
+All three are configured with `timescaledb.materialized_only = false` — real-time aggregates. Their refresh policies (offsets/schedules) are unchanged from migration 000019. Being real-time removes the just-closed-day staleness window that a `materialized_only = true` aggregate would otherwise have: a query against the aggregate transparently unions its materialized historical buckets with a live aggregation over not-yet-materialized rows, so a just-closed period is correct immediately rather than waiting on the next scheduled refresh.
 
 These are **continuous aggregates**, not application-maintained rollup tables populated by a cron job or backend batch process. That choice matters for three reasons:
 
 1. **Automatic refresh.** A continuous aggregate has a refresh policy attached to it directly in TimescaleDB; the database keeps the materialized rollups current on a schedule without the backend needing its own scheduler, job queue, or failure-handling code for rollup maintenance.
 2. **Correctness under late or out-of-order inserts.** Because `activity_events` ingests from offline-first clients (see [[architecture-desktop]] and [[architecture-mobile]]), events for a given hour or day can arrive well after that period has "closed" — for example, a mobile device syncing hours of Screen Time data after being offline overnight. A hand-rolled rollup job that runs once and moves on would silently miss or under-count such late arrivals. Continuous aggregates track which underlying chunks have changed and incrementally re-materialize only the affected buckets, so late data is folded in correctly without a full recompute.
 3. **Compression-aware.** Continuous aggregates can be queried transparently over both compressed and uncompressed chunks of the underlying hypertable. A hand-rolled rollup would need explicit branching logic to handle the compressed, older portion of `activity_events` differently from the recent, uncompressed portion.
+
+**Device-aware overlap capping (closed periods).** With `device_id` now part of the GROUP BY, closed-period category/app report queries (`CategoryTotalsForRange`, `AppTotalsForRange` in `internal/reports/trim.go`) cap each device's summed `total_s` at the requested window's length in seconds, before summing across devices. This is an upper bound on same-device overlap inflation, **not** a reproduction of the raw/open-period path's exact interval-merge logic (see [[architecture-backend]] §Aggregation Strategy for that raw-path mechanism). The cap and the raw path's merge agree only when a device's merged coverage spans the whole window; otherwise the cap can overstate the total — worked example in [[architecture-backend]]. `hourly_category_totals` also carries `device_id` and is real-time, but no report query caps it by device today; it is not part of any documented overlap-trim contract yet. Cross-device overlap remains uncapped/additive for both the raw and closed-period paths, unchanged.
 
 ## Hypertable Notes
 

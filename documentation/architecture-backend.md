@@ -61,13 +61,15 @@ flowchart TB
             JobRefresh["Refresh-token cleanup"]
             JobRetention["Retention enforcement"]
             JobGDPR["GDPR deletion executor"]
+            JobChangelogPrune["sync_changelog pruning\n(SYNC_CHANGELOG_PRUNE_INTERVAL_SECONDS)"]
         end
     end
 
     subgraph DB["PostgreSQL 16 + TimescaleDB"]
         Hypertable[("activity_events\n(hypertable)")]
-        Aggregates[("Continuous aggregates:\ndaily_app_totals\ndaily_category_totals\nhourly_category_totals")]
+        Aggregates[("Continuous aggregates (device-aware, real-time):\ndaily_app_totals\ndaily_category_totals\nhourly_category_totals")]
         Relational[("Relational tables:\nusers, apps,\nuser_app_settings,\nrefresh_tokens")]
+        Changelog[("sync_changelog +\nsync_changelog_horizon")]
     end
 
     Desktop -- "HTTPS/JSON" --> HTTP
@@ -89,13 +91,14 @@ flowchart TB
     JobRetention --> Hypertable
     JobGDPR --> Relational
     JobGDPR --> Hypertable
+    JobChangelogPrune --> Changelog
 ```
 
 Notes on the diagram:
 
 - The **Ingestion service** is the only writer of the `activity_events` hypertable; it also reads and writes `apps` and `user_app_settings` during app/category resolution (see the ingestion pipeline below).
 - The **Reporting service** reads from the continuous aggregates for historical periods and from the raw hypertable for the current, not-yet-aggregated period (see the aggregation strategy section).
-- **Background jobs** run inside the same binary as scheduled goroutines rather than as separate services, consistent with the modular-monolith shape: refresh-token cleanup removes expired/revoked tokens from `refresh_tokens`, retention enforcement drops or compresses old hypertable chunks, and the GDPR deletion executor removes a user's data across both relational tables and the hypertable on request.
+- **Background jobs** run inside the same binary as scheduled goroutines rather than as separate services, consistent with the modular-monolith shape: refresh-token cleanup removes expired/revoked tokens from `refresh_tokens`, retention enforcement drops or compresses old hypertable chunks, the GDPR deletion executor removes a user's data across both relational tables and the hypertable on request, and `sync_changelog` pruning deletes rows older than `SYNC_CHANGELOG_MAX_AGE` in batches, advancing `sync_changelog_horizon` in the same transaction as each batch's delete — see [[database-schema]] §sync_changelog Retention and [[sync-protocol]] §Retention and cursor expiry.
 
 ## Middleware Stack
 
@@ -180,17 +183,31 @@ Schema for `apps`, `user_app_settings`, and `activity_events` is defined in [[da
 
 ## Aggregation Strategy
 
-Reporting is built on TimescaleDB continuous aggregates rather than hand-rolled rollup jobs (cron-triggered batch jobs that recompute summary tables). Three continuous aggregates back the reporting service:
+Reporting is built on TimescaleDB continuous aggregates rather than hand-rolled rollup jobs (cron-triggered batch jobs that recompute summary tables). Three continuous aggregates back the reporting service, each grouped by device in addition to their own dimension (see [[#Device-aware aggregates and overlap capping]] below):
 
-- `daily_app_totals` — per-user, per-app time totals by day.
-- `daily_category_totals` — per-user, per-category time totals by day.
-- `hourly_category_totals` — per-user, per-category time totals by hour, for finer-grained intraday views.
+- `daily_app_totals` — per-user, per-device, per-app time totals by day.
+- `daily_category_totals` — per-user, per-device, per-category time totals by day.
+- `hourly_category_totals` — per-user, per-device, per-category time totals by hour, for finer-grained intraday views.
 
 TimescaleDB refreshes these aggregates incrementally as new chunks of `activity_events` are written, rather than the backend having to schedule, coordinate, and backfill its own rollup jobs. This removes an entire class of custom scheduling and consistency logic from `internal/reports` — the reporting service queries the aggregates directly for closed historical periods.
 
-Because a continuous aggregate's refresh policy does not guarantee up-to-the-second freshness for the current, still-accumulating period, the reporting service covers "today" (or the current partial hour, for `hourly_category_totals`) by combining the aggregate's data for completed periods with a real-time aggregation query over the raw `activity_events` hypertable for the partial period. This gives users an up-to-date view of the current day without waiting on the aggregate's refresh interval.
+All three aggregates are configured as **real-time aggregates** (`timescaledb.materialized_only = false`, unchanged refresh policy from migration 000019): a query against them transparently unions materialized historical buckets with a live aggregation over not-yet-materialized rows, so the current, still-accumulating period ("today," or the current partial hour for `hourly_category_totals`) is always correct as of query time without the reporting service having to special-case it or run a separate freshness-covering query itself.
 
-Overlapping `activity_events` are resolved in the report-query layer over the raw `activity_events` hypertable, per [[sync-protocol]]'s Overlap Rules: same-device overlapping intervals are ingested unmodified (trimming them at ingestion would mean the server editing the substance of a raw event, which the sync protocol's ingestion path does not do), so trimming — capping, per device, the active time a single device can contribute to a given window so that one device never contributes more active time to a window than the window contains — happens in the report layer's raw-event pass, the same stage already described above for the real-time partial-period aggregation, not inside the `daily_app_totals`, `daily_category_totals`, or `hourly_category_totals` continuous aggregate definitions. As defined, those continuous aggregates sum `duration_s` over `time_bucket` with no `device_id` dimension, so they cannot de-overlap intervals themselves; serving trimmed totals for closed historical periods therefore requires the report layer to run a raw-event pass analogous to its partial-period path, rather than reading a trimmed total directly out of the aggregate — unless a future, separately documented continuous-aggregate redesign (adding a device dimension and window-capping logic) removes that need. This same report-layer stage also disambiguates overlap between *different* devices, so both same-device trimming and cross-device disambiguation are one piece of logic. This requirement lands with the reports implementation (RIZ-35).
+Overlapping `activity_events` are resolved in the report-query layer, per [[sync-protocol]]'s Overlap Rules: same-device overlapping intervals are ingested unmodified (trimming them at ingestion would mean the server editing the substance of a raw event, which the sync protocol's ingestion path does not do), so trimming happens at report time, not at ingestion.
+
+### Device-aware aggregates and overlap capping
+
+`daily_app_totals`, `daily_category_totals`, and `hourly_category_totals` carry a `device_id` column in their GROUP BY (migrations 000030–000037; `device_id`/`materialized_only` land in 000034 for `daily_app_totals`, 000035 for `daily_category_totals`, 000036 for `hourly_category_totals`), in addition to their existing `user_id`, time-bucket, and dimension columns — see [[database-schema]] §Continuous Aggregates for the column-level detail.
+
+**Raw/open-period path.** For the current, still-accumulating period, the reporting service combines the aggregate's completed-bucket data with a real-time aggregation over the raw `activity_events` hypertable, using an exact interval-merge to compute each device's true merged coverage of the window before summing across devices — this is the precise trimming mechanism, and it is unaffected by the aggregate changes below.
+
+**Closed-period path.** `CategoryTotalsForRange` and `AppTotalsForRange` (`internal/reports/trim.go`) now read the device-aware `daily_category_totals` / `daily_app_totals` aggregates and cap each device's summed `total_s` at the requested window's length in seconds, before summing across devices. This is an upper bound on same-device overlap inflation, **not** a reproduction of the raw/open-period path's exact interval-merge** — the cap and the raw path's merge agree only when a device's merged coverage spans the whole window; otherwise the cap can overstate the total.
+
+Worked example: a 24-hour window with same-device events at 00:00–06:00 and 03:00–09:00 (3 hours of overlap). The raw/open-period path returns 9h (the true merged coverage: 00:00–09:00). The capped closed-period path returns 12h: it sums the two intervals' durations (6h + 6h = 12h) and caps at the window length (24h), but 12h never reaches the 24h cap, so the cap does not trigger and the naive, overlap-inflated sum is returned uncapped.
+
+`hourly_category_totals` also carries `device_id` and is real-time, but no report query caps it by device today — it is not part of any documented overlap-trim contract yet. Cross-device overlap remains uncapped/additive for both the raw and closed-period paths, unchanged: overlapping intervals from *different* devices are allowed to stand and disambiguated by the raw-path merge logic only where that path is used, not trimmed against each other.
+
+This requirement landed with the reports implementation (RIZ-35) and its device-aware follow-up.
 
 ## Config & Observability
 
