@@ -10,14 +10,14 @@
     "semantic_hash": "82f6d4380319976a132758a20cfaa278"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/cmd/api/main.go": {
-    "mtime": 1783342873.2895808,
-    "ast_hash": "74e7544c2abdb567dcfc3d93dd61fe1f",
-    "semantic_hash": "74e7544c2abdb567dcfc3d93dd61fe1f"
+    "mtime": 1783448874.450024,
+    "ast_hash": "f0567b8d36a36773ec420263b958cda1",
+    "semantic_hash": "f0567b8d36a36773ec420263b958cda1"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/cmd/api/main_test.go": {
-    "mtime": 1783342873.289795,
-    "ast_hash": "e70b5f63e304298e4c01eceaa3cb9bc6",
-    "semantic_hash": "e70b5f63e304298e4c01eceaa3cb9bc6"
+    "mtime": 1783448874.4504292,
+    "ast_hash": "65a56685dd1ca165d6b61e3dacf908b9",
+    "semantic_hash": "65a56685dd1ca165d6b61e3dacf908b9"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/doc.go": {
     "mtime": 1783342873.2908547,
@@ -25,14 +25,14 @@
     "semantic_hash": "f49b7a611de885b34e98c04722ba87aa"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/doc.go": {
-    "mtime": 1783342873.2910783,
-    "ast_hash": "a3a346708a481919878f544ec2081af3",
-    "semantic_hash": "a3a346708a481919878f544ec2081af3"
+    "mtime": 1783347642.6265817,
+    "ast_hash": "8ff0519bde56a06b84940b01e39e0222",
+    "semantic_hash": "8ff0519bde56a06b84940b01e39e0222"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/doc.go": {
-    "mtime": 1783342873.291394,
-    "ast_hash": "c0d905fc069d7e87ada4aee6281278ee",
-    "semantic_hash": "c0d905fc069d7e87ada4aee6281278ee"
+    "mtime": 1783425015.8841274,
+    "ast_hash": "7019f9829546dd6cf4725ec4b5e72e87",
+    "semantic_hash": "7019f9829546dd6cf4725ec4b5e72e87"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/doc.go": {
     "mtime": 1783342873.2915928,
@@ -50,14 +50,14 @@
     "semantic_hash": "c8e92b482a47524d1e60e3cd38862009"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/doc.go": {
-    "mtime": 1783342873.2923222,
-    "ast_hash": "f9c2bfd949817965413ac19254feb346",
-    "semantic_hash": "f9c2bfd949817965413ac19254feb346"
+    "mtime": 1783372990.8162549,
+    "ast_hash": "d9424913f955cb0f99eed034120b0ced",
+    "semantic_hash": "d9424913f955cb0f99eed034120b0ced"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/App/AppDelegate.swift": {
-    "mtime": 1783342875.3989797,
-    "ast_hash": "48bfa81982826feae43022c6e905d6f5",
-    "semantic_hash": "48bfa81982826feae43022c6e905d6f5"
+    "mtime": 1783359429.4357023,
+    "ast_hash": "5416a40220b4184bcbaccab4cf4cf70c",
+    "semantic_hash": "5416a40220b4184bcbaccab4cf4cf70c"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/App/RizeDesktopApp.swift": {
     "mtime": 1783342875.399442,
@@ -65,14 +65,14 @@
     "semantic_hash": "9174c271463d935ffbe7413331e81074"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/ViewModels/MenuContentViewModel.swift": {
-    "mtime": 1783342875.3997333,
-    "ast_hash": "983750e5bb4c760b0355322f22e005b8",
-    "semantic_hash": "983750e5bb4c760b0355322f22e005b8"
+    "mtime": 1783359429.4420626,
+    "ast_hash": "18a89768da6c6a920f06d073bccbdce4",
+    "semantic_hash": "18a89768da6c6a920f06d073bccbdce4"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Views/MenuContentView.swift": {
-    "mtime": 1783342875.3999906,
-    "ast_hash": "5f905ddd27ac841939aaaf88fe4daf99",
-    "semantic_hash": "5f905ddd27ac841939aaaf88fe4daf99"
+    "mtime": 1783359429.4427087,
+    "ast_hash": "e52300f1455563977a19de3de9423271",
+    "semantic_hash": "e52300f1455563977a19de3de9423271"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/RizeDesktopTests.swift": {
     "mtime": 1783342875.4002898,
@@ -80,19 +80,19 @@
     "semantic_hash": "638611cead070ca6087dce1e4c906401"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/App/RizeMobileApp.swift": {
-    "mtime": 1783342877.476596,
-    "ast_hash": "d6f043da58e3f64db3f7c0b1334f1c67",
-    "semantic_hash": "d6f043da58e3f64db3f7c0b1334f1c67"
+    "mtime": 1783355627.2256012,
+    "ast_hash": "2a057979eea92ea6d71f961bfca429ce",
+    "semantic_hash": "2a057979eea92ea6d71f961bfca429ce"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/DashboardView.swift": {
-    "mtime": 1783342877.477393,
-    "ast_hash": "ff4bbd261bf407021a151d90c9257cc5",
-    "semantic_hash": "ff4bbd261bf407021a151d90c9257cc5"
+    "mtime": 1783355627.2295444,
+    "ast_hash": "5973b6ce148f0b206f3aab858b4426ad",
+    "semantic_hash": "5973b6ce148f0b206f3aab858b4426ad"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/DashboardViewTests.swift": {
-    "mtime": 1783342877.4779198,
-    "ast_hash": "7565d48fccd6afa0e4281c48cdc48360",
-    "semantic_hash": "7565d48fccd6afa0e4281c48cdc48360"
+    "mtime": 1783355627.2311945,
+    "ast_hash": "b20a67e139094c6e5f27b5b8e4a4dc07",
+    "semantic_hash": "b20a67e139094c6e5f27b5b8e4a4dc07"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/scripts/check-mermaid.sh": {
     "mtime": 1783343284.9122293,
@@ -105,12 +105,12 @@
     "semantic_hash": "9968dc8dd91d034322c98ac3141d56a8"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/.claude/agents/code-reviewer.md": {
-    "mtime": 1783337651.8438053,
-    "ast_hash": "05e7694505314184ccb6bb57741181d7",
-    "semantic_hash": "05e7694505314184ccb6bb57741181d7"
+    "mtime": 1783375111.0146897,
+    "ast_hash": "2bf37e6966362810e4accc45055d1e6b",
+    "semantic_hash": "2bf37e6966362810e4accc45055d1e6b"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/.claude/agents/code-writer.md": {
-    "mtime": 1783344506.4256494,
+    "mtime": 1783362954.6299012,
     "ast_hash": "4a55197aed83c65be48b9fed77400b39",
     "semantic_hash": "4a55197aed83c65be48b9fed77400b39"
   },
@@ -130,9 +130,9 @@
     "semantic_hash": "b528c23dee7d9a326d5b995157f64160"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/CLAUDE.md": {
-    "mtime": 1783339316.2272005,
-    "ast_hash": "3e77a5e560c8b6ab48b11e683b9d4e5a",
-    "semantic_hash": "3e77a5e560c8b6ab48b11e683b9d4e5a"
+    "mtime": 1783373247.9854336,
+    "ast_hash": "ccdf2e5a9a3ae9aee7f7e23d1145798b",
+    "semantic_hash": "ccdf2e5a9a3ae9aee7f7e23d1145798b"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/README.md": {
     "mtime": 1783343284.9115703,
@@ -140,34 +140,34 @@
     "semantic_hash": "5ec276046a9a15f6ec5d729894ab4a14"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/README.md": {
-    "mtime": 1783338787.9079576,
-    "ast_hash": "36fb984d2f5f7a0c2e18ee507508915c",
-    "semantic_hash": "36fb984d2f5f7a0c2e18ee507508915c"
+    "mtime": 1783362954.6311185,
+    "ast_hash": "e63630d3ec0e728e7280d532d10498c7",
+    "semantic_hash": "e63630d3ec0e728e7280d532d10498c7"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/api-reference.md": {
-    "mtime": 1783338179.4184506,
-    "ast_hash": "0e9a8dc67df964a890d69d372b164f52",
-    "semantic_hash": "0e9a8dc67df964a890d69d372b164f52"
+    "mtime": 1783448894.5108037,
+    "ast_hash": "870b5306a84ec9cc754d74224ab4900c",
+    "semantic_hash": "870b5306a84ec9cc754d74224ab4900c"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/architecture-backend.md": {
-    "mtime": 1783338961.9560347,
-    "ast_hash": "135f4f52adba6af84d6b6c3ac5e4ac81",
-    "semantic_hash": "135f4f52adba6af84d6b6c3ac5e4ac81"
+    "mtime": 1783448894.5116186,
+    "ast_hash": "78942c24278f08cea2a1bf0f0d937007",
+    "semantic_hash": "78942c24278f08cea2a1bf0f0d937007"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/architecture-desktop.md": {
-    "mtime": 1783338213.5284302,
-    "ast_hash": "3c84b66307217758a2a0fb0400b07a5e",
-    "semantic_hash": "3c84b66307217758a2a0fb0400b07a5e"
+    "mtime": 1783362954.6319287,
+    "ast_hash": "f18462a69fa46026afc8b1a35cc23aa6",
+    "semantic_hash": "f18462a69fa46026afc8b1a35cc23aa6"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/architecture-mobile.md": {
-    "mtime": 1783338242.2750564,
-    "ast_hash": "5b448a8737967c2150b70fc3fdc442d5",
-    "semantic_hash": "5b448a8737967c2150b70fc3fdc442d5"
+    "mtime": 1783362954.6322343,
+    "ast_hash": "cc1c0b671181a4baf3b8fb516ed80547",
+    "semantic_hash": "cc1c0b671181a4baf3b8fb516ed80547"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/database-schema.md": {
-    "mtime": 1783338705.4961317,
-    "ast_hash": "a0f8b8018f92c05c446c8c8d91ec2c7e",
-    "semantic_hash": "a0f8b8018f92c05c446c8c8d91ec2c7e"
+    "mtime": 1783448894.5121784,
+    "ast_hash": "427fbaf4657b6e67976865dd59f461ee",
+    "semantic_hash": "427fbaf4657b6e67976865dd59f461ee"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/observability.md": {
     "mtime": 1783338784.1666887,
@@ -175,14 +175,14 @@
     "semantic_hash": "109ddb404419a693212e94d914367e3e"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/security.md": {
-    "mtime": 1783338705.5009954,
-    "ast_hash": "f1f82c8a6925d313128ada36b364f612",
-    "semantic_hash": "f1f82c8a6925d313128ada36b364f612"
+    "mtime": 1783448894.5131783,
+    "ast_hash": "48d8434f8f5e1b4b9596254b2b563ab1",
+    "semantic_hash": "48d8434f8f5e1b4b9596254b2b563ab1"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/sync-protocol.md": {
-    "mtime": 1783338287.9024715,
-    "ast_hash": "101273b03f97672c56218524213af1fb",
-    "semantic_hash": "101273b03f97672c56218524213af1fb"
+    "mtime": 1783448894.5137677,
+    "ast_hash": "772a3d9312b2d5a0f913da896493af13",
+    "semantic_hash": "772a3d9312b2d5a0f913da896493af13"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/documentation/system-overview.md": {
     "mtime": 1783340394.6864533,
@@ -190,9 +190,9 @@
     "semantic_hash": "656209a8cd92bacdb6ea626f93b56ca2"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/mkdocs.yml": {
-    "mtime": 1783343284.911706,
-    "ast_hash": "4bb695dd7e35e9af3a8dee0608aa9fc4",
-    "semantic_hash": "4bb695dd7e35e9af3a8dee0608aa9fc4"
+    "mtime": 1783362954.6490836,
+    "ast_hash": "29f5ffcb98981f1045f1be744ad7c6c7",
+    "semantic_hash": "29f5ffcb98981f1045f1be744ad7c6c7"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/requirements-docs.txt": {
     "mtime": 1783343284.9118316,
@@ -200,9 +200,9 @@
     "semantic_hash": "7ed133789c283da758c87201157998ed"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/.github/workflows/ci.yml": {
-    "mtime": 1783342873.287659,
-    "ast_hash": "7599ca7443262691890f597c82f4ad2e",
-    "semantic_hash": "7599ca7443262691890f597c82f4ad2e"
+    "mtime": 1783448874.448393,
+    "ast_hash": "4c8d9386ff28b51b884d2d1602164cd6",
+    "semantic_hash": "4c8d9386ff28b51b884d2d1602164cd6"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/.github/workflows/release.yml": {
     "mtime": 1783342873.2879362,
@@ -225,24 +225,24 @@
     "semantic_hash": "4d100d56f8633055e200fbe1ffb30b6b"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/README.md": {
-    "mtime": 1783338967.5918128,
-    "ast_hash": "fd8b860053771766ecc0da725e9e1eb7",
-    "semantic_hash": "fd8b860053771766ecc0da725e9e1eb7"
+    "mtime": 1783448874.4496763,
+    "ast_hash": "67efd7832c33b2890f00f2de8c277628",
+    "semantic_hash": "67efd7832c33b2890f00f2de8c277628"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/docker-compose.yml": {
-    "mtime": 1783342873.2900434,
-    "ast_hash": "a9a5ef94149e94ff8c6aac214c413141",
-    "semantic_hash": "a9a5ef94149e94ff8c6aac214c413141"
+    "mtime": 1783363308.8419595,
+    "ast_hash": "aa566cd61075033e770b7171ac2cc501",
+    "semantic_hash": "aa566cd61075033e770b7171ac2cc501"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/.github/workflows/ci.yml": {
-    "mtime": 1783342875.3970447,
-    "ast_hash": "e6f154c728b7ed8b0c6db47f5a9f10ae",
-    "semantic_hash": "e6f154c728b7ed8b0c6db47f5a9f10ae"
+    "mtime": 1783429538.8858433,
+    "ast_hash": "bfa4dbfc96d4f9f2ec5ed2cb2026c041",
+    "semantic_hash": "bfa4dbfc96d4f9f2ec5ed2cb2026c041"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/.github/workflows/release.yml": {
-    "mtime": 1783342875.3973734,
-    "ast_hash": "24523916d55caae84a2180f314782d35",
-    "semantic_hash": "24523916d55caae84a2180f314782d35"
+    "mtime": 1783429538.886161,
+    "ast_hash": "8ad0816008b0315f22f556b6a805b5ad",
+    "semantic_hash": "8ad0816008b0315f22f556b6a805b5ad"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/.swiftlint.yml": {
     "mtime": 1783342875.3983545,
@@ -255,29 +255,29 @@
     "semantic_hash": "d22d9827818cbf697c88eb792ab65b26"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/README.md": {
-    "mtime": 1783338228.1288297,
-    "ast_hash": "7a75dcd6a7cae0698b19f0fc51ecf5f4",
-    "semantic_hash": "7a75dcd6a7cae0698b19f0fc51ecf5f4"
+    "mtime": 1783429538.8864994,
+    "ast_hash": "e94d0d5278f83de6907701e7e01d11b2",
+    "semantic_hash": "e94d0d5278f83de6907701e7e01d11b2"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/project.yml": {
-    "mtime": 1783342875.4005485,
-    "ast_hash": "43bfa46d8f35e26aa4b2c6484e2f3c87",
-    "semantic_hash": "43bfa46d8f35e26aa4b2c6484e2f3c87"
+    "mtime": 1783361414.605535,
+    "ast_hash": "750c269086dd6b74af4696fd3c4c4e18",
+    "semantic_hash": "750c269086dd6b74af4696fd3c4c4e18"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/.github/workflows/ci.yml": {
-    "mtime": 1783342877.4743614,
-    "ast_hash": "5a2661f8731c3b6f87434fc906834028",
-    "semantic_hash": "5a2661f8731c3b6f87434fc906834028"
+    "mtime": 1783373696.273725,
+    "ast_hash": "48c9b6784e75adb2a73fb71c4d751c15",
+    "semantic_hash": "48c9b6784e75adb2a73fb71c4d751c15"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/.github/workflows/release.yml": {
-    "mtime": 1783342877.4748633,
-    "ast_hash": "bb5d3aafdb28db9d6ffb1c7d6e033d0b",
-    "semantic_hash": "bb5d3aafdb28db9d6ffb1c7d6e033d0b"
+    "mtime": 1783429568.6675453,
+    "ast_hash": "e5cf0142392c9358753bb226563fdf49",
+    "semantic_hash": "e5cf0142392c9358753bb226563fdf49"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/.swiftlint.yml": {
-    "mtime": 1783342877.4755993,
-    "ast_hash": "eb1f165f118e1d3d838572fe3513d557",
-    "semantic_hash": "eb1f165f118e1d3d838572fe3513d557"
+    "mtime": 1783348092.6446226,
+    "ast_hash": "41f563bcf27bac1d09fc2d87c57c8cc4",
+    "semantic_hash": "41f563bcf27bac1d09fc2d87c57c8cc4"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/CLAUDE.md": {
     "mtime": 1783338247.2663798,
@@ -285,13 +285,1868 @@
     "semantic_hash": "84c2592244247a2c2b739f28ae372305"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/README.md": {
-    "mtime": 1783338241.3165832,
-    "ast_hash": "0dc3f49bda34b1495eee6496ed0afbde",
-    "semantic_hash": "0dc3f49bda34b1495eee6496ed0afbde"
+    "mtime": 1783429568.6680288,
+    "ast_hash": "19b04db3f3cdd8bc7294abf6a39650bc",
+    "semantic_hash": "19b04db3f3cdd8bc7294abf6a39650bc"
   },
   "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/project.yml": {
-    "mtime": 1783342877.4782388,
-    "ast_hash": "5c2ec18a75f0fde30fc2d21e6dce0ab4",
-    "semantic_hash": "5c2ec18a75f0fde30fc2d21e6dce0ab4"
+    "mtime": 1783360792.618633,
+    "ast_hash": "c072d9c3109a2520be9063d3c7c16f65",
+    "semantic_hash": "c072d9c3109a2520be9063d3c7c16f65"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/cmd/api/serve_test.go": {
+    "mtime": 1783448874.4507084,
+    "ast_hash": "91e1e57cd0b2ec3cc25d5727cbc8c970",
+    "semantic_hash": "91e1e57cd0b2ec3cc25d5727cbc8c970"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/deploy/bootstrap-gce.sh": {
+    "mtime": 1783448874.4510388,
+    "ast_hash": "5fbcd7ec67421bdb0d11459941554567",
+    "semantic_hash": "5fbcd7ec67421bdb0d11459941554567"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/cursor.go": {
+    "mtime": 1783425015.8786945,
+    "ast_hash": "3ee1473325f63b754dc22c3281aa89f4",
+    "semantic_hash": "3ee1473325f63b754dc22c3281aa89f4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/doc.go": {
+    "mtime": 1783425015.8789475,
+    "ast_hash": "e9ffb692af871be5a0337b550a185230",
+    "semantic_hash": "e9ffb692af871be5a0337b550a185230"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/dto.go": {
+    "mtime": 1783425015.8791287,
+    "ast_hash": "3bc220d0e0a1c19dc8a097cc2094f8f3",
+    "semantic_hash": "3bc220d0e0a1c19dc8a097cc2094f8f3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/errors.go": {
+    "mtime": 1783425015.8793116,
+    "ast_hash": "8a98e773320ecc50acc71802edcf49a9",
+    "semantic_hash": "8a98e773320ecc50acc71802edcf49a9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/handlers.go": {
+    "mtime": 1783425015.879689,
+    "ast_hash": "24953e05f68fd6f5b85d2fe6a0fc0992",
+    "semantic_hash": "24953e05f68fd6f5b85d2fe6a0fc0992"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/handlers_test.go": {
+    "mtime": 1783448874.4522133,
+    "ast_hash": "461cdfa431341a383be3d56b8acdb49c",
+    "semantic_hash": "461cdfa431341a383be3d56b8acdb49c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/routes.go": {
+    "mtime": 1783425015.8799136,
+    "ast_hash": "b45514e2b79ea857120b0c981620136e",
+    "semantic_hash": "b45514e2b79ea857120b0c981620136e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/service.go": {
+    "mtime": 1783425015.8801873,
+    "ast_hash": "f679686bcc522e189d17c629de9076a5",
+    "semantic_hash": "f679686bcc522e189d17c629de9076a5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/service_test.go": {
+    "mtime": 1783425015.880542,
+    "ast_hash": "5c54ad2bf6fbdd94e4cee32f6b5d2223",
+    "semantic_hash": "5c54ad2bf6fbdd94e4cee32f6b5d2223"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/activities/uuid.go": {
+    "mtime": 1783425015.8808634,
+    "ast_hash": "daf3f22ff939d3fb87b0a9d06fec4900",
+    "semantic_hash": "daf3f22ff939d3fb87b0a9d06fec4900"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/context.go": {
+    "mtime": 1783356020.4502034,
+    "ast_hash": "94e7f06f7c7083255c3ae0bd1eac99d0",
+    "semantic_hash": "94e7f06f7c7083255c3ae0bd1eac99d0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/decoy_internal_test.go": {
+    "mtime": 1783448874.452675,
+    "ast_hash": "4adcf2cb681961a80d7643f101ff40d8",
+    "semantic_hash": "4adcf2cb681961a80d7643f101ff40d8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/devices_db_test.go": {
+    "mtime": 1783448874.4529548,
+    "ast_hash": "39025ee52bd704e84c04a28bf7e61e6d",
+    "semantic_hash": "39025ee52bd704e84c04a28bf7e61e6d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/dto.go": {
+    "mtime": 1783356020.450832,
+    "ast_hash": "6aaa71cdd177b16612d21435bef3768b",
+    "semantic_hash": "6aaa71cdd177b16612d21435bef3768b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/errors.go": {
+    "mtime": 1783356020.4510465,
+    "ast_hash": "f9781ff33e2eb2c9bf82041567f448e8",
+    "semantic_hash": "f9781ff33e2eb2c9bf82041567f448e8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/fake_querier_test.go": {
+    "mtime": 1783448874.4533045,
+    "ast_hash": "0307dd0804fbf4bbc0a5996f0fa125b9",
+    "semantic_hash": "0307dd0804fbf4bbc0a5996f0fa125b9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/fault_injection_test.go": {
+    "mtime": 1783448874.4536288,
+    "ast_hash": "9d8c5d08aa92472698f3dc8cd5c52116",
+    "semantic_hash": "9d8c5d08aa92472698f3dc8cd5c52116"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/handlers.go": {
+    "mtime": 1783356020.4516387,
+    "ast_hash": "21740b1c3086eb426222efb7ef45eda8",
+    "semantic_hash": "21740b1c3086eb426222efb7ef45eda8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/handlers_test.go": {
+    "mtime": 1783448874.453914,
+    "ast_hash": "08afe317834e971db58cd9e71d49ed79",
+    "semantic_hash": "08afe317834e971db58cd9e71d49ed79"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/internal_unit_test.go": {
+    "mtime": 1783448874.4541438,
+    "ast_hash": "9ba3f51d1e25aa480385597c7d53ed53",
+    "semantic_hash": "9ba3f51d1e25aa480385597c7d53ed53"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/keys.go": {
+    "mtime": 1783356020.45219,
+    "ast_hash": "cbd99bf98a0cb4e7f2b352b3a0b782c0",
+    "semantic_hash": "cbd99bf98a0cb4e7f2b352b3a0b782c0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/keys_test.go": {
+    "mtime": 1783448874.45452,
+    "ast_hash": "d5005054f97b7f29e49e8bacfdc86338",
+    "semantic_hash": "d5005054f97b7f29e49e8bacfdc86338"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/lockout_db_test.go": {
+    "mtime": 1783448874.4548068,
+    "ast_hash": "b0158e41404c74ebe260874bb0b80cbf",
+    "semantic_hash": "b0158e41404c74ebe260874bb0b80cbf"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/lockout_test.go": {
+    "mtime": 1783448874.455184,
+    "ast_hash": "61cebb47c663d07cc501da23e3daad5e",
+    "semantic_hash": "61cebb47c663d07cc501da23e3daad5e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/refresh_concurrency_test.go": {
+    "mtime": 1783356020.4527323,
+    "ast_hash": "c3c4a18c31af2ecbd0007d7636e784d1",
+    "semantic_hash": "c3c4a18c31af2ecbd0007d7636e784d1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/refresh_logout.go": {
+    "mtime": 1783356020.4529681,
+    "ast_hash": "498d742a924c3a36b663b9c86a2d3397",
+    "semantic_hash": "498d742a924c3a36b663b9c86a2d3397"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/register_login.go": {
+    "mtime": 1783448874.4556136,
+    "ast_hash": "2072483319085e9c90dbdfa6d52a803b",
+    "semantic_hash": "2072483319085e9c90dbdfa6d52a803b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/routes.go": {
+    "mtime": 1783356020.453523,
+    "ast_hash": "8bf1df87dd83f79f59681ad723ea3aa8",
+    "semantic_hash": "8bf1df87dd83f79f59681ad723ea3aa8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/service.go": {
+    "mtime": 1783448874.456015,
+    "ast_hash": "5157ceb43f5210f5932ff6ecb0ca0801",
+    "semantic_hash": "5157ceb43f5210f5932ff6ecb0ca0801"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/service_test.go": {
+    "mtime": 1783448874.4564092,
+    "ast_hash": "79ea945aac6034926484cf1e22d9faa5",
+    "semantic_hash": "79ea945aac6034926484cf1e22d9faa5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/stubs.go": {
+    "mtime": 1783356020.4544294,
+    "ast_hash": "dac7c385c6b6e73fee98f75f3e67756d",
+    "semantic_hash": "dac7c385c6b6e73fee98f75f3e67756d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/users_devices.go": {
+    "mtime": 1783356020.4551134,
+    "ast_hash": "e71f43dfb9f315ac41e79cd35cc8bd34",
+    "semantic_hash": "e71f43dfb9f315ac41e79cd35cc8bd34"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/auth/uuid.go": {
+    "mtime": 1783356020.4553368,
+    "ast_hash": "67af99447bf84cf95c788e2ea6141d1f",
+    "semantic_hash": "67af99447bf84cf95c788e2ea6141d1f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/doc.go": {
+    "mtime": 1783372990.8045735,
+    "ast_hash": "4aaedddd3d0ad5abb8117a5c7fa915d0",
+    "semantic_hash": "4aaedddd3d0ad5abb8117a5c7fa915d0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/dto.go": {
+    "mtime": 1783372990.8047137,
+    "ast_hash": "3ea494975292d400c308f9f7f9762418",
+    "semantic_hash": "3ea494975292d400c308f9f7f9762418"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/errors.go": {
+    "mtime": 1783372990.8049762,
+    "ast_hash": "17e9b7fac299fb5dcf4cd718914352f8",
+    "semantic_hash": "17e9b7fac299fb5dcf4cd718914352f8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/handlers.go": {
+    "mtime": 1783372990.805214,
+    "ast_hash": "9cf81f285fe74763ae8d7f84287e0aed",
+    "semantic_hash": "9cf81f285fe74763ae8d7f84287e0aed"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/handlers_test.go": {
+    "mtime": 1783448874.4567866,
+    "ast_hash": "c877083170df752daf424c7fe1370a86",
+    "semantic_hash": "c877083170df752daf424c7fe1370a86"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/routes.go": {
+    "mtime": 1783372990.8060489,
+    "ast_hash": "551f409a8862be83e44c6991a45f7cb2",
+    "semantic_hash": "551f409a8862be83e44c6991a45f7cb2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/service.go": {
+    "mtime": 1783372990.8062837,
+    "ast_hash": "7717c0a1910a141f091b7b851f731765",
+    "semantic_hash": "7717c0a1910a141f091b7b851f731765"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/service_test.go": {
+    "mtime": 1783372990.8065395,
+    "ast_hash": "d8e12b4c41f0e3a33ce5b98df1d3c199",
+    "semantic_hash": "d8e12b4c41f0e3a33ce5b98df1d3c199"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/categories/uuid.go": {
+    "mtime": 1783372990.8068187,
+    "ast_hash": "5d4afa2c4f200a2e23584d898ddd0cd0",
+    "semantic_hash": "5d4afa2c4f200a2e23584d898ddd0cd0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/config/config.go": {
+    "mtime": 1783448874.457182,
+    "ast_hash": "9bc64b7e369a6010d04b60cdd73476ec",
+    "semantic_hash": "9bc64b7e369a6010d04b60cdd73476ec"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/config/config_test.go": {
+    "mtime": 1783448874.4574342,
+    "ast_hash": "b490dc051c4841698e79bc4da905b09e",
+    "semantic_hash": "b490dc051c4841698e79bc4da905b09e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/config/env_example_test.go": {
+    "mtime": 1783363308.8429646,
+    "ast_hash": "409ff24734c85c502997a0c623eaada3",
+    "semantic_hash": "409ff24734c85c502997a0c623eaada3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/doc.go": {
+    "mtime": 1783372990.8071868,
+    "ast_hash": "fc2e5402042b4757721dc733f81a6664",
+    "semantic_hash": "fc2e5402042b4757721dc733f81a6664"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/dto.go": {
+    "mtime": 1783372990.8074462,
+    "ast_hash": "14127f9786e9aa8d8d0f2e9eecec36f6",
+    "semantic_hash": "14127f9786e9aa8d8d0f2e9eecec36f6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/errors.go": {
+    "mtime": 1783372990.8077471,
+    "ast_hash": "9c10e1f85bd95c90853b345e4973e8c1",
+    "semantic_hash": "9c10e1f85bd95c90853b345e4973e8c1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/handlers.go": {
+    "mtime": 1783372990.8079178,
+    "ast_hash": "e59f36d7cd31b1c5837fb6e8fa793ba5",
+    "semantic_hash": "e59f36d7cd31b1c5837fb6e8fa793ba5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/handlers_test.go": {
+    "mtime": 1783448874.4577308,
+    "ast_hash": "23737c40f262a0f3db5fe9c0e548f505",
+    "semantic_hash": "23737c40f262a0f3db5fe9c0e548f505"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/routes.go": {
+    "mtime": 1783372990.808118,
+    "ast_hash": "14fe959ed4587f8e1dc079abfe53914f",
+    "semantic_hash": "14fe959ed4587f8e1dc079abfe53914f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/service.go": {
+    "mtime": 1783372990.8084402,
+    "ast_hash": "dde1e933e118e254923d5e25217bee2d",
+    "semantic_hash": "dde1e933e118e254923d5e25217bee2d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/service_test.go": {
+    "mtime": 1783372990.8086424,
+    "ast_hash": "db50a09588d464782e916b00a9d5999e",
+    "semantic_hash": "db50a09588d464782e916b00a9d5999e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/focussessions/uuid.go": {
+    "mtime": 1783372990.808858,
+    "ast_hash": "278903bfd649815766753c1500fbebc3",
+    "semantic_hash": "278903bfd649815766753c1500fbebc3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/httpx/httpx.go": {
+    "mtime": 1783347642.624998,
+    "ast_hash": "7fdd5f666e191a05c766801be809a6ac",
+    "semantic_hash": "7fdd5f666e191a05c766801be809a6ac"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/httpx/httpx_test.go": {
+    "mtime": 1783347642.6252367,
+    "ast_hash": "e73f8ff237c8bdda688278f0ef4d981b",
+    "semantic_hash": "e73f8ff237c8bdda688278f0ef4d981b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/httpx/metrics.go": {
+    "mtime": 1783347642.6255238,
+    "ast_hash": "e7734a859696080c782a8fb0e90ef2c5",
+    "semantic_hash": "e7734a859696080c782a8fb0e90ef2c5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/httpx/metrics_test.go": {
+    "mtime": 1783347642.6256804,
+    "ast_hash": "8ef73b3eb5ddd8767a4ddc7d278d0ccb",
+    "semantic_hash": "8ef73b3eb5ddd8767a4ddc7d278d0ccb"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/auth.go": {
+    "mtime": 1783356020.4556587,
+    "ast_hash": "b1e1ec263a623f0764851868ee1e6377",
+    "semantic_hash": "b1e1ec263a623f0764851868ee1e6377"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/auth_test.go": {
+    "mtime": 1783448874.458035,
+    "ast_hash": "e4545d61192f4ab0f0d3f75e995c6e36",
+    "semantic_hash": "e4545d61192f4ab0f0d3f75e995c6e36"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/cors.go": {
+    "mtime": 1783347642.6260402,
+    "ast_hash": "6ec86d0c8998c217df2f4a95071b537f",
+    "semantic_hash": "6ec86d0c8998c217df2f4a95071b537f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/cors_test.go": {
+    "mtime": 1783347642.6262732,
+    "ast_hash": "08a19b83cbc43788a8c5bc0fcb9d8418",
+    "semantic_hash": "08a19b83cbc43788a8c5bc0fcb9d8418"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/logging.go": {
+    "mtime": 1783347642.6267905,
+    "ast_hash": "533de450f470c9d7e4d051c00e67b968",
+    "semantic_hash": "533de450f470c9d7e4d051c00e67b968"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/logging_test.go": {
+    "mtime": 1783347642.626979,
+    "ast_hash": "acb338fc20eb81df6236188ecd627f0d",
+    "semantic_hash": "acb338fc20eb81df6236188ecd627f0d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/ratelimit.go": {
+    "mtime": 1783347642.6272438,
+    "ast_hash": "ad6bb8a4f8e40c25838cf0f7d7962649",
+    "semantic_hash": "ad6bb8a4f8e40c25838cf0f7d7962649"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/ratelimit_test.go": {
+    "mtime": 1783347642.6276634,
+    "ast_hash": "c654c95e2d9ecaa4a0ac9470e8ddcbac",
+    "semantic_hash": "c654c95e2d9ecaa4a0ac9470e8ddcbac"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/recoverer.go": {
+    "mtime": 1783347642.6278536,
+    "ast_hash": "6c0f8755e11035b84c70c9a00c3497e7",
+    "semantic_hash": "6c0f8755e11035b84c70c9a00c3497e7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/recoverer_test.go": {
+    "mtime": 1783347642.6280334,
+    "ast_hash": "a9ac7f75540c3b9d5e85963b0c3197ef",
+    "semantic_hash": "a9ac7f75540c3b9d5e85963b0c3197ef"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/requestid.go": {
+    "mtime": 1783347642.6281989,
+    "ast_hash": "483be2b1aeda465c2226e393cb183b26",
+    "semantic_hash": "483be2b1aeda465c2226e393cb183b26"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/middleware/requestid_test.go": {
+    "mtime": 1783347642.6283867,
+    "ast_hash": "ad30a213d45cd8330db5a1bc680c5c6b",
+    "semantic_hash": "ad30a213d45cd8330db5a1bc680c5c6b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/doc.go": {
+    "mtime": 1783372990.8090868,
+    "ast_hash": "2c455bf9d020f5de55ebf4b0f49311b6",
+    "semantic_hash": "2c455bf9d020f5de55ebf4b0f49311b6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/dto.go": {
+    "mtime": 1783372990.8092356,
+    "ast_hash": "1f651dbe7a8e093ab2a0f29d60d7725f",
+    "semantic_hash": "1f651dbe7a8e093ab2a0f29d60d7725f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/errors.go": {
+    "mtime": 1783372990.809414,
+    "ast_hash": "5caceb40e12cdb2c5a1bcf78245a14e8",
+    "semantic_hash": "5caceb40e12cdb2c5a1bcf78245a14e8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/handlers.go": {
+    "mtime": 1783372990.8096025,
+    "ast_hash": "3c972ba37ecd1371eba3d6cb7aea3317",
+    "semantic_hash": "3c972ba37ecd1371eba3d6cb7aea3317"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/handlers_test.go": {
+    "mtime": 1783448874.4583716,
+    "ast_hash": "aaba51e0c2df7f5258906485a5c7374d",
+    "semantic_hash": "aaba51e0c2df7f5258906485a5c7374d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/routes.go": {
+    "mtime": 1783372990.809791,
+    "ast_hash": "ccd30c006dce15f852b1ed21c05f8348",
+    "semantic_hash": "ccd30c006dce15f852b1ed21c05f8348"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/service.go": {
+    "mtime": 1783372990.8099911,
+    "ast_hash": "f432946321f45d58034e8dda06e8cac0",
+    "semantic_hash": "f432946321f45d58034e8dda06e8cac0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/service_test.go": {
+    "mtime": 1783372990.8101559,
+    "ast_hash": "7c70ca59ea220ae2bbf274a1ca46f7dd",
+    "semantic_hash": "7c70ca59ea220ae2bbf274a1ca46f7dd"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/projects/uuid.go": {
+    "mtime": 1783372990.810287,
+    "ast_hash": "02fc4491286a421f947c936f124881c5",
+    "semantic_hash": "02fc4491286a421f947c936f124881c5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/cursor.go": {
+    "mtime": 1783425015.8814368,
+    "ast_hash": "59ec636f0116e0892e7b90d1d159d39d",
+    "semantic_hash": "59ec636f0116e0892e7b90d1d159d39d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/dimension.go": {
+    "mtime": 1783448874.4592123,
+    "ast_hash": "43f2c457f8d8d518825a5e5f4d37a285",
+    "semantic_hash": "43f2c457f8d8d518825a5e5f4d37a285"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/dimension_test.go": {
+    "mtime": 1783448874.4595118,
+    "ast_hash": "a8f5ffe556bf7826bc092fe0d357aba9",
+    "semantic_hash": "a8f5ffe556bf7826bc092fe0d357aba9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/dto.go": {
+    "mtime": 1783425015.8843215,
+    "ast_hash": "b05faabae0ca17de1a3c320b01483765",
+    "semantic_hash": "b05faabae0ca17de1a3c320b01483765"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/errors.go": {
+    "mtime": 1783425015.884809,
+    "ast_hash": "fe6f8f50628612b9545fafab3c64635b",
+    "semantic_hash": "fe6f8f50628612b9545fafab3c64635b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/handlers.go": {
+    "mtime": 1783425015.885002,
+    "ast_hash": "f819be356ab343c477a31a8d19821d18",
+    "semantic_hash": "f819be356ab343c477a31a8d19821d18"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/handlers_test.go": {
+    "mtime": 1783448874.4598825,
+    "ast_hash": "4735184e0361ba6681038e2605398c9e",
+    "semantic_hash": "4735184e0361ba6681038e2605398c9e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/routes.go": {
+    "mtime": 1783425015.8851528,
+    "ast_hash": "a14f6308c2168a36fad204a9a443a603",
+    "semantic_hash": "a14f6308c2168a36fad204a9a443a603"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/service.go": {
+    "mtime": 1783425015.8855443,
+    "ast_hash": "6177cf2c055412bc385ad9e1b4ec887f",
+    "semantic_hash": "6177cf2c055412bc385ad9e1b4ec887f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/service_test.go": {
+    "mtime": 1783448874.4602523,
+    "ast_hash": "52a6457a56880aad39f2765aee61ed6d",
+    "semantic_hash": "52a6457a56880aad39f2765aee61ed6d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/timeline.go": {
+    "mtime": 1783425015.8859572,
+    "ast_hash": "d90b9ed1ace5b6b6c00ff8366e9c3a46",
+    "semantic_hash": "d90b9ed1ace5b6b6c00ff8366e9c3a46"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/trim.go": {
+    "mtime": 1783425015.8862429,
+    "ast_hash": "29fbe116c994d812cfbfbe8fad3c2f79",
+    "semantic_hash": "29fbe116c994d812cfbfbe8fad3c2f79"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/trim_test.go": {
+    "mtime": 1783425015.886704,
+    "ast_hash": "16c12728d345094b678a1e394f2022f3",
+    "semantic_hash": "16c12728d345094b678a1e394f2022f3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/uuid.go": {
+    "mtime": 1783425015.8868482,
+    "ast_hash": "17353e8e7a17faf89baebf0479950e53",
+    "semantic_hash": "17353e8e7a17faf89baebf0479950e53"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/window.go": {
+    "mtime": 1783448874.4606218,
+    "ast_hash": "43510ccc84b8ffdbe1302dfb3dd2a6be",
+    "semantic_hash": "43510ccc84b8ffdbe1302dfb3dd2a6be"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/reports/window_test.go": {
+    "mtime": 1783448874.46091,
+    "ast_hash": "83b6e27773b5a50c77688ecaa7b8dca8",
+    "semantic_hash": "83b6e27773b5a50c77688ecaa7b8dca8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/cursor.go": {
+    "mtime": 1783448874.461567,
+    "ast_hash": "9be0764af026eb8389e09f0963c6d818",
+    "semantic_hash": "9be0764af026eb8389e09f0963c6d818"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/cursor_test.go": {
+    "mtime": 1783448874.4618132,
+    "ast_hash": "08bbf6f9ccd12b81d407c41cffdc4cd0",
+    "semantic_hash": "08bbf6f9ccd12b81d407c41cffdc4cd0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/dberr.go": {
+    "mtime": 1783372990.810908,
+    "ast_hash": "050845f6cc6db85455a89019c3a68d12",
+    "semantic_hash": "050845f6cc6db85455a89019c3a68d12"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/dberr_test.go": {
+    "mtime": 1783448874.4621904,
+    "ast_hash": "f27593333eba1fd7ec090119a1dec71d",
+    "semantic_hash": "f27593333eba1fd7ec090119a1dec71d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000002_enable_citext.down.sql": {
+    "mtime": 1783351300.4877849,
+    "ast_hash": "cef3162dae9cc92deed4bb09d53879f0",
+    "semantic_hash": "cef3162dae9cc92deed4bb09d53879f0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000002_enable_citext.up.sql": {
+    "mtime": 1783351300.4880812,
+    "ast_hash": "eb381a05fc9b87e094289069e446aefc",
+    "semantic_hash": "eb381a05fc9b87e094289069e446aefc"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000003_create_users.down.sql": {
+    "mtime": 1783351300.4886088,
+    "ast_hash": "e50b19833b634821ed0ba29a4a55e7bf",
+    "semantic_hash": "e50b19833b634821ed0ba29a4a55e7bf"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000003_create_users.up.sql": {
+    "mtime": 1783351300.4888341,
+    "ast_hash": "395239620bca44cacbd7a721f8484d2b",
+    "semantic_hash": "395239620bca44cacbd7a721f8484d2b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000004_create_devices.down.sql": {
+    "mtime": 1783351300.489044,
+    "ast_hash": "77d2f78abb7f0b813e1f673f7ef88269",
+    "semantic_hash": "77d2f78abb7f0b813e1f673f7ef88269"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000004_create_devices.up.sql": {
+    "mtime": 1783351300.4892201,
+    "ast_hash": "de30637a08a71ffa221c402b675dae1a",
+    "semantic_hash": "de30637a08a71ffa221c402b675dae1a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000006_create_categories.down.sql": {
+    "mtime": 1783351300.4897714,
+    "ast_hash": "f189083032b9f9b5cc0a80f226374b4d",
+    "semantic_hash": "f189083032b9f9b5cc0a80f226374b4d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000006_create_categories.up.sql": {
+    "mtime": 1783351300.4899607,
+    "ast_hash": "d3a4e0031e7959a75fb0d83d1931a478",
+    "semantic_hash": "d3a4e0031e7959a75fb0d83d1931a478"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000007_create_apps.down.sql": {
+    "mtime": 1783351300.4901242,
+    "ast_hash": "666a00f55eb9fe65616cc6269ccd31c6",
+    "semantic_hash": "666a00f55eb9fe65616cc6269ccd31c6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000007_create_apps.up.sql": {
+    "mtime": 1783351300.490329,
+    "ast_hash": "fe6bb1992e97da375138bf654a3081aa",
+    "semantic_hash": "fe6bb1992e97da375138bf654a3081aa"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000008_create_user_app_settings.down.sql": {
+    "mtime": 1783351300.4905431,
+    "ast_hash": "9aabe06b1c137cf890259db627ecb75b",
+    "semantic_hash": "9aabe06b1c137cf890259db627ecb75b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000008_create_user_app_settings.up.sql": {
+    "mtime": 1783351300.4907491,
+    "ast_hash": "0c65ffbe269120ab9608121c9d408ed0",
+    "semantic_hash": "0c65ffbe269120ab9608121c9d408ed0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000009_create_projects.down.sql": {
+    "mtime": 1783351300.4909863,
+    "ast_hash": "2435dde013fcebb7e90882df3a2afc94",
+    "semantic_hash": "2435dde013fcebb7e90882df3a2afc94"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000009_create_projects.up.sql": {
+    "mtime": 1783351300.4912415,
+    "ast_hash": "5915be19ef377a833f83529664939b22",
+    "semantic_hash": "5915be19ef377a833f83529664939b22"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000010_create_tags.down.sql": {
+    "mtime": 1783351300.4914813,
+    "ast_hash": "6ef7d1728c72aef22b4c082d16980df7",
+    "semantic_hash": "6ef7d1728c72aef22b4c082d16980df7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000010_create_tags.up.sql": {
+    "mtime": 1783351300.491716,
+    "ast_hash": "0523f91dd166fe05ec2b9583e5ecce20",
+    "semantic_hash": "0523f91dd166fe05ec2b9583e5ecce20"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000011_create_activity_events.down.sql": {
+    "mtime": 1783351300.492023,
+    "ast_hash": "51ab5869440e2b4b4ccc68a87fdc60cb",
+    "semantic_hash": "51ab5869440e2b4b4ccc68a87fdc60cb"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000011_create_activity_events.up.sql": {
+    "mtime": 1783351300.4922757,
+    "ast_hash": "71480b8beadffe4c2934b6e727f2f022",
+    "semantic_hash": "71480b8beadffe4c2934b6e727f2f022"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000012_create_focus_sessions.down.sql": {
+    "mtime": 1783351300.4925187,
+    "ast_hash": "64a35c688ba208c9dfc6e50436c02d8a",
+    "semantic_hash": "64a35c688ba208c9dfc6e50436c02d8a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000012_create_focus_sessions.up.sql": {
+    "mtime": 1783351300.4927576,
+    "ast_hash": "4d671365f73c5d5ff75e0ce5011d7d30",
+    "semantic_hash": "4d671365f73c5d5ff75e0ce5011d7d30"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000013_create_tag_join_tables.down.sql": {
+    "mtime": 1783351300.4930162,
+    "ast_hash": "083ae4420495e4d8f3099848112dba30",
+    "semantic_hash": "083ae4420495e4d8f3099848112dba30"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000013_create_tag_join_tables.up.sql": {
+    "mtime": 1783351300.4933052,
+    "ast_hash": "7b8beeca1b037ff3c4f3f23b959206e6",
+    "semantic_hash": "7b8beeca1b037ff3c4f3f23b959206e6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000014_create_sync_cursors.down.sql": {
+    "mtime": 1783351300.493556,
+    "ast_hash": "11a73caa2008316de3de51886c16aa1f",
+    "semantic_hash": "11a73caa2008316de3de51886c16aa1f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000014_create_sync_cursors.up.sql": {
+    "mtime": 1783351300.493779,
+    "ast_hash": "cd6e0f6df67e6e104f663ba23062164b",
+    "semantic_hash": "cd6e0f6df67e6e104f663ba23062164b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000015_create_deletion_requests.down.sql": {
+    "mtime": 1783351300.4939406,
+    "ast_hash": "537674d9496f5b929422b8880f8b3c3c",
+    "semantic_hash": "537674d9496f5b929422b8880f8b3c3c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000015_create_deletion_requests.up.sql": {
+    "mtime": 1783351300.4941297,
+    "ast_hash": "9e452ca32346feac493dd0d9a497e8fa",
+    "semantic_hash": "9e452ca32346feac493dd0d9a497e8fa"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000016_create_daily_app_totals_cagg.down.sql": {
+    "mtime": 1783351300.4942987,
+    "ast_hash": "d9f746b4e9c66a85fab3ee290400f470",
+    "semantic_hash": "d9f746b4e9c66a85fab3ee290400f470"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000016_create_daily_app_totals_cagg.up.sql": {
+    "mtime": 1783351300.4944925,
+    "ast_hash": "90a830ce9b288b55e121c3ff92a80391",
+    "semantic_hash": "90a830ce9b288b55e121c3ff92a80391"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000017_create_daily_category_totals_cagg.down.sql": {
+    "mtime": 1783351300.4947655,
+    "ast_hash": "5d8aa1b6cad345fa014f1745f538aa14",
+    "semantic_hash": "5d8aa1b6cad345fa014f1745f538aa14"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000017_create_daily_category_totals_cagg.up.sql": {
+    "mtime": 1783351300.4949086,
+    "ast_hash": "8906567d4c18a9faa6c522cd76605f6e",
+    "semantic_hash": "8906567d4c18a9faa6c522cd76605f6e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000018_create_hourly_category_totals_cagg.down.sql": {
+    "mtime": 1783351300.4950693,
+    "ast_hash": "c140939b9624d086e08fb053ecb479a9",
+    "semantic_hash": "c140939b9624d086e08fb053ecb479a9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000018_create_hourly_category_totals_cagg.up.sql": {
+    "mtime": 1783351300.4952066,
+    "ast_hash": "0221e9c46443bf39d26555dd05ced954",
+    "semantic_hash": "0221e9c46443bf39d26555dd05ced954"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000019_add_continuous_aggregate_policies.down.sql": {
+    "mtime": 1783351300.4953635,
+    "ast_hash": "a48e3af030f99035afe3c5dbdd41bd0d",
+    "semantic_hash": "a48e3af030f99035afe3c5dbdd41bd0d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000019_add_continuous_aggregate_policies.up.sql": {
+    "mtime": 1783351300.4955204,
+    "ast_hash": "dcc2da5496ade899df86ab8b01bb184a",
+    "semantic_hash": "dcc2da5496ade899df86ab8b01bb184a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000020_relax_user_nullability.down.sql": {
+    "mtime": 1783351300.4957743,
+    "ast_hash": "a107c2ba9a5a050128a7cee5219aeff7",
+    "semantic_hash": "a107c2ba9a5a050128a7cee5219aeff7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000020_relax_user_nullability.up.sql": {
+    "mtime": 1783351300.496051,
+    "ast_hash": "20d1e93aef3b5664f85fa32fba902b9d",
+    "semantic_hash": "20d1e93aef3b5664f85fa32fba902b9d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000021_global_server_seq.down.sql": {
+    "mtime": 1783351300.4963467,
+    "ast_hash": "c5a9a31a0cec610c1a1ee63e003b0682",
+    "semantic_hash": "c5a9a31a0cec610c1a1ee63e003b0682"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000021_global_server_seq.up.sql": {
+    "mtime": 1783351300.4966326,
+    "ast_hash": "ad33710ff19f20e389e88451440ac637",
+    "semantic_hash": "ad33710ff19f20e389e88451440ac637"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000022_server_seq_triggers.down.sql": {
+    "mtime": 1783362351.8634243,
+    "ast_hash": "295a1f3a3345985d37c4a58392e5d112",
+    "semantic_hash": "295a1f3a3345985d37c4a58392e5d112"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000022_server_seq_triggers.up.sql": {
+    "mtime": 1783362351.8636847,
+    "ast_hash": "f8e4a99243a24fc79602d3e14aefe49e",
+    "semantic_hash": "f8e4a99243a24fc79602d3e14aefe49e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000023_pull_server_seq_indexes.down.sql": {
+    "mtime": 1783372990.8111258,
+    "ast_hash": "41080a67b6379332366063eedbf64620",
+    "semantic_hash": "41080a67b6379332366063eedbf64620"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000023_pull_server_seq_indexes.up.sql": {
+    "mtime": 1783372990.8113084,
+    "ast_hash": "97b009cb646bf4d8e2cde718c7bbcb94",
+    "semantic_hash": "97b009cb646bf4d8e2cde718c7bbcb94"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000024_pull_xmin_horizon.down.sql": {
+    "mtime": 1783372990.8115582,
+    "ast_hash": "62166d3091a9524d514466a057564a29",
+    "semantic_hash": "62166d3091a9524d514466a057564a29"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000024_pull_xmin_horizon.up.sql": {
+    "mtime": 1783372990.8118324,
+    "ast_hash": "358a14d98810207b7fbeeb24f3a13644",
+    "semantic_hash": "358a14d98810207b7fbeeb24f3a13644"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000025_pull_commit_ordered_cursor.down.sql": {
+    "mtime": 1783372990.8121173,
+    "ast_hash": "18a87360722f0c2235678d33cb897630",
+    "semantic_hash": "18a87360722f0c2235678d33cb897630"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000025_pull_commit_ordered_cursor.up.sql": {
+    "mtime": 1783372990.8123991,
+    "ast_hash": "7b45ffda192b1003b125d320c7023fb1",
+    "semantic_hash": "7b45ffda192b1003b125d320c7023fb1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000026_sync_changelog.down.sql": {
+    "mtime": 1783372990.812707,
+    "ast_hash": "049bccc5966267a124f83b45a434ed68",
+    "semantic_hash": "049bccc5966267a124f83b45a434ed68"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000026_sync_changelog.up.sql": {
+    "mtime": 1783372990.812944,
+    "ast_hash": "76e197f92416b34cb86b1f8c20ca957d",
+    "semantic_hash": "76e197f92416b34cb86b1f8c20ca957d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000028_add_login_lockout.down.sql": {
+    "mtime": 1783448874.462543,
+    "ast_hash": "658a1ab4512ba687a8fa68f39a858706",
+    "semantic_hash": "658a1ab4512ba687a8fa68f39a858706"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000028_add_login_lockout.up.sql": {
+    "mtime": 1783448874.4627376,
+    "ast_hash": "d107ae3384d68d44ce73f6dd68c2fd67",
+    "semantic_hash": "d107ae3384d68d44ce73f6dd68c2fd67"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000029_sync_changelog_retention.down.sql": {
+    "mtime": 1783448874.463206,
+    "ast_hash": "609b1476b799d577265699777a8ecc2e",
+    "semantic_hash": "609b1476b799d577265699777a8ecc2e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000029_sync_changelog_retention.up.sql": {
+    "mtime": 1783448874.463528,
+    "ast_hash": "1b0172d768b98df48e11c447f81f4c91",
+    "semantic_hash": "1b0172d768b98df48e11c447f81f4c91"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000030_remove_report_cagg_policies.down.sql": {
+    "mtime": 1783448874.4636564,
+    "ast_hash": "28a44444dcaa47bb4d55d90d6f3a9f01",
+    "semantic_hash": "28a44444dcaa47bb4d55d90d6f3a9f01"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000030_remove_report_cagg_policies.up.sql": {
+    "mtime": 1783448874.463903,
+    "ast_hash": "f37e6f3adb7a7b998569f47562c79b11",
+    "semantic_hash": "f37e6f3adb7a7b998569f47562c79b11"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000031_drop_daily_app_totals_cagg_v1.down.sql": {
+    "mtime": 1783448874.4641767,
+    "ast_hash": "632cca7f5e0b137673d88bd6351268c0",
+    "semantic_hash": "632cca7f5e0b137673d88bd6351268c0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000031_drop_daily_app_totals_cagg_v1.up.sql": {
+    "mtime": 1783448874.4643908,
+    "ast_hash": "ae4944c75cf63dc20d2c5c9f1ae2c352",
+    "semantic_hash": "ae4944c75cf63dc20d2c5c9f1ae2c352"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000032_drop_daily_category_totals_cagg_v1.down.sql": {
+    "mtime": 1783448874.4645746,
+    "ast_hash": "c1d8104cbbd3f919af95d3b8c7dc17da",
+    "semantic_hash": "c1d8104cbbd3f919af95d3b8c7dc17da"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000032_drop_daily_category_totals_cagg_v1.up.sql": {
+    "mtime": 1783448874.4647,
+    "ast_hash": "14b4e60d7c95f43dc8ca07e2ecdc3ffc",
+    "semantic_hash": "14b4e60d7c95f43dc8ca07e2ecdc3ffc"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000033_drop_hourly_category_totals_cagg_v1.down.sql": {
+    "mtime": 1783448874.4648817,
+    "ast_hash": "14daf6647828a4e1d7a02ce95f221cc7",
+    "semantic_hash": "14daf6647828a4e1d7a02ce95f221cc7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000033_drop_hourly_category_totals_cagg_v1.up.sql": {
+    "mtime": 1783448874.4651856,
+    "ast_hash": "d754537853a89b20c5d298cc9a47ac31",
+    "semantic_hash": "d754537853a89b20c5d298cc9a47ac31"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000034_create_daily_app_totals_cagg_v2.down.sql": {
+    "mtime": 1783448874.4654608,
+    "ast_hash": "d9f746b4e9c66a85fab3ee290400f470",
+    "semantic_hash": "d9f746b4e9c66a85fab3ee290400f470"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000034_create_daily_app_totals_cagg_v2.up.sql": {
+    "mtime": 1783448874.4657004,
+    "ast_hash": "b2670e4ca67c27d91575a9ff959c4993",
+    "semantic_hash": "b2670e4ca67c27d91575a9ff959c4993"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000035_create_daily_category_totals_cagg_v2.down.sql": {
+    "mtime": 1783448874.466119,
+    "ast_hash": "5d8aa1b6cad345fa014f1745f538aa14",
+    "semantic_hash": "5d8aa1b6cad345fa014f1745f538aa14"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000035_create_daily_category_totals_cagg_v2.up.sql": {
+    "mtime": 1783448874.4664261,
+    "ast_hash": "cc832d80e69e38a1fb90f8f9fc363db2",
+    "semantic_hash": "cc832d80e69e38a1fb90f8f9fc363db2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000036_create_hourly_category_totals_cagg_v2.down.sql": {
+    "mtime": 1783448874.4676385,
+    "ast_hash": "c140939b9624d086e08fb053ecb479a9",
+    "semantic_hash": "c140939b9624d086e08fb053ecb479a9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000036_create_hourly_category_totals_cagg_v2.up.sql": {
+    "mtime": 1783448874.4679554,
+    "ast_hash": "fb1dfa9418d2a509fdfbe0ae0098df8d",
+    "semantic_hash": "fb1dfa9418d2a509fdfbe0ae0098df8d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000037_add_report_cagg_policies_v2.down.sql": {
+    "mtime": 1783448874.4687343,
+    "ast_hash": "a48e3af030f99035afe3c5dbdd41bd0d",
+    "semantic_hash": "a48e3af030f99035afe3c5dbdd41bd0d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/migrations/000037_add_report_cagg_policies_v2.up.sql": {
+    "mtime": 1783448874.470968,
+    "ast_hash": "a57185a84c7ac9c48f1b94183158c83b",
+    "semantic_hash": "a57185a84c7ac9c48f1b94183158c83b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/pool.go": {
+    "mtime": 1783351300.4969304,
+    "ast_hash": "693c5914d3b3e509b0a0aea48da5fe1c",
+    "semantic_hash": "693c5914d3b3e509b0a0aea48da5fe1c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/activities.sql": {
+    "mtime": 1783448874.4723554,
+    "ast_hash": "b3c6bc4c33ecc82fc88f2e0026626eb4",
+    "semantic_hash": "b3c6bc4c33ecc82fc88f2e0026626eb4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/categories.sql": {
+    "mtime": 1783372990.813205,
+    "ast_hash": "bda72656b804a79e765b4499e7ba8e50",
+    "semantic_hash": "bda72656b804a79e765b4499e7ba8e50"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/devices.sql": {
+    "mtime": 1783356020.4559796,
+    "ast_hash": "647f02c7c11d294fdd093c95e2772fac",
+    "semantic_hash": "647f02c7c11d294fdd093c95e2772fac"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/focus_sessions.sql": {
+    "mtime": 1783372990.8133252,
+    "ast_hash": "6a49d4662287126086198f365c37e17a",
+    "semantic_hash": "6a49d4662287126086198f365c37e17a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/login_lockout.sql": {
+    "mtime": 1783448874.473319,
+    "ast_hash": "e07259a5509e3ff73ebc48cdd54d4a0b",
+    "semantic_hash": "e07259a5509e3ff73ebc48cdd54d4a0b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/projects.sql": {
+    "mtime": 1783372990.8136024,
+    "ast_hash": "0536cc16cc5f13be073a3ee900240d8f",
+    "semantic_hash": "0536cc16cc5f13be073a3ee900240d8f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/pull.sql": {
+    "mtime": 1783372990.8138216,
+    "ast_hash": "2004ec39e908b5a67ba2ed41f8bd5ba4",
+    "semantic_hash": "2004ec39e908b5a67ba2ed41f8bd5ba4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/sync.sql": {
+    "mtime": 1783362351.8645916,
+    "ast_hash": "43e88a49f0e634196584f8aead00d518",
+    "semantic_hash": "43e88a49f0e634196584f8aead00d518"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/sync_retention.sql": {
+    "mtime": 1783448874.4742343,
+    "ast_hash": "584b23c93c156c68c1878b58dd29ad0a",
+    "semantic_hash": "584b23c93c156c68c1878b58dd29ad0a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/tags.sql": {
+    "mtime": 1783372990.8140655,
+    "ast_hash": "8d29846df1e8c6f89544232d8e3d45a8",
+    "semantic_hash": "8d29846df1e8c6f89544232d8e3d45a8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/queries/users.sql": {
+    "mtime": 1783362351.8648324,
+    "ast_hash": "4794f9f142a08e88ebd7a2633eaff245",
+    "semantic_hash": "4794f9f142a08e88ebd7a2633eaff245"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/server_seq_trigger_test.go": {
+    "mtime": 1783362351.8650174,
+    "ast_hash": "fbbcf63e089f48b05f55d7c288030f0a",
+    "semantic_hash": "fbbcf63e089f48b05f55d7c288030f0a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/store_test.go": {
+    "mtime": 1783351300.4980857,
+    "ast_hash": "01968f17dbc6e4b863ff954164cf6e24",
+    "semantic_hash": "01968f17dbc6e4b863ff954164cf6e24"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/activities.sql.go": {
+    "mtime": 1783448874.475204,
+    "ast_hash": "0f13d8f085bb20ee3fc34855d6544ebc",
+    "semantic_hash": "0f13d8f085bb20ee3fc34855d6544ebc"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/categories.sql.go": {
+    "mtime": 1783446757.438865,
+    "ast_hash": "73c015a770824e21b9edb2c3c0ee9d6e",
+    "semantic_hash": "73c015a770824e21b9edb2c3c0ee9d6e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/db.go": {
+    "mtime": 1783446757.4380474,
+    "ast_hash": "a8f326ed1953011b3f3dfe3bca632831",
+    "semantic_hash": "a8f326ed1953011b3f3dfe3bca632831"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/devices.sql.go": {
+    "mtime": 1783446757.438618,
+    "ast_hash": "73b80abd59457b8818961f30667a98d4",
+    "semantic_hash": "73b80abd59457b8818961f30667a98d4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/focus_sessions.sql.go": {
+    "mtime": 1783446757.4379377,
+    "ast_hash": "77611ed31959ea780f55023a51e97d16",
+    "semantic_hash": "77611ed31959ea780f55023a51e97d16"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/login_lockout.sql.go": {
+    "mtime": 1783448874.475817,
+    "ast_hash": "ce4ae42f528b339c43933bcf79d10ed7",
+    "semantic_hash": "ce4ae42f528b339c43933bcf79d10ed7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/models.go": {
+    "mtime": 1783448874.4764361,
+    "ast_hash": "a8391a4a1450301e1fc1c3582c99d185",
+    "semantic_hash": "a8391a4a1450301e1fc1c3582c99d185"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/projects.sql.go": {
+    "mtime": 1783446757.4381206,
+    "ast_hash": "31a4a42a5b642c0b95353429a36ce52d",
+    "semantic_hash": "31a4a42a5b642c0b95353429a36ce52d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/pull.sql.go": {
+    "mtime": 1783446757.43849,
+    "ast_hash": "969669709474a287d5941573917d079a",
+    "semantic_hash": "969669709474a287d5941573917d079a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/querier.go": {
+    "mtime": 1783448874.4771385,
+    "ast_hash": "0ec45b8006de5875a9b3e89d85080781",
+    "semantic_hash": "0ec45b8006de5875a9b3e89d85080781"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/sync.sql.go": {
+    "mtime": 1783446757.4382215,
+    "ast_hash": "5b06fc1a93b5c65d1f39f8766c289b65",
+    "semantic_hash": "5b06fc1a93b5c65d1f39f8766c289b65"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/sync_retention.sql.go": {
+    "mtime": 1783448874.4775636,
+    "ast_hash": "281cc11500b26207f70fe7f1966f4e4e",
+    "semantic_hash": "281cc11500b26207f70fe7f1966f4e4e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/tags.sql.go": {
+    "mtime": 1783446757.439213,
+    "ast_hash": "c430f27a73a9898f6856bd332aa157f6",
+    "semantic_hash": "c430f27a73a9898f6856bd332aa157f6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/storedb/users.sql.go": {
+    "mtime": 1783448874.4778657,
+    "ast_hash": "250fc187a213f49c65bcf7fcd072a36b",
+    "semantic_hash": "250fc187a213f49c65bcf7fcd072a36b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/timerange.go": {
+    "mtime": 1783425015.888516,
+    "ast_hash": "4ffb3191f29dd6210165b61de34b61c9",
+    "semantic_hash": "4ffb3191f29dd6210165b61de34b61c9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/store/timerange_test.go": {
+    "mtime": 1783448874.478104,
+    "ast_hash": "30445034c56db96965e4c02c5204260b",
+    "semantic_hash": "30445034c56db96965e4c02c5204260b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/dberr_test.go": {
+    "mtime": 1783448874.4782882,
+    "ast_hash": "19c4dcbe640e670d1dea9493833e9e39",
+    "semantic_hash": "19c4dcbe640e670d1dea9493833e9e39"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/dto.go": {
+    "mtime": 1783362351.8665504,
+    "ast_hash": "94a4dde4e1b2dd862f5b5b504008fd0f",
+    "semantic_hash": "94a4dde4e1b2dd862f5b5b504008fd0f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/errors.go": {
+    "mtime": 1783448874.4785595,
+    "ast_hash": "8fbcc41ff9fdea4fbf566b1ca1d4b194",
+    "semantic_hash": "8fbcc41ff9fdea4fbf566b1ca1d4b194"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/handlers.go": {
+    "mtime": 1783448874.4788647,
+    "ast_hash": "6aa8374cd2dd688e46b9e792ae7a622a",
+    "semantic_hash": "6aa8374cd2dd688e46b9e792ae7a622a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/handlers_test.go": {
+    "mtime": 1783448874.4791367,
+    "ast_hash": "3eb08a092607af15d9e8a0ad9536e3a4",
+    "semantic_hash": "3eb08a092607af15d9e8a0ad9536e3a4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/pull.go": {
+    "mtime": 1783448874.47943,
+    "ast_hash": "ef202f22ab3a29c6594745c9ea4d1d38",
+    "semantic_hash": "ef202f22ab3a29c6594745c9ea4d1d38"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/pull_extra_test.go": {
+    "mtime": 1783448874.479791,
+    "ast_hash": "32e614b8431a007a0d836b5380546bb4",
+    "semantic_hash": "32e614b8431a007a0d836b5380546bb4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/pull_test.go": {
+    "mtime": 1783372990.8175406,
+    "ast_hash": "922e81c004be103470b734b3d5001c36",
+    "semantic_hash": "922e81c004be103470b734b3d5001c36"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/retention.go": {
+    "mtime": 1783448874.480027,
+    "ast_hash": "81a797b0602578cb276e1efcb622358e",
+    "semantic_hash": "81a797b0602578cb276e1efcb622358e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/retention_test.go": {
+    "mtime": 1783448874.480318,
+    "ast_hash": "04deb798106bfa740330d122a43a2a5a",
+    "semantic_hash": "04deb798106bfa740330d122a43a2a5a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/routes.go": {
+    "mtime": 1783372990.8177767,
+    "ast_hash": "62f482baa2cf8997b2400c3b9fa98012",
+    "semantic_hash": "62f482baa2cf8997b2400c3b9fa98012"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/service.go": {
+    "mtime": 1783372990.818091,
+    "ast_hash": "49ede6edafe2eff8ab295a5a0dd2991a",
+    "semantic_hash": "49ede6edafe2eff8ab295a5a0dd2991a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/service_test.go": {
+    "mtime": 1783362351.8682566,
+    "ast_hash": "9de7c8723e61683f1220576cf5004dcb",
+    "semantic_hash": "9de7c8723e61683f1220576cf5004dcb"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/uuid.go": {
+    "mtime": 1783362351.8685865,
+    "ast_hash": "9e9f2abcc6de9f509644f8f19154c95c",
+    "semantic_hash": "9e9f2abcc6de9f509644f8f19154c95c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/sync/uuid_test.go": {
+    "mtime": 1783448874.480577,
+    "ast_hash": "d84625a3a68c1fc7ff5c32685a99a5b3",
+    "semantic_hash": "d84625a3a68c1fc7ff5c32685a99a5b3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/doc.go": {
+    "mtime": 1783372990.8184295,
+    "ast_hash": "f822fe18dd1028ad232aa88213d51f73",
+    "semantic_hash": "f822fe18dd1028ad232aa88213d51f73"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/dto.go": {
+    "mtime": 1783372990.8186302,
+    "ast_hash": "cf81615094ae96fd9ceae1eaeb8f3ffb",
+    "semantic_hash": "cf81615094ae96fd9ceae1eaeb8f3ffb"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/errors.go": {
+    "mtime": 1783372990.8188584,
+    "ast_hash": "413a1345efc963188631b31be4e16497",
+    "semantic_hash": "413a1345efc963188631b31be4e16497"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/handlers.go": {
+    "mtime": 1783372990.8190439,
+    "ast_hash": "7c291689223098a6ff5b881159f29e44",
+    "semantic_hash": "7c291689223098a6ff5b881159f29e44"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/handlers_test.go": {
+    "mtime": 1783448874.4811199,
+    "ast_hash": "0367e38f956794936bf35e0c7186eb42",
+    "semantic_hash": "0367e38f956794936bf35e0c7186eb42"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/routes.go": {
+    "mtime": 1783372990.8192754,
+    "ast_hash": "299e1dfecf427292bab40ca49c92ad1a",
+    "semantic_hash": "299e1dfecf427292bab40ca49c92ad1a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/service.go": {
+    "mtime": 1783372990.8194864,
+    "ast_hash": "327e741f2f60323c4875c58907ea5371",
+    "semantic_hash": "327e741f2f60323c4875c58907ea5371"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/service_test.go": {
+    "mtime": 1783372990.819702,
+    "ast_hash": "29f754f38dfc3dc3b59044818214aee3",
+    "semantic_hash": "29f754f38dfc3dc3b59044818214aee3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/internal/tags/uuid.go": {
+    "mtime": 1783372990.8199139,
+    "ast_hash": "adef1fa295fc16fc1342dd8e4bde6fb6",
+    "semantic_hash": "adef1fa295fc16fc1342dd8e4bde6fb6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/AuthSessionViewModel.swift": {
+    "mtime": 1783359429.4361033,
+    "ast_hash": "28433beaa418f9024c3fe8eeeeae067b",
+    "semantic_hash": "28433beaa418f9024c3fe8eeeeae067b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/AuthTokenManager.swift": {
+    "mtime": 1783429538.8869693,
+    "ast_hash": "f416304da85d964d93f42c2063a91ed4",
+    "semantic_hash": "f416304da85d964d93f42c2063a91ed4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/AuthTokenStorage.swift": {
+    "mtime": 1783359429.4366975,
+    "ast_hash": "95521cbca4a17f2f4c39a830b9a15b6b",
+    "semantic_hash": "95521cbca4a17f2f4c39a830b9a15b6b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/AuthorizingSyncAPIClient.swift": {
+    "mtime": 1783359429.4374733,
+    "ast_hash": "80a7fd6011183c98941cc7ce823f4be5",
+    "semantic_hash": "80a7fd6011183c98941cc7ce823f4be5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/DeviceInfoProvider.swift": {
+    "mtime": 1783359429.4376912,
+    "ast_hash": "ab561f68ffaeb10a947da78c0cd99dd4",
+    "semantic_hash": "ab561f68ffaeb10a947da78c0cd99dd4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Auth/SecureStore.swift": {
+    "mtime": 1783359429.4381788,
+    "ast_hash": "813664ae8c4b206a606eb9625ccfc9d2",
+    "semantic_hash": "813664ae8c4b206a606eb9625ccfc9d2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/APIError.swift": {
+    "mtime": 1783359429.4384956,
+    "ast_hash": "f437d7cd013e71d3f698dceb982eae9b",
+    "semantic_hash": "f437d7cd013e71d3f698dceb982eae9b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/AuthAPIClient.swift": {
+    "mtime": 1783359429.4387372,
+    "ast_hash": "b98b8af3c8a0febb13fa6920e3cf0c8b",
+    "semantic_hash": "b98b8af3c8a0febb13fa6920e3cf0c8b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/AuthAPIModels.swift": {
+    "mtime": 1783359429.438954,
+    "ast_hash": "d2f86813895156e0fee41448572964a4",
+    "semantic_hash": "d2f86813895156e0fee41448572964a4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/BaseURLProvider.swift": {
+    "mtime": 1783371848.29954,
+    "ast_hash": "18e150bf40422412ac240d0c799a1589",
+    "semantic_hash": "18e150bf40422412ac240d0c799a1589"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/HTTPTransport.swift": {
+    "mtime": 1783359429.4393468,
+    "ast_hash": "675995047995e63044b8c2764c6e7e95",
+    "semantic_hash": "675995047995e63044b8c2764c6e7e95"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/SyncAPIClient.swift": {
+    "mtime": 1783359429.439553,
+    "ast_hash": "1e153dfaf2704fed8a274f9c1a55f64d",
+    "semantic_hash": "1e153dfaf2704fed8a274f9c1a55f64d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Networking/SyncAPIModels.swift": {
+    "mtime": 1783359429.4397771,
+    "ast_hash": "2db3e304bf5fca01aed24b5462b84a8a",
+    "semantic_hash": "2db3e304bf5fca01aed24b5462b84a8a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/ActivityEvent.swift": {
+    "mtime": 1783346170.5989337,
+    "ast_hash": "4ae6c0ee7461213bd8f1fda618411d70",
+    "semantic_hash": "4ae6c0ee7461213bd8f1fda618411d70"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/DatabaseManager.swift": {
+    "mtime": 1783346170.5992255,
+    "ast_hash": "08ba8713ede31db2615285e40d3fd074",
+    "semantic_hash": "08ba8713ede31db2615285e40d3fd074"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/DatabaseMigrations.swift": {
+    "mtime": 1783346170.5995576,
+    "ast_hash": "aee19b7895e00d707776e69de704c8c3",
+    "semantic_hash": "aee19b7895e00d707776e69de704c8c3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/FocusSession.swift": {
+    "mtime": 1783346170.5998197,
+    "ast_hash": "4cd7bba6006cb9addf0114038c9798c6",
+    "semantic_hash": "4cd7bba6006cb9addf0114038c9798c6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/GRDBLocalStore.swift": {
+    "mtime": 1783359429.4402459,
+    "ast_hash": "a703f8355cb8d46c4decf54ec5ecf8ef",
+    "semantic_hash": "a703f8355cb8d46c4decf54ec5ecf8ef"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/LocalStore.swift": {
+    "mtime": 1783359429.4407563,
+    "ast_hash": "a61c516eeb54d665b4e27a21a9f72a65",
+    "semantic_hash": "a61c516eeb54d665b4e27a21a9f72a65"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Persistence/UUIDv7.swift": {
+    "mtime": 1783346170.6007178,
+    "ast_hash": "ed7e231f742a35e6543e4cfc166dd1d7",
+    "semantic_hash": "ed7e231f742a35e6543e4cfc166dd1d7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Support/ActivityAggregation.swift": {
+    "mtime": 1783355849.148385,
+    "ast_hash": "92c8ce101b62006f2c8a9eaf7c891545",
+    "semantic_hash": "92c8ce101b62006f2c8a9eaf7c891545"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Support/Clock.swift": {
+    "mtime": 1783346170.6014025,
+    "ast_hash": "8ee2e0ea322af971b23e043acc797bb5",
+    "semantic_hash": "8ee2e0ea322af971b23e043acc797bb5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Sync/Sleeper.swift": {
+    "mtime": 1783359429.4410133,
+    "ast_hash": "7ba2a4dee86b133481d5cb3c83dbfd01",
+    "semantic_hash": "7ba2a4dee86b133481d5cb3c83dbfd01"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Sync/SyncCoordinator.swift": {
+    "mtime": 1783359429.4412727,
+    "ast_hash": "327077d253e3f9be3417067633f4114d",
+    "semantic_hash": "327077d253e3f9be3417067633f4114d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Sync/SyncCursorStore.swift": {
+    "mtime": 1783359429.4414887,
+    "ast_hash": "20c55fa18fff95793510c1fa6e509046",
+    "semantic_hash": "20c55fa18fff95793510c1fa6e509046"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Sync/SyncEngine.swift": {
+    "mtime": 1783359429.4417398,
+    "ast_hash": "0347ef07f16c488bad5237b345b4b56f",
+    "semantic_hash": "0347ef07f16c488bad5237b345b4b56f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/OSTrackingSignalSources.swift": {
+    "mtime": 1783429538.8872743,
+    "ast_hash": "02483b1cba7d2259b217b10fbcfc2be1",
+    "semantic_hash": "02483b1cba7d2259b217b10fbcfc2be1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/TrackingCoordinator.swift": {
+    "mtime": 1783429538.8874834,
+    "ast_hash": "253229e076f1b85390f4d0d30ba66987",
+    "semantic_hash": "253229e076f1b85390f4d0d30ba66987"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/TrackingEngine.swift": {
+    "mtime": 1783355849.1488783,
+    "ast_hash": "da5cb4db091b38773639a0365438f14e",
+    "semantic_hash": "da5cb4db091b38773639a0365438f14e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/TrackingEngineControlling.swift": {
+    "mtime": 1783355849.1491923,
+    "ast_hash": "f4a71f4c6d70704dd9895cc3f7803f2c",
+    "semantic_hash": "f4a71f4c6d70704dd9895cc3f7803f2c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/TrackingPrivacySettings.swift": {
+    "mtime": 1783352078.0876098,
+    "ast_hash": "5a6f5ee4953a956b7e6ca5189f409740",
+    "semantic_hash": "5a6f5ee4953a956b7e6ca5189f409740"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Tracking/TrackingSignalSources.swift": {
+    "mtime": 1783352078.0878909,
+    "ast_hash": "3cafbeb80aea512afae77452339847d2",
+    "semantic_hash": "3cafbeb80aea512afae77452339847d2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/ViewModels/TrackingDisplayState.swift": {
+    "mtime": 1783355849.149679,
+    "ast_hash": "ad36e7b2adc1839f296250b43a4266d6",
+    "semantic_hash": "ad36e7b2adc1839f296250b43a4266d6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Sources/RizeDesktop/Views/LoginView.swift": {
+    "mtime": 1783359429.442306,
+    "ast_hash": "9e825b490a5e7fd82d1c27832484d21c",
+    "semantic_hash": "9e825b490a5e7fd82d1c27832484d21c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/ActivityAggregationTests.swift": {
+    "mtime": 1783429538.8878288,
+    "ast_hash": "145d9a6fa4e5db00f0b4a3ca65f895f7",
+    "semantic_hash": "145d9a6fa4e5db00f0b4a3ca65f895f7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/AuthAPIClientTests.swift": {
+    "mtime": 1783429538.8881123,
+    "ast_hash": "239f5e8bd20932fa338965dc77bc2176",
+    "semantic_hash": "239f5e8bd20932fa338965dc77bc2176"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/AuthSessionViewModelTests.swift": {
+    "mtime": 1783429538.8884122,
+    "ast_hash": "17657492bd836bfcd58235bde2b0ca99",
+    "semantic_hash": "17657492bd836bfcd58235bde2b0ca99"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/AuthTokenManagerTests.swift": {
+    "mtime": 1783429538.8889644,
+    "ast_hash": "5506f7b801911ca2a1bd1bfb22d16ab7",
+    "semantic_hash": "5506f7b801911ca2a1bd1bfb22d16ab7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/AuthTokenStorageTests.swift": {
+    "mtime": 1783429538.8891938,
+    "ast_hash": "ed66ae4abc56b3fdd2a49a58c3567478",
+    "semantic_hash": "ed66ae4abc56b3fdd2a49a58c3567478"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/AuthorizingSyncAPIClientTests.swift": {
+    "mtime": 1783429538.8896017,
+    "ast_hash": "0ddf5755459ce5b439a5bf574ebef136",
+    "semantic_hash": "0ddf5755459ce5b439a5bf574ebef136"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/BaseURLProviderTests.swift": {
+    "mtime": 1783361414.6051548,
+    "ast_hash": "ce845fb86085c039f15e3b016de82d92",
+    "semantic_hash": "ce845fb86085c039f15e3b016de82d92"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/GRDBLocalStoreTests.swift": {
+    "mtime": 1783359429.4435704,
+    "ast_hash": "1f4c37506a6feda17323ab4b59f3e30a",
+    "semantic_hash": "1f4c37506a6feda17323ab4b59f3e30a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/HTTPTransportTests.swift": {
+    "mtime": 1783429538.8898778,
+    "ast_hash": "09b9fc6159e5f04ee3a7f94f511f39df",
+    "semantic_hash": "09b9fc6159e5f04ee3a7f94f511f39df"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/LocalStoreTests.swift": {
+    "mtime": 1783429538.89023,
+    "ast_hash": "062d810f25a6981ae574d354506145d2",
+    "semantic_hash": "062d810f25a6981ae574d354506145d2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/MenuContentViewModelTests.swift": {
+    "mtime": 1783371848.3002326,
+    "ast_hash": "0990549f9d1546628740cac6a8c3f70a",
+    "semantic_hash": "0990549f9d1546628740cac6a8c3f70a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/NetworkingTestDoubles.swift": {
+    "mtime": 1783429538.8904283,
+    "ast_hash": "c15ef585132341818b6e9889bf789651",
+    "semantic_hash": "c15ef585132341818b6e9889bf789651"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/OSTrackingSignalSourcesTests.swift": {
+    "mtime": 1783429538.8907373,
+    "ast_hash": "975cd9a924c0ab71927f8d08978e5d0c",
+    "semantic_hash": "975cd9a924c0ab71927f8d08978e5d0c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SecureStoreTests.swift": {
+    "mtime": 1783429538.8909101,
+    "ast_hash": "331e6a927648c5215ea0a6b0057292b1",
+    "semantic_hash": "331e6a927648c5215ea0a6b0057292b1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncAPIClientTests.swift": {
+    "mtime": 1783429538.891212,
+    "ast_hash": "19d7ff13de5a591aba6653029d4ec138",
+    "semantic_hash": "19d7ff13de5a591aba6653029d4ec138"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncAuthTestDoubles+Sync.swift": {
+    "mtime": 1783429538.8914843,
+    "ast_hash": "b7c459417cf6aca86e3e2511057a6834",
+    "semantic_hash": "b7c459417cf6aca86e3e2511057a6834"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncAuthTestDoubles.swift": {
+    "mtime": 1783429538.8917801,
+    "ast_hash": "e46e72ca540b8b7cd74441f024dcbde6",
+    "semantic_hash": "e46e72ca540b8b7cd74441f024dcbde6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncCoordinatorTests.swift": {
+    "mtime": 1783429538.8919847,
+    "ast_hash": "fc30cf814f9b1062739042d2ee57574f",
+    "semantic_hash": "fc30cf814f9b1062739042d2ee57574f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncCursorStoreTests.swift": {
+    "mtime": 1783429538.8921163,
+    "ast_hash": "68b6cb4db99af045f04bd54e552c3f8a",
+    "semantic_hash": "68b6cb4db99af045f04bd54e552c3f8a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncEnginePullTests.swift": {
+    "mtime": 1783371848.300821,
+    "ast_hash": "9284030732a63a234f661cd425bd859d",
+    "semantic_hash": "9284030732a63a234f661cd425bd859d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/SyncEngineTests.swift": {
+    "mtime": 1783371848.3012002,
+    "ast_hash": "cad37eefc93acbbff211773c9ce3a6a8",
+    "semantic_hash": "cad37eefc93acbbff211773c9ce3a6a8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/TrackingCoordinatorTests.swift": {
+    "mtime": 1783429538.8923302,
+    "ast_hash": "ffb066fbec92a2b94d32935278631a8c",
+    "semantic_hash": "ffb066fbec92a2b94d32935278631a8c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/TrackingDisplayStateTests.swift": {
+    "mtime": 1783429538.8925252,
+    "ast_hash": "a7709fbd960d81f18552cb87488500fc",
+    "semantic_hash": "a7709fbd960d81f18552cb87488500fc"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/TrackingEnginePauseTests.swift": {
+    "mtime": 1783429538.8927808,
+    "ast_hash": "b363bc36059947f7b3f7d90cb630ccf6",
+    "semantic_hash": "b363bc36059947f7b3f7d90cb630ccf6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/TrackingEngineReentrancyTests.swift": {
+    "mtime": 1783359429.4453974,
+    "ast_hash": "738b6fd28d80d7ba873c82fb84b4a72a",
+    "semantic_hash": "738b6fd28d80d7ba873c82fb84b4a72a"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/TrackingEngineTests.swift": {
+    "mtime": 1783359429.4458117,
+    "ast_hash": "27e2723dd4ab1893c54b7fcc2db875ee",
+    "semantic_hash": "27e2723dd4ab1893c54b7fcc2db875ee"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/UUIDv7Tests.swift": {
+    "mtime": 1783346170.6019998,
+    "ast_hash": "122f15727996d0a4d893da01e690e31e",
+    "semantic_hash": "122f15727996d0a4d893da01e690e31e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/Tests/RizeDesktopTests/ViewRenderingTests.swift": {
+    "mtime": 1783429538.8929718,
+    "ast_hash": "95b7e53f4bfb3d067774a20ee525b98c",
+    "semantic_hash": "95b7e53f4bfb3d067774a20ee525b98c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-desktop/scripts/coverage-check.sh": {
+    "mtime": 1783371848.301592,
+    "ast_hash": "4e3fed8aaee998be3f7a423588aae61d",
+    "semantic_hash": "4e3fed8aaee998be3f7a423588aae61d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/App/AppEnvironment.swift": {
+    "mtime": 1783358789.3881946,
+    "ast_hash": "2751d97ada53b71cfb851bcb2b0f2910",
+    "semantic_hash": "2751d97ada53b71cfb851bcb2b0f2910"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/App/AppTab.swift": {
+    "mtime": 1783358789.388499,
+    "ast_hash": "420ce145082018b503a8473523863702",
+    "semantic_hash": "420ce145082018b503a8473523863702"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/App/DeviceIdProvider.swift": {
+    "mtime": 1783367606.5595367,
+    "ast_hash": "e795936a78cd165b1dc3711477f2b3e3",
+    "semantic_hash": "e795936a78cd165b1dc3711477f2b3e3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/App/RootView.swift": {
+    "mtime": 1783358789.389006,
+    "ast_hash": "7f874fe535e8fd2b70e1ee4d7458f661",
+    "semantic_hash": "7f874fe535e8fd2b70e1ee4d7458f661"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Dashboard/DashboardViewModel.swift": {
+    "mtime": 1783355627.2263083,
+    "ast_hash": "58bee91da69c71472df5f6f440f05df7",
+    "semantic_hash": "58bee91da69c71472df5f6f440f05df7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/AppDatabase.swift": {
+    "mtime": 1783347852.9183664,
+    "ast_hash": "c14a9aa2465e8d60ebb7462403adc31b",
+    "semantic_hash": "c14a9aa2465e8d60ebb7462403adc31b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/GRDBLocalStore.swift": {
+    "mtime": 1783358789.3892486,
+    "ast_hash": "3184c7f888da0a3256a9c530e2b12f7b",
+    "semantic_hash": "3184c7f888da0a3256a9c530e2b12f7b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/GRDBTodayDataObserver.swift": {
+    "mtime": 1783355627.2269742,
+    "ast_hash": "f65ed06deb1cee85eed97316b1edfadd",
+    "semantic_hash": "f65ed06deb1cee85eed97316b1edfadd"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/LocalStoring.swift": {
+    "mtime": 1783367606.5599616,
+    "ast_hash": "025c7c5693937172be693fbf37b50ba8",
+    "semantic_hash": "025c7c5693937172be693fbf37b50ba8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/Migrations/AppDatabaseMigrator.swift": {
+    "mtime": 1783347852.9195867,
+    "ast_hash": "889a091af3c68dcd4b755cca306eeba9",
+    "semantic_hash": "889a091af3c68dcd4b755cca306eeba9"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/Models/ActivityEventRecord.swift": {
+    "mtime": 1783347852.9198666,
+    "ast_hash": "59fab8a65c3f0aefcd416070001be627",
+    "semantic_hash": "59fab8a65c3f0aefcd416070001be627"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/Models/FocusSessionRecord.swift": {
+    "mtime": 1783347852.9201956,
+    "ast_hash": "31b12d3571a3605daf0f616e0fd315e4",
+    "semantic_hash": "31b12d3571a3605daf0f616e0fd315e4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/LocalStore/TodayDataObserving.swift": {
+    "mtime": 1783355627.2276838,
+    "ast_hash": "aef04c9ca994d97b210d76c137d0b264",
+    "semantic_hash": "aef04c9ca994d97b210d76c137d0b264"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sessions/SessionClockState.swift": {
+    "mtime": 1783350633.926461,
+    "ast_hash": "1940ef5a094e213fc8d318f2b75dcf59",
+    "semantic_hash": "1940ef5a094e213fc8d318f2b75dcf59"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sessions/SessionClockStoring.swift": {
+    "mtime": 1783350633.92672,
+    "ast_hash": "0ebc4341322ab97ea679731b9700fe82",
+    "semantic_hash": "0ebc4341322ab97ea679731b9700fe82"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sessions/SessionEngine.swift": {
+    "mtime": 1783358789.389732,
+    "ast_hash": "e7e7f0dffb5072ca9849e27e1867caad",
+    "semantic_hash": "e7e7f0dffb5072ca9849e27e1867caad"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sessions/SessionHistoryViewModel.swift": {
+    "mtime": 1783350633.9273815,
+    "ast_hash": "aae625d855c1d259ba23b29e8acb32b1",
+    "semantic_hash": "aae625d855c1d259ba23b29e8acb32b1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Support/Clock.swift": {
+    "mtime": 1783347852.9205227,
+    "ast_hash": "3a2025d74444fc7e598d20073ec26b55",
+    "semantic_hash": "3a2025d74444fc7e598d20073ec26b55"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Support/UUIDv7Generator.swift": {
+    "mtime": 1783347852.9207904,
+    "ast_hash": "f8e0bc725e529a54d03218d501cbce97",
+    "semantic_hash": "f8e0bc725e529a54d03218d501cbce97"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/APIClient.swift": {
+    "mtime": 1783358789.3899786,
+    "ast_hash": "49ff3b076fc4b46f3f348c136b1bc01d",
+    "semantic_hash": "49ff3b076fc4b46f3f348c136b1bc01d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/APIClientProtocol.swift": {
+    "mtime": 1783358789.3901572,
+    "ast_hash": "e7cbd27472c033985105a0b3f9e3038e",
+    "semantic_hash": "e7cbd27472c033985105a0b3f9e3038e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/AuthService.swift": {
+    "mtime": 1783358789.3904881,
+    "ast_hash": "4df49420f7ad35eba00515d9eef49e8c",
+    "semantic_hash": "4df49420f7ad35eba00515d9eef49e8c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/AuthViewModel.swift": {
+    "mtime": 1783358789.39069,
+    "ast_hash": "bd09285cf4312feadfb10da5795e8969",
+    "semantic_hash": "bd09285cf4312feadfb10da5795e8969"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/BackendConfig.swift": {
+    "mtime": 1783367606.5602138,
+    "ast_hash": "1379cd1672908e17829495e9ddbb7525",
+    "semantic_hash": "1379cd1672908e17829495e9ddbb7525"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/BackoffPolicy.swift": {
+    "mtime": 1783358789.3911245,
+    "ast_hash": "4da69bfa39dd6ec490df0d1eccc9d35c",
+    "semantic_hash": "4da69bfa39dd6ec490df0d1eccc9d35c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/DeviceInfoProvider.swift": {
+    "mtime": 1783358789.3913312,
+    "ast_hash": "b877c883111f13c1b054892b3d309a13",
+    "semantic_hash": "b877c883111f13c1b054892b3d309a13"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/HTTPTransport.swift": {
+    "mtime": 1783358789.3915675,
+    "ast_hash": "b70eccc566a20d6efb7934d6c169e02c",
+    "semantic_hash": "b70eccc566a20d6efb7934d6c169e02c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/KeychainStoring.swift": {
+    "mtime": 1783358789.391823,
+    "ast_hash": "3be2a11ea621b71857a0642c06982853",
+    "semantic_hash": "3be2a11ea621b71857a0642c06982853"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/SyncClient.swift": {
+    "mtime": 1783367606.5606189,
+    "ast_hash": "452578b23504fca926420e1d13cadea7",
+    "semantic_hash": "452578b23504fca926420e1d13cadea7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/SyncCursorStoring.swift": {
+    "mtime": 1783358789.3923028,
+    "ast_hash": "0b75e84c335865fa8ba80dc48f07a21d",
+    "semantic_hash": "0b75e84c335865fa8ba80dc48f07a21d"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Sync/SyncWireModels.swift": {
+    "mtime": 1783358789.3925474,
+    "ast_hash": "a7f941c91e9bc654ed7d3195a426adfe",
+    "semantic_hash": "a7f941c91e9bc654ed7d3195a426adfe"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Auth/AuthView.swift": {
+    "mtime": 1783358789.3928869,
+    "ast_hash": "5ba3944f22d13121dd8b54136fbc53e2",
+    "semantic_hash": "5ba3944f22d13121dd8b54136fbc53e2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Dashboard/DashboardEmptyStateView.swift": {
+    "mtime": 1783355627.2284632,
+    "ast_hash": "0ea83cd490719d1adc73167adbec01d3",
+    "semantic_hash": "0ea83cd490719d1adc73167adbec01d3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Dashboard/DashboardRunningSessionBanner.swift": {
+    "mtime": 1783355627.2286918,
+    "ast_hash": "52aa2087c519ba68c278c09c8d362438",
+    "semantic_hash": "52aa2087c519ba68c278c09c8d362438"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Dashboard/DashboardSessionRow.swift": {
+    "mtime": 1783355627.2291055,
+    "ast_hash": "48d2a49f813c4d6f4163c5773f9c4fb0",
+    "semantic_hash": "48d2a49f813c4d6f4163c5773f9c4fb0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Sessions/FocusSessionKind+Display.swift": {
+    "mtime": 1783355627.2298703,
+    "ast_hash": "3b8ff529c6906c87a638d323e2e28666",
+    "semantic_hash": "3b8ff529c6906c87a638d323e2e28666"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Sessions/RunningSessionView.swift": {
+    "mtime": 1783373696.2745342,
+    "ast_hash": "4d9bb421eaa5d338d01fa780a2f567cb",
+    "semantic_hash": "4d9bb421eaa5d338d01fa780a2f567cb"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Sessions/SessionHistoryView.swift": {
+    "mtime": 1783373696.2749817,
+    "ast_hash": "6ebef66b3bfaa206361b7c505082e905",
+    "semantic_hash": "6ebef66b3bfaa206361b7c505082e905"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Sessions/SessionsView.swift": {
+    "mtime": 1783350633.9281893,
+    "ast_hash": "b20f390cf11a1de5d3d7800162fd1e22",
+    "semantic_hash": "b20f390cf11a1de5d3d7800162fd1e22"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Sources/RizeMobile/Views/Sessions/StartSessionView.swift": {
+    "mtime": 1783350633.9283767,
+    "ast_hash": "e075a82d9e96c80796e7be85a9ee66df",
+    "semantic_hash": "e075a82d9e96c80796e7be85a9ee66df"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/App/DeviceIdProviderTests.swift": {
+    "mtime": 1783367606.560923,
+    "ast_hash": "435f4dcc197f3b1850a68a6756a9046b",
+    "semantic_hash": "435f4dcc197f3b1850a68a6756a9046b"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Dashboard/DashboardViewModelReliabilityTests.swift": {
+    "mtime": 1783358789.393491,
+    "ast_hash": "f631edbea8cbcddc6b97c584e0207af0",
+    "semantic_hash": "f631edbea8cbcddc6b97c584e0207af0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Dashboard/DashboardViewModelTests.swift": {
+    "mtime": 1783355627.2305462,
+    "ast_hash": "ed90a8023dcb65a4c475ec51f465ec04",
+    "semantic_hash": "ed90a8023dcb65a4c475ec51f465ec04"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Dashboard/StubTodayDataObserver.swift": {
+    "mtime": 1783355627.230823,
+    "ast_hash": "0a80327425991d1f812b6359e57f8b0c",
+    "semantic_hash": "0a80327425991d1f812b6359e57f8b0c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/DashboardViewBranchTests.swift": {
+    "mtime": 1783373696.2753816,
+    "ast_hash": "7ad473462b051ee4f093a8c92fc7c2a0",
+    "semantic_hash": "7ad473462b051ee4f093a8c92fc7c2a0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/LocalStore/AppDatabaseMigrationTests.swift": {
+    "mtime": 1783347852.921193,
+    "ast_hash": "87bea664f58c2c1a3bffab53f34d4582",
+    "semantic_hash": "87bea664f58c2c1a3bffab53f34d4582"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/LocalStore/GRDBLocalStoreSyncTests.swift": {
+    "mtime": 1783367606.561095,
+    "ast_hash": "b8eb953a65e131318991d20e73056791",
+    "semantic_hash": "b8eb953a65e131318991d20e73056791"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/LocalStore/GRDBLocalStoreTests.swift": {
+    "mtime": 1783367606.5612853,
+    "ast_hash": "121d345cff91e19d794e9e43e43d95c3",
+    "semantic_hash": "121d345cff91e19d794e9e43e43d95c3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/LocalStore/GRDBTodayDataObserverTests.swift": {
+    "mtime": 1783355627.2318597,
+    "ast_hash": "67e4565f3b4a1b7608b8f36144bd449f",
+    "semantic_hash": "67e4565f3b4a1b7608b8f36144bd449f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/InMemorySessionClockStore.swift": {
+    "mtime": 1783350633.928561,
+    "ast_hash": "814dec5e3ba632b868cf287bae216037",
+    "semantic_hash": "814dec5e3ba632b868cf287bae216037"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/SessionClockStateTests.swift": {
+    "mtime": 1783350633.9287121,
+    "ast_hash": "27191f4b42af5558a4d0b41bb9467328",
+    "semantic_hash": "27191f4b42af5558a4d0b41bb9467328"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/SessionEngineRecoveryTests.swift": {
+    "mtime": 1783358789.3941486,
+    "ast_hash": "c401dcc3f53d316f425e06da68cce471",
+    "semantic_hash": "c401dcc3f53d316f425e06da68cce471"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/SessionEngineTests.swift": {
+    "mtime": 1783350633.9293091,
+    "ast_hash": "7704b9d54d522a00d237a56c8f8ba9e2",
+    "semantic_hash": "7704b9d54d522a00d237a56c8f8ba9e2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/SessionHistoryViewModelTests.swift": {
+    "mtime": 1783350633.9295065,
+    "ast_hash": "331ee93ea4ffee79711c3c62d6ef7641",
+    "semantic_hash": "331ee93ea4ffee79711c3c62d6ef7641"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/SuspendingFakeStore.swift": {
+    "mtime": 1783358789.3944411,
+    "ast_hash": "3d6cc8fb01ba03e048e0c2b969a37f0c",
+    "semantic_hash": "3d6cc8fb01ba03e048e0c2b969a37f0c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sessions/UserDefaultsSessionClockStoreTests.swift": {
+    "mtime": 1783350633.929986,
+    "ast_hash": "ac62bccedb0b55e46a7215e587b5c92e",
+    "semantic_hash": "ac62bccedb0b55e46a7215e587b5c92e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Support/TestClock.swift": {
+    "mtime": 1783347852.9221334,
+    "ast_hash": "2cffeaebb36bcdf5a1c4d6aec7c53354",
+    "semantic_hash": "2cffeaebb36bcdf5a1c4d6aec7c53354"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Support/UUIDv7GeneratorTests.swift": {
+    "mtime": 1783348092.6452043,
+    "ast_hash": "d9e4eed4d8f7b1cc80f99266bf3907f4",
+    "semantic_hash": "d9e4eed4d8f7b1cc80f99266bf3907f4"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/APIClientTests.swift": {
+    "mtime": 1783373696.2757177,
+    "ast_hash": "40aefbd620fd51f7795d6ef8470f27b2",
+    "semantic_hash": "40aefbd620fd51f7795d6ef8470f27b2"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/AuthServiceTests.swift": {
+    "mtime": 1783367606.5614653,
+    "ast_hash": "838b437956491df6a2ab71ca9ce7750c",
+    "semantic_hash": "838b437956491df6a2ab71ca9ce7750c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/AuthViewModelTests.swift": {
+    "mtime": 1783373696.2760496,
+    "ast_hash": "b65ab01e70022a276d748042a208407e",
+    "semantic_hash": "b65ab01e70022a276d748042a208407e"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/BackendConfigTests.swift": {
+    "mtime": 1783360792.6183352,
+    "ast_hash": "abbc1599f403b243c7f69fc711a53295",
+    "semantic_hash": "abbc1599f403b243c7f69fc711a53295"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/DeviceInfoProviderTests.swift": {
+    "mtime": 1783373696.2762766,
+    "ast_hash": "ad9b2586b09013a172bd20625cfea30c",
+    "semantic_hash": "ad9b2586b09013a172bd20625cfea30c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/FakeSleeper.swift": {
+    "mtime": 1783358789.3949862,
+    "ast_hash": "a6e71991379eb7ac651b3cefe32033f0",
+    "semantic_hash": "a6e71991379eb7ac651b3cefe32033f0"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/InMemorySyncCursorStore.swift": {
+    "mtime": 1783358789.395168,
+    "ast_hash": "8207e4cd9d634ef1745bea54750268d7",
+    "semantic_hash": "8207e4cd9d634ef1745bea54750268d7"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/MockAPIClient.swift": {
+    "mtime": 1783373696.2766674,
+    "ast_hash": "a8f0a7dceeb616eb5e98f8f1eb9b52c3",
+    "semantic_hash": "a8f0a7dceeb616eb5e98f8f1eb9b52c3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/SpyLocalStore.swift": {
+    "mtime": 1783358789.395623,
+    "ast_hash": "48f64c0deaef1dbfdf5a233e562404c3",
+    "semantic_hash": "48f64c0deaef1dbfdf5a233e562404c3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/SyncClientPullTests.swift": {
+    "mtime": 1783358789.3958907,
+    "ast_hash": "d82b27ec32b9955e8bf078747d8325d5",
+    "semantic_hash": "d82b27ec32b9955e8bf078747d8325d5"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/SyncClientPushTests.swift": {
+    "mtime": 1783358789.3961089,
+    "ast_hash": "8d7be40aae0bbddecccbf34e97afb745",
+    "semantic_hash": "8d7be40aae0bbddecccbf34e97afb745"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/SyncClientTestSupport.swift": {
+    "mtime": 1783358789.396342,
+    "ast_hash": "c981cff0a612a3d6baca430f15dcf4cd",
+    "semantic_hash": "c981cff0a612a3d6baca430f15dcf4cd"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Sync/SyncWireModelsTests.swift": {
+    "mtime": 1783373696.277087,
+    "ast_hash": "710be1c4c922cfa79b1650e27bdf3381",
+    "semantic_hash": "710be1c4c922cfa79b1650e27bdf3381"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Views/AuthViewTests.swift": {
+    "mtime": 1783373696.2773948,
+    "ast_hash": "e2cc7c782108f275abb74b758c989029",
+    "semantic_hash": "e2cc7c782108f275abb74b758c989029"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Views/FocusSessionKindDisplayTests.swift": {
+    "mtime": 1783373696.2779028,
+    "ast_hash": "ce9e95ec230bc928845a2693e58e9538",
+    "semantic_hash": "ce9e95ec230bc928845a2693e58e9538"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Views/SessionHistoryComponentsTests.swift": {
+    "mtime": 1783373696.278246,
+    "ast_hash": "5faeec46b7c80322e6ecc188d69718a3",
+    "semantic_hash": "5faeec46b7c80322e6ecc188d69718a3"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Views/SessionViewsTests.swift": {
+    "mtime": 1783373696.278604,
+    "ast_hash": "f856d867ad4e288add6e1225abb1bfcd",
+    "semantic_hash": "f856d867ad4e288add6e1225abb1bfcd"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/Tests/RizeMobileTests/Views/SessionsViewStateTests.swift": {
+    "mtime": 1783373696.2789583,
+    "ast_hash": "9d5fe3c7f5a854e8e93921653c581ce1",
+    "semantic_hash": "9d5fe3c7f5a854e8e93921653c581ce1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-mobile/scripts/coverage-check.sh": {
+    "mtime": 1783359637.7521687,
+    "ast_hash": "f120cdedef7b26a120e20b8f4f302a1c",
+    "semantic_hash": "f120cdedef7b26a120e20b8f4f302a1c"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/.claude/agents/orchestrator.md": {
+    "mtime": 1783375111.0153613,
+    "ast_hash": "08e21f2dcb835695ec5e25066bdd5df1",
+    "semantic_hash": "08e21f2dcb835695ec5e25066bdd5df1"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/documentation/deployment.md": {
+    "mtime": 1783448894.512675,
+    "ast_hash": "cf83bb0218f4916f6890fee0010e3391",
+    "semantic_hash": "cf83bb0218f4916f6890fee0010e3391"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/.github/workflows/deploy-integration.yml": {
+    "mtime": 1783448874.448722,
+    "ast_hash": "68658a5bc12be3ec8ad46c1859de079f",
+    "semantic_hash": "68658a5bc12be3ec8ad46c1859de079f"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/.github/workflows/deploy-production.yml": {
+    "mtime": 1783448874.4490244,
+    "ast_hash": "c49de76818732e8723e067eba3e21cf6",
+    "semantic_hash": "c49de76818732e8723e067eba3e21cf6"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/coverage.html": {
+    "mtime": 1783447284.3772106,
+    "ast_hash": "02f2c696e521fe4d00b88d30a89c1efc",
+    "semantic_hash": "02f2c696e521fe4d00b88d30a89c1efc"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/deploy/docker-compose.deploy.yml": {
+    "mtime": 1783448874.4514072,
+    "ast_hash": "20d08c2546df550074ae51865497f2c8",
+    "semantic_hash": "20d08c2546df550074ae51865497f2c8"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/docs/deployment.md": {
+    "mtime": 1783448874.4517715,
+    "ast_hash": "9512fa65042a813ad7e24cb9c29acaac",
+    "semantic_hash": "9512fa65042a813ad7e24cb9c29acaac"
+  },
+  "/Users/roman.myrka/Projects/Rize-Clone/rize-backend/sqlc.yaml": {
+    "mtime": 1783351300.5003686,
+    "ast_hash": "2edab64c39663baa4c2e0e368a9ed77a",
+    "semantic_hash": "2edab64c39663baa4c2e0e368a9ed77a"
   }
 }
