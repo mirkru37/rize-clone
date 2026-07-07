@@ -82,6 +82,7 @@ Clients push their local outbox — rows created or tombstoned since the last su
         "app_bundle_id": "com.apple.dt.Xcode",
         "window_title": "sync-protocol.md — Rize-Clone",
         "precision": "exact",
+        "type": "app_active",
         "deleted": false
       }
     },
@@ -95,6 +96,7 @@ Clients push their local outbox — rows created or tombstoned since the last su
         "project_id": "018f99f0-6a11-77aa-9c40-1a2b3c4d5e6f",
         "kind": "focus",
         "status": "completed",
+        "planned_duration_s": 1500,
         "note": "Deep work",
         "deleted": false
       }
@@ -113,11 +115,16 @@ Clients push their local outbox — rows created or tombstoned since the last su
 }
 ```
 
+> [!note] Not yet implemented
+> The `user_app_setting` item above illustrates the intended future wire shape only. The currently deployed push handler does not accept it — see the field note below and the worked response, where this item comes back `invalid` / `UNSUPPORTED_ENTITY_TYPE`.
+
 Field notes:
 
-- `entity_type` is a discriminator; valid values are `activity_event`, `focus_session`, `project`, `tag`, `user_app_setting`, and any other mutable settings entity defined in [[database-schema]].
+- `entity_type` is a discriminator. The wire schema anticipates `activity_event`, `focus_session`, `project`, `tag`, `user_app_setting`, and any other mutable settings entity defined in [[database-schema]], but the currently deployed push handler only implements `activity_event` and `focus_session`; any other `entity_type` (including `project`, `tag`, and `user_app_setting`) is rejected per-item with `UNSUPPORTED_ENTITY_TYPE` (see the response example and the `error.code` list below).
 - `activity_event.data` never includes `deleted: true` on first creation; tombstoning an existing event is a subsequent push of the same `event_id` with `deleted: true` and the same `started_at` (per the immutability rule, no other field may change on a tombstone push).
+- `activity_event.data.type` (one of `app_active` | `idle` | `locked` | `mobile_usage` | `manual`, per [[database-schema]]'s `activity_events.type` CHECK constraint) is **optional** on the wire. If omitted, the server defaults it to `"manual"` before persisting the row — this keeps a client that never sends `type` fully functional against the underlying column, which is `NOT NULL`. If sent, `type` is validated against the enum and the item is rejected as `invalid` (`VALIDATION_ERROR`) if it falls outside it. `source` is never sent by the client; it is derived server-side from the authenticated device's `platform` (`macos` -> `desktop`, `ios` -> `mobile`).
 - For mutable entities, `data.id` and `data.updated_at` are required on every item, including tombstones (`deleted: true` is itself just another LWW-compared write).
+- `focus_session.data.planned_duration_s` is an optional integer (seconds) populating the `focus_sessions.planned_duration_s` column defined in [[database-schema]]; a client that omits it leaves the column unset for that write.
 - `precision` (`exact` | `approximate`) is only meaningful on `activity_event` items; see [[#Precision Semantics]].
 
 ### Response schema
@@ -129,7 +136,8 @@ The response returns one result per submitted item, in the same order as the req
   "results": [
     { "index": 0, "entity_type": "activity_event", "event_id": "018f9a3e-2b4b-7c31-9a2e-6f1d2b3c4d5e", "status": "applied" },
     { "index": 1, "entity_type": "focus_session", "id": "018f9a41-9d2a-7e3f-8b11-2f4a6c8d0e12", "status": "applied", "server_seq": 48213 },
-    { "index": 2, "entity_type": "user_app_setting", "id": "018f9a44-11cd-7abf-9d02-aa11bb22cc33", "status": "duplicate" },
+    { "index": 2, "entity_type": "user_app_setting", "status": "invalid",
+      "error": { "code": "UNSUPPORTED_ENTITY_TYPE", "message": "entity_type \"user_app_setting\" is not yet supported by this endpoint" } },
     { "index": 3, "entity_type": "activity_event", "event_id": "018f9a47-0000-7000-8000-000000000000", "status": "invalid",
       "error": { "code": "VALIDATION_ERROR", "message": "ended_at precedes started_at" } }
   ]
@@ -141,6 +149,13 @@ Per-item `status` is exactly one of:
 - **`applied`** — the item was persisted. For mutable entities this means the write was evaluated under last-write-wins and the response's `server_seq` reflects the row's new sequence number, whether or not this particular write ended up being the winning value (see [[#Entity Classes and Sync Strategies]]).
 - **`duplicate`** — the item was already present under its idempotency key (`(user_id, event_id, started_at)` for `activity_events`; a not-newer `updated_at` for LWW entities) and was a no-op.
 - **`invalid`** — the item was rejected outright (malformed payload, foreign-key violation, failed validation). The `error` object carries a machine-readable `code` and a human-readable `message`.
+
+`error.code` is one of:
+
+- **`VALIDATION_ERROR`** — the payload is malformed, fails a field-level check (e.g. `type` outside its enum, `ended_at` preceding `started_at`, a missing required field), or violates a database CHECK/UNIQUE/NOT NULL constraint.
+- **`FOREIGN_KEY_VIOLATION`** — the item references a row that does not exist (e.g. an unknown `project_id`).
+- **`FORBIDDEN`** — the item's `data.id` collides with a row that belongs to a different user (a tenant-isolation violation on a mutable, last-write-wins entity such as `focus_session`).
+- **`UNSUPPORTED_ENTITY_TYPE`** — `entity_type` is not one of the values this endpoint currently handles.
 
 **Partial success is allowed.** A batch is never rejected as a whole because one item is invalid; the client marks each outbox row according to its own result — `applied` and `duplicate` rows are removed from the outbox, `invalid` rows are flagged for user-visible surfacing or discarded per client policy, and the rest of the batch is unaffected.
 
