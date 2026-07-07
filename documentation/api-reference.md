@@ -99,6 +99,12 @@ Revoking a device via `DELETE /v1/devices/{id}` invalidates every refresh token 
 
 `POST /v1/sync/events` accepts a batch of up to 500 events per request and is idempotent — resubmitting the same event (by its idempotency key) does not create duplicates. `GET /v1/sync/changes` is the pull side of sync: it returns a page of upserts and tombstones since the given cursor, using the same cursor-and-limit pagination convention described above. Full semantics for idempotency, conflict resolution, and tombstone handling are defined in [[sync-protocol]]; this document only covers the transport shape.
 
+`GET /v1/sync/changes` additionally returns `410 Gone` (RFC 7807-style body, `type` slug `cursor-expired`) when a non-empty submitted cursor refers to a position in the change stream that has already been pruned by [[database-schema]]'s `sync_changelog` retention policy. An empty/first-ever cursor never triggers this. See [[sync-protocol]] §Retention and cursor expiry for the client recovery contract.
+
+| Slug | Status | Meaning |
+|---|---|---|
+| `cursor-expired` | 410 | `GET /v1/sync/changes` was called with a non-empty cursor whose position has already been pruned from the change stream; client should discard the cursor and re-pull from the beginning (see [[sync-protocol]]) |
+
 ### Activities & reports
 
 | Method | Path | Description | Auth level |

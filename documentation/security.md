@@ -159,10 +159,36 @@ The backend applies the following hardening measures to every request, on top of
 - **Sync batch limit of 500** events per `POST /v1/sync/events` call (see [[api-reference]] and [[sync-protocol]]) — this bounds worst-case request cost and keeps ingestion latency predictable.
 - **Input validation** is applied to every payload on every route, not only to sync events — malformed or out-of-range fields are rejected with the RFC 7807-style error body described in [[api-reference]] rather than silently coerced.
 - **CORS is locked to known origins** — only the origins the backend explicitly expects to serve (the clients' own web-facing surfaces, if any, plus any first-party web console) are permitted; there is no wildcard (`*`) CORS origin in any environment.
-- **Brute-force lockout on login** — repeated failed login attempts against a single account (in addition to the per-IP rate limit above) trigger a lockout, so that an attacker distributing attempts across many IPs cannot bypass protection by evading the per-IP limit alone.
+- **Brute-force lockout on login** — repeated failed login attempts against a single account (in addition to the per-IP rate limit above) trigger a lockout, so that an attacker distributing attempts across many IPs cannot bypass protection by evading the per-IP limit alone. See [[#Account lockout policy]] below for the implemented policy.
 
 > [!note] Open question
-> The brief marks the 10/min (per-IP, auth) and 60/min (per-user, sync/reports) figures as "suggested," not final. The exact lockout threshold and lockout duration for brute-force login protection are also unspecified. These numbers should be confirmed (and, once confirmed, mirrored into [[api-reference]]) before they are treated as a hard contract that clients can rely on.
+> The brief marks the 10/min (per-IP, auth) and 60/min (per-user, sync/reports) figures as "suggested," not final. These numbers should be confirmed (and, once confirmed, mirrored into [[api-reference]]) before they are treated as a hard contract that clients can rely on. The brute-force lockout threshold and duration, unlike these two rate limits, are now confirmed — see [[#Account lockout policy]].
+
+### Account lockout policy
+
+Brute-force lockout is a per-account counter, independent of and additional to the per-IP rate limiting on `/v1/auth/*` described above — an attacker distributing attempts across many IPs still trips this counter, since it is keyed on the account, not the source IP.
+
+| Parameter | Value |
+|---|---|
+| Threshold | 10 consecutive failed login attempts |
+| Base lockout duration (first lockout) | 15 minutes |
+| Escalation | Each subsequent lockout on the same account doubles the previous lockout's duration |
+| Cap | 24 hours |
+| Reset | Both the failed-attempt counter and the lockout-count counter reset to zero on the next successful login |
+
+Because a successful login is only possible once the account is unlocked, the reset in the table above only ever happens after the escalating lockout window has fully elapsed — there is no path to reset the counters while still locked out.
+
+Config knobs (environment variables):
+
+| Name | Default | Purpose |
+|---|---|---|
+| `AUTH_LOCKOUT_THRESHOLD` | `10` | Consecutive failed attempts before an account is locked. |
+| `AUTH_LOCKOUT_BASE_DURATION` | `15m` | Duration of the first lockout on an account. |
+| `AUTH_LOCKOUT_MAX_DURATION` | `24h` | Cap on lockout duration after repeated escalation. |
+
+State backing this policy is stored on the `users` row itself: `failed_login_attempts`, `lockout_count`, and `locked_until` (see [[database-schema]] §users).
+
+**No-oracle guarantee.** The locked-account path and the wrong-password path are indistinguishable to a caller: both return the identical error type, envelope shape, and HTTP status (`invalid-credentials`, per [[api-reference]]), and both pay a comparable argon2id cost, so a caller cannot use response shape or timing to infer whether an account is currently locked versus simply being sent a wrong password.
 
 ## GDPR and data lifecycle
 
@@ -245,7 +271,8 @@ This checklist is the canonical, citable list of concrete requirements from this
 | [ ] | Auth endpoints (`/v1/auth/*`) are rate-limited per-IP via token bucket (suggested: 10/min on login/register) |
 | [ ] | Sync and reports endpoints are rate-limited per-user via token bucket (suggested: 60/min) |
 | [ ] | `429` responses include a `Retry-After` header and rate-limit usage headers |
-| [ ] | Brute-force lockout triggers on repeated failed logins against a single account, independent of per-IP limiting |
+| [ ] | Brute-force lockout triggers after 10 consecutive failed logins against a single account, independent of per-IP limiting; duration starts at 15 minutes, doubles per subsequent lockout, and caps at 24 hours (see [[#Account lockout policy]]) |
+| [ ] | Locked-account and wrong-password login responses are identical in error type, envelope, status, and argon2id cost (no timing/response oracle for lockout state) |
 | [ ] | Request bodies are size-limited on every route |
 | [ ] | `POST /v1/sync/events` rejects batches larger than 500 events |
 

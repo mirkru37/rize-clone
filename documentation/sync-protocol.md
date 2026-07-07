@@ -246,6 +246,32 @@ Field notes:
 
 **Pulls are idempotent and safe to repeat.** Because the cursor is a stable position in the commit-ordered change stream rather than a time window, requesting the same cursor twice returns the same page, and applying that page twice is a no-op (upserts overwrite by `id`/`event_id`, tombstones set `deleted` which is already set on replay). This is what makes cursor loss and full re-pull safe (see [[#Device Restore from Backup]]).
 
+### Retention and cursor expiry
+
+`sync_changelog` (see [[database-schema]] §sync_changelog Retention) is not retained forever: rows older than `SYNC_CHANGELOG_MAX_AGE` (default 90 days) are pruned in batches by a background job, and `sync_changelog_horizon` (see [[database-schema]]) records the furthest `(xid8, server_seq)` position ever pruned as a single, global, permanent watermark. This is a global watermark, not a per-device one, and it is unrelated to `sync_cursors`, which remains fully unused/unimplemented.
+
+`GET /v1/sync/changes` returns **`410 Gone`** (RFC 7807-style body, `type` slug suffix `cursor-expired`) when a **non-empty** submitted cursor's `(xid8, server_seq)` position is strictly below the current horizon — i.e. the change-stream position that cursor refers to has already been pruned and can no longer be served. An empty or first-ever cursor is always exempt from this check, since there is nothing for it to have fallen behind.
+
+Client recovery from a `410` is exactly the [[#Device Restore from Backup]] path already defined below: treat the cursor as empty and re-pull from the beginning of the change stream. This is safe and idempotent for the same reason a restored device's stale cursor is safe — re-applying already-known upserts and tombstones has no effect beyond redundant local writes.
+
+```mermaid
+sequenceDiagram
+    participant App as Client App
+    participant API as Backend API
+    participant DB as Server DB
+
+    App->>API: GET /v1/sync/changes?cursor=<stale_cursor>
+    API->>DB: compare cursor position against sync_changelog_horizon
+    alt cursor position < horizon (and cursor non-empty)
+        API-->>App: 410 Gone (type suffix: cursor-expired)
+        App->>App: discard stored cursor, treat as empty
+        App->>API: GET /v1/sync/changes (no cursor)
+        API-->>App: full re-pull from beginning of change stream
+    else cursor position >= horizon, or cursor empty
+        API-->>App: 200 OK, changes payload
+    end
+```
+
 **No row is ever skipped, even under concurrent writes.** The server guarantees this by pairing a snapshot-consistent read across every entity type in a page with a transaction-visibility horizon: a row is only eligible for delivery once the write that produced it is safely behind that horizon. A row belonging to a transaction that has not yet reached that horizon — for example, a slower concurrent write that has not finished committing yet — is simply deferred and delivered on a later pull instead of being included (or half-included) in the current one. `next_cursor` only ever advances over rows that were actually delivered under this rule, never past a row that is still pending. From a client's perspective this means: a just-written row may take a short additional delay to appear in a pull, but once `next_cursor` has advanced past a point, nothing behind that point can arrive out of order or get permanently lost.
 
 ## Flow
