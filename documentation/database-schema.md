@@ -371,24 +371,26 @@ The append-only, high-volume time-series table capturing every unit of tracked a
 
 | Column | Type | Constraints |
 |---|---|---|
-| event_id | uuid | client-supplied UUIDv7 |
-| user_id | uuid | FK -> `users(id)` |
-| device_id | uuid | FK -> `devices(id)` |
+| event_id | uuid | NOT NULL, client-supplied UUIDv7 |
+| user_id | uuid | NOT NULL, FK -> `users(id)` |
+| device_id | uuid | NOT NULL, FK -> `devices(id)` |
 | started_at | timestamptz | NOT NULL |
 | ended_at | timestamptz | NOT NULL |
 | duration_s | int | GENERATED ALWAYS AS (`EXTRACT(EPOCH FROM (ended_at - started_at))::int`) STORED |
-| type | text | CHECK (`type IN ('app_active','idle','locked','mobile_usage','manual')`) |
-| source | text | CHECK (`source IN ('desktop','mobile','manual')`) |
-| precision | text | CHECK (`precision IN ('exact','approximate')`), DEFAULT `'exact'` |
+| type | text | NOT NULL, CHECK (`type IN ('app_active','idle','locked','mobile_usage','manual')`) |
+| source | text | NOT NULL, CHECK (`source IN ('desktop','mobile','manual')`) |
+| precision | text | NOT NULL, CHECK (`precision IN ('exact','approximate')`), DEFAULT `'exact'` |
 | app_id | uuid | FK -> `apps(id)`, NULL |
 | raw_bundle_id | text | NULL |
 | window_title | text | NULL |
 | url | text | NULL |
 | category_id | uuid | FK -> `categories(id)`, NULL |
 | project_id | uuid | FK -> `projects(id)`, NULL |
-| deleted | bool | DEFAULT `false` |
-| inserted_at | timestamptz | |
-| server_seq | bigint | bumped on every write |
+| deleted | bool | NOT NULL, DEFAULT `false` |
+| inserted_at | timestamptz | NOT NULL |
+| server_seq | bigint | NOT NULL, bumped on every write |
+
+`type` and `source` are `NOT NULL` at the database level even though the wire protocol treats `type` as optional (see [[sync-protocol]] §Push): the sync-push service layer defaults an omitted `type` to `"manual"` before the insert, and derives `source` server-side from the authenticated device's `platform` column, so no request payload can produce a null value for either column.
 
 Primary key: `(user_id, started_at, event_id)`. TimescaleDB requires the partitioning column (`started_at`) to be part of any primary key or unique constraint on a hypertable, which is why the PK is composite rather than `event_id` alone — see the Hypertable Notes section below for the full rationale.
 
